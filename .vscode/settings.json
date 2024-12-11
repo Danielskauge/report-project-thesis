@@ -1,0 +1,59 @@
+{
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-shell-escape",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk",
+            "tools": [
+                "latexmk"
+            ]
+        }
+    ],
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.view.pdf.refresh.mode": "auto",
+    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+    "files.exclude": {
+        "**/*.aux": true,
+        "**/*.bbl": true,
+        "**/*.bcf": true,
+        "**/*.blg": true,
+        "**/*.idx": true,
+        "**/*.ind": true,
+        "**/*.lof": true,
+        "**/*.lot": true,
+        "**/*.out": true,
+        "**/*.toc": true,
+        "**/*.acn": true,
+        "**/*.acr": true,
+        "**/*.alg": true,
+        "**/*.glg": true,
+        "**/*.glo": true,
+        "**/*.gls": true,
+        "**/*.ist": true,
+        "**/*.fls": true,
+        "**/*.log": true,
+        "**/*.fdb_latexmk": true,
+        "**/*.snm": true,
+        "**/*.synctex(busy)": true,
+        "**/*.synctex.gz(busy)": true,
+        "**/*.nav": true,
+        "**/*.vrb": true,
+        "**/*.run.xml": true,
+        "**/_minted*": true,
+        "**/*.pyg": true,
+        "**/*.synctex.gz": true
+    }
+}

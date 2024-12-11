@@ -8,12 +8,13 @@
 \begin{document}
 
 % Inserting title page
-\import{./}{title}
+\import{./Sections/}{title}
 
 % Defining front matter settings (Norsk: innstillinger for forord m.m.)
 \frontmatter
 
 \import{./Sections/}{Abstract}
+
 
 % Inserting table of contents
 \newpage
@@ -30,6 +31,16 @@
 \import{./Sections}{Abbreviations}
 
 \import{./Sections/}{Introduction}
+\newpage
+\section{Crazy Matrix}
+\begin{equation}
+    \begin{bmatrix}
+        1 & 2 & 3 & 4 & 5 \\
+        6 & 7 & 8 & 9 & 10 \\
+        11 & 12 & 13 & 14 & 15 \\   
+        16 & 17 & 18 & 19 & 20 \\
+    \end{bmatrix}
+\end{equation}
 
 \import{./Sections}{Theory}
 
