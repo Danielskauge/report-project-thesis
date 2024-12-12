@@ -22,6 +22,7 @@
             ]
         }
     ],
+    "editor.wordWrap": "on",
     "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.view.pdf.refresh.mode": "auto",
     "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
@@ -55,5 +56,6 @@
         "**/_minted*": false,
         "**/*.pyg": true,
         "**/*.synctex.gz": true
+        
     }
 }

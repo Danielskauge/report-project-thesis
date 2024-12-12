@@ -16,7 +16,7 @@
 \subsection{Kinematics, Jacobians, and Virtual Work}
     \subsubsection{Robot Kinematics}
     \label{sec:robot_kinematics}
-Consider a robotic link arm existing in $\mathbb{R}^2$ consisting of $n$ links, each with a length $l_i$ and a joint angle $\theta_i$. The position of the end-effector is given by the vector $\mathbf{x} = [x, y]^T$, where $x$ and $y$ are the coordinates of the end-effector in the global coordinate system. Using simple trigonometry, the position of the end-effector can be expressed as a function of the joint angles and link lengths as seen in equation \ref{eq:robot_kinematics}.
+Consider a robotic link arm existing in $\mathbb{R}^2$ consisting of $n$ links, each with a length $l_i$ and a joint angle $q_i$. The position of the end-effector is given by the vector $\mathbf{x} = [x, y]^T$, where $x$ and $y$ are the coordinates of the end-effector in the global coordinate system. Using simple trigonometry, the position of the end-effector can be expressed as a function of the joint angles and link lengths as seen in equation \ref{eq:robot_kinematics}.
 
 \begin{equation}
     \label{eq:robot_kinematics}
@@ -24,8 +24,8 @@ Consider a robotic link arm existing in $\mathbb{R}^2$ consisting of $n$ links, 
         x \\
         y
     \end{bmatrix} = \begin{bmatrix}
-        \sum_{i=1}^{n} l_i \cos(\theta_i) \\
-        \sum_{i=1}^{n} l_i \sin(\theta_i)
+        \sum_{i=1}^{n} l_i \cos(q_i) \\
+        \sum_{i=1}^{n} l_i \sin(q_i)
     \end{bmatrix}
 \end{equation}
 
@@ -33,16 +33,11 @@ Consider a robotic link arm existing in $\mathbb{R}^2$ consisting of $n$ links, 
 
     \subsubsection{Jacobian Matrix}
 
-As described in section \ref{sec:robot_kinematics}, the position of the end-effector can be expressed as a function of the joint angles and link lengths. In this section we define the Jacobian, as described in equation \ref{eq:jacobian}, which relates infitesimal changes in the joint angles to the resulting change in the end-effector position.
-
-Now I am testing how quick this is. Testing again. So much testing. 
+As described in section \ref{sec:robot_kinematics}, the position of the end-effector can be expressed as a function of the joint angles and link lengths. In robotics, it is often useful to express the relationship between infinitesimal changes in the joint angles and the resulting change in the end-effector position. As can be seen in equation \ref{eq:infinitesimal_change}, infinitesimal changes in variables $delta y$ and $\delta x$ can be described by means of the partial derivative. If this is compared to the definition of the jacobian in 
 
 \begin{equation}
-    \label{eq:jacobian}
-    \mathbf{J} = \begin{bmatrix}
-        \frac{\partial x}{\partial \theta_1} & \frac{\partial x}{\partial \theta_2} & \cdots & \frac{\partial x}{\partial \theta_n} \\
-        \frac{\partial y}{\partial \theta_1} & \frac{\partial y}{\partial \theta_2} & \cdots & \frac{\partial y}{\partial \theta_n}
-    \end{bmatrix}
+    \label{eq:infinitesimal_change}
+    \delta  y = \frac{\partial y}{\partial x} \delta x
 \end{equation}
 
 
