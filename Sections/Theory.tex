@@ -14,9 +14,41 @@
 \subsection{Spring-Damper Systems}
 
 \subsection{Kinematics, Jacobians, and Virtual Work}
-    \subsubsection{Kinematic Modeling}
+    \subsubsection{Robot Kinematics}
+    \label{sec:robot_kinematics}
+Consider a robotic link arm existing in $\mathbb{R}^2$ consisting of $n$ links, each with a length $l_i$ and a joint angle $\theta_i$. The position of the end-effector is given by the vector $\mathbf{x} = [x, y]^T$, where $x$ and $y$ are the coordinates of the end-effector in the global coordinate system. Using simple trigonometry, the position of the end-effector can be expressed as a function of the joint angles and link lengths as seen in equation \ref{eq:robot_kinematics}.
+
+\begin{equation}
+    \label{eq:robot_kinematics}
+    \mathbf{x} = \begin{bmatrix}
+        x \\
+        y
+    \end{bmatrix} = \begin{bmatrix}
+        \sum_{i=1}^{n} l_i \cos(\theta_i) \\
+        \sum_{i=1}^{n} l_i \sin(\theta_i)
+    \end{bmatrix}
+\end{equation}
+
+% This simple relation is illustrated in figure \ref{fig:robot_kinematics}. 
+
     \subsubsection{Jacobian Matrix}
+
+As described in section \ref{sec:robot_kinematics}, the position of the end-effector can be expressed as a function of the joint angles and link lengths. In this section we define the Jacobian, as described in equation \ref{eq:jacobian}, which relates infitesimal changes in the joint angles to the resulting change in the end-effector position.
+
+Now I am testing how quick this is. Testing again. So much testing. 
+
+\begin{equation}
+    \label{eq:jacobian}
+    \mathbf{J} = \begin{bmatrix}
+        \frac{\partial x}{\partial \theta_1} & \frac{\partial x}{\partial \theta_2} & \cdots & \frac{\partial x}{\partial \theta_n} \\
+        \frac{\partial y}{\partial \theta_1} & \frac{\partial y}{\partial \theta_2} & \cdots & \frac{\partial y}{\partial \theta_n}
+    \end{bmatrix}
+\end{equation}
+
+
     \subsubsection{Virtual Work and Force/Torque Mapping}
+
+    Example citation \cite{schulman_proximal_2017}
 
 \subsection{Dynamical Systems and Contact Dynamics}
     \subsubsection{Rigid-Body Dynamics}

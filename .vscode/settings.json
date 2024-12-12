@@ -52,7 +52,7 @@
         "**/*.nav": true,
         "**/*.vrb": true,
         "**/*.run.xml": true,
-        "**/_minted*": true,
+        "**/_minted*": false,
         "**/*.pyg": true,
         "**/*.synctex.gz": true
     }
