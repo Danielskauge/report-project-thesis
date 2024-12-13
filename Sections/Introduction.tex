@@ -1,12 +1,31 @@
 \section{Introduction}
 
 \subsection{Motivation}
+\label{sec:motivation}
+
+The exploration of extraterrestrial environments represents one of the most demanding frontiers of robotic systems, requiring exceptional autonomy, resilience, and adaptability to navigate complex and unpredictable terrain. On Mars, wheeled rovers have proven their utility, with six successful deployments to date \cite{mars_rovers_x6}, robots like Axel \cite{Axel} and Reachbot \cite{ReachBot} have also been designed, tailored towards specific tasks. One such task that has received much attention in recent years, is the exploration of potential Martian and Lunar lava tubes \cite{lavatubes}. These tubes are hollow caverns hypothesized to exist beneath the surface of Mars and the Moon, formed by ancient lava flows. They are of particular interest to astrobiologists and planetary scientists, as they could provide shelter from cosmic radiation and micrometeorites, as well as stable temperatures and access to subsurface water ice \cite{lavatubes}.
+
+The exploration of such lava tubes present a unique challenge to robotic systems, as they are believed to be characterized by rough, uneven terrain, sharp rocks, and steep slopes. This could present a challenge to traditional wheeled rovers. Further, the motion of wheeled robots is limited to the ground plane, and thus, inherently, they do not utilize the lower gravity of extraterrestrial objects such as asteroids, the Moon and Mars. Jumping quadrupeds, on the other hand, inherently utilize the lower gravity of such objects, and in low earth gravity could potentially jump to heights of several meters TODO: CITE. This could allow them to traverse obstacles that would be insurmountable to wheeled rovers, such as steep slopes, large rocks, and gaps in the terrain.
+
+While recent years have seen great progress in the development of quadruped robots, most quadrupeds still struggle with jumping in earth gravity TODO: CITE. Since, additionally, low gravity environments are very hard to replicate on earth, it is difficult to test hardware and control algorithms intended for low gravity jumping quadrupeds. Jumping also includes high velocity impacts, making damage to the often expensive hardware likely. This motivates the main goal of this project, which is to develop a design for a small, lightweight, and low-cost jumping quadruped robot. The robot's low weight is intended to reduce the risk of damage during testing, and the low cost to make it more accessible to researchers, as well as reduce the cost of potential damage.
 
 \subsection{Scope}
-\subsubsection{Problem Description}
-\subsubsection{Related Work}
-\cite{schulman_proximal_2017} is an important paper. 
-\subsection{Report Outline}
+
+As described in the Motivation section, section \ref{sec:motivation}, the main goal of this project is to develop a design for a small, lightweight, and low-cost jumping quadruped robot. The work presented in this report is part of a specialization project, TTK4550 - Engineering Cybernetics, Specialization Project TODO: CITE, pursued at the Norwegian University of Science and Technology (NTNU), as a preparation for a master's thesis. So while the scope of the specialization project is limited to the development of a design, the overall goal is for the design to be used as the basis for a master's thesis, where the robot will be built and tested. The master's thesis will also include the development of control algorithms for the robot, which is not included in this report.
+
+More precisely, the scope of this project is limited to the following:
+\begin{itemize}
+    \item Developing a simplified simulation for the robot in MATLAB/Simulink, to be used for verification and evaluation of various design choices. 
+    \item Choosing a specific method of actuation, such as motors, parallel torsional springs, parallel extension springs, or a combination of these.
+    \item Identifying key hardware components, such as motors and springs. 
+    \item Designing a CAD model for a single leg of the robot. The leg must adhere to geometric and mechanical constraints such as:
+    \begin{itemize}
+    \item Accommodating chosen springs and motors. 
+    \item Being easily manufacturable using 3D printing and machining TODO: WHAT?
+    \item Sturdiness, ie. being able to withstand the forces and impacts of jumping.
+    \end{itemize}
+\end{itemize}
+
 
 \nocite{schulman_proximal_2017}  % This is an example of how to add a reference to the bibliography at the end without having it displayed as a reference within the text
 

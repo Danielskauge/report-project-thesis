@@ -1,15 +1,10 @@
 \section{Theory}
 
-\subsection{Reinforcement Learning}
-    \subsubsection{The Reinforcement Learning Problem Setting}
-    \subsubsection{Value-Based and Policy-Based Methods}
-    \subsubsection{Policy Gradient Methods}
+\subsection{Actuator Modeling}
+    \subsubsection{DC Motor Model}
 
-\subsection{Artificial Neural Networks}
-
-\subsection{Electric Motor Dynamics}
-    \subsubsection{Motor Modeling}
-    \subsubsection{Torque Speed Models}
+    \subsubsection{BLDC Motor Model}
+    \subsubsection{Gear Transmission Friction Model}
 
 \subsection{Spring-Damper Systems}
 
@@ -67,14 +62,18 @@ As described in section \ref{sec:robot_kinematics}, the position of the end-effe
 
     \subsubsection{Force/Torque Mapping}
 
+    Consider a general robotic manipulator, such as the one illustrated in figure \ref{fig:robotic_link_arm}, but with an arbitrary amount, $n$, of joints and links. Using the principle of conservation of power, one arrives at the formulation found in equation \ref{eq:power_conservation}.
+
+    \begin{equation}
+        \text{power at the joints} = \text{(power to move the robot)} + \text{(power at the end-effector)}
+        \label{eq:power_conservation}
+    \end{equation}
+    
+    As the power used to move the robot approaches zero, 
+
     Finally found northwestern book that says what I need: \cite{NorthWestern_Robotics}. 
 
     Consider a robotic manipulator with $n$ joints, each with a joint angle $q_i$ and a joint torque $\tau_i$. The position of the end effector for such a system is given by equation \ref{eq:robot_kinematics}, and thus the formula in equation \ref{eq:jacobian_speed_mapping} can be used to map joint velocities to end effector velocities. 
 
-    
 
 
-\subsection{Dynamical Systems and Contact Dynamics}
-    \subsubsection{Rigid-Body Dynamics}
-    \subsubsection{Contact Modeling and Impact Dynamics}
-    \subsubsection{Friction Models}
