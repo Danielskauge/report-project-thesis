@@ -1,16 +1,25 @@
+\section{Modeling and Simulation}
+\label{sec:modeling}
+For the purpose of doing design verification and optimization, a simplified model of the robot was created. The model was created in Simscape, a physical modeling toolbox integrated with MATLAB/Simulink. 
+\subsection{Simscape}
+
+Simscape is a simulation tool that allows you to rapidly create models of physical systems within Mathworks' MATLAB/Simulink environment. With Simscape, physical systems are built by interconnecting blocks representing physical components, such as rigid bodies, joints and springs in a block diagram. The blocks are parameterized by physical properties, such as mass, inertia, and damping. Simscape automatically generates the equations of motion for the system, which can be solved numerically to simulate the system's behavior. Like you can do with Simulink without Simscape, you can also add ordinary Simulink blocks, including Matlab Function blocks, to the model. 
+
+%\subsection{Simscape}
+%Simscape is a physical modeling toolbox integrated with MATLAB/Simulink. While Simulink handles signal-based modeling through block diagrams, Simscape adds the ability to model physical components and their interactions directly. For this project, its multibody library was used to create a simplified model of the robot. The key advantage is automatic handling of complex multi-body dynamics equations. Rather than manual derivation, Simscape generates them based on specified geometry and joints. The model parameters can be easily modified through MATLAB scripts.
+
+%\subsection{Motor Torque-Speed Characteristics}
+%To model the motor torque-speed characteristics, a torque-speed curve such as the one covered in section \ref{sec:theory:motor_model} was used, with parameters as covered in section \ref{sec:hardware:motor_characteristics}.
+
+
+
+%\subsection{Motor Friction Modelling}
+%Since the motors will be turned off during the jumping maneuver, motor friction must be included. It was modelled using a linear motor friction model covered in section \ref{sec:theory:motor_model}, using only the viscous friction component. To estimate the model parameters, we performed hardware tests for each motor, where the motors acted as the axis of rotation for a pendulum. A aluminium rod with a aluminium ballast was attacted to the motor shaft, and the pendulum was released from rest at horizontal position and allowed to swing freely untill at rest. This was repeated for both motors. The tests where filmed by a phone camera placed at a distance in front of the pendulum, and the angles of the pendulum were manually annotated using Tracker \cite{tracker}. The hardware setup is shown in figure \ref{fig:motor_friction_test_setup}, and the results are shown in figure \ref{fig:results:motor_friction_test}.
+
 \section{Link Length Optimization}
 
 \subsection{Motivation}
-The robot must have reasonable jumping performance to be suitable for training and demonstrating the future RL control policies. One of the main design aspects that determines the jumping performance is the length of the thigh and shank links. The link lengths impact the robots mass, mass distribution, and acts as constraints for initial jumping poses and spring compression. Which in turn affect how jumps are performed and thus jumping performance. To find the optimal link lengths, a grid search was performed. To do this, a simplified model of the robot was created in Simscape.
-
-\subsection{Simscape}
-Simscape is a physical modeling toolbox integrated with MATLAB/Simulink. While Simulink handles signal-based modeling through block diagrams, Simscape adds the ability to model physical components and their interactions directly. For this project, its multibody library was used to create a simplified model of the robot. The key advantage is automatic handling of complex multi-body dynamics equations. Rather than manual derivation, Simscape generates them based on specified geometry and joints. The model parameters can be easily modified through MATLAB scripts.
-
-\subsection{Motor Torque-Speed Characteristics}
-To model the motor torque-speed characteristics, a torque-speed curve such as the one covered in section \ref{sec:theory:motor_model} was used, with parameters as covered in section \ref{sec:hardware:motor_characteristics}.
-
-\subsection{Motor Friction Modelling}
-Since the motors will be turned off during the jumping maneuver, motor friction must be included. It was modelled using a linear motor friction model covered in section \ref{sec:theory:motor_model}, using only the viscous friction component. To estimate the model parameters, we performed hardware tests for each motor, where the motors acted as the axis of rotation for a pendulum. A aluminium rod with a aluminium ballast was attacted to the motor shaft, and the pendulum was released from rest at horizontal position and allowed to swing freely untill at rest. This was repeated for both motors. The tests where filmed by a phone camera placed at a distance in front of the pendulum, and the angles of the pendulum were manually annotated using Tracker \cite{tracker}. The hardware setup is shown in figure \ref{fig:motor_friction_test_setup}, and the results are shown in figure \ref{fig:results:motor_friction_test}.
+The robot must have reasonable jumping performance to be suitable for training and demonstrating the future RL control policies. One of the main design aspects that determines the jumping performance is the length of the thigh and shank links. The link lengths impact the robots mass, mass distribution, and acts as constraints for initial jumping poses and spring compression. Which in turn affect how jumps are performed and thus jumping performance. To find the optimal link lengths, a grid search was performed. To do this, a simplified model of the robot was created in Simscape, the details of this are covered in the section \ref{sec:modeling}.
 
 
 \subsubsection{Pendulum Modeling}
