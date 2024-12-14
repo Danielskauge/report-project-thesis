@@ -3,8 +3,48 @@
 \subsection{Actuator Modeling}
     \subsubsection{DC Motor Model}
 
+
+
     \subsubsection{BLDC Motor Model}
+
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{Images/stolen_BLDC_torque_speed.png}
+        \caption{Torque-speed characteristics of a BLDC motor. TODO: Replace with an image that isn't stolen, and that we are allowed to use. }
+        \label{fig:bldc_torque_speed}
+    \end{figure}
+
     \subsubsection{Gear Transmission Friction Model}
+
+    Although electric motors for robotics are available for a wide power range, they are often too high speed and low power to do any useful work. For this reason, it is often necessary to use a gear transmission to increase the torque and reduce the speed of the motor. 
+
+    In the presence of a geared transmission, assuming no power loss, the output torque and velocity of a geared motor are given by equation \ref{eq:gear_torque} and equation \ref{eq:gear_velocity}, respectively, where $N$ is the gear ratio, $\tau_{in}$ is the input torque, $\tau_{out}$ is the output torque, $w_{in}$ is the input velocity, and $w_{out}$ is the output velocity \cite{modern_robotics_book}.
+
+    \begin{equation}
+        \label{eq:gear_torque}
+        w_ {out} = \frac{w_{in}}{N}
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:gear_velocity}
+        \tau_{out} = N\tau_{in}
+    \end{equation}
+
+    In reality, however, there is always some power loss in the transmission. A common way to model this is to use friction model consisting of a viscous friction term and a Coulomb friction term \cite{modern_robotics_book}. The viscous friction term is proportional to the velocity of the transmission, and the Coulomb friction term is a constant friction torque that must be overcome before the transmission starts moving. The total friction torque is the sum of these two terms, as seen in equation \ref{eq:friction_torque}. It is also possible to drop one or the other of these terms, depending on the application \cite{modern_robotics_book}.
+
+    \begin{equation}
+        \label{eq:friction_torque}
+        \tau_{friction} = b_{viscous}\dot{\theta} + b_{coulomb}\text{sign}(\dot{\theta})  
+    \end{equation}
+
+    In addition to friction, heavily gearing motors can lead to a very high apparent rotor inertia. If one looks at equation \ref{eq:rotor_kinetic_energy}, it is clear that the apparent rotor inertia is proportional to the square of the gear ratio \cite{modern_robotics_book}. This can lead to a very high apparent rotor inertia, which can often be problematic to robotic applications. This is especially the case for cases with contact forces, as the high apparent rotor inertia can lead to very stiff and damaging collisions \cite{proprioceptive}.
+
+    \begin{equation}
+        \label{eq:rotor_kinetic_energy}
+        K = \frac{1}{2}{I}_{rotor}(G\dot\theta)^2 = \frac{1}{2}{I}_{rotor}G^2(\dot\theta)^2 = \frac{1}{2}I_{apparent}(\dot\theta)^2
+    \end{equation}
+
 
 \subsection{Spring-Damper Systems}
 
@@ -71,7 +111,7 @@ As described in section \ref{sec:robot_kinematics}, the position of the end-effe
     
     As the power used to move the robot approaches zero, 
 
-    Finally found northwestern book that says what I need: \cite{NorthWestern_Robotics}. 
+    Finally found northwestern book that says what I need: \cite{modern_robotics_book}. 
 
     Consider a robotic manipulator with $n$ joints, each with a joint angle $q_i$ and a joint torque $\tau_i$. The position of the end effector for such a system is given by equation \ref{eq:robot_kinematics}, and thus the formula in equation \ref{eq:jacobian_speed_mapping} can be used to map joint velocities to end effector velocities. 
 
