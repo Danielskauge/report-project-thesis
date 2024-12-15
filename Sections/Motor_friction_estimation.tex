@@ -1,4 +1,6 @@
 \section{Motor Friction Estimation}
+This section details the estimation of the motor friction coefficients using a pendulum model. The pendulum is used to measure the motor friction coefficients by measuring the angular velocity and acceleration of the pendulum as it is released from a known initial angle. The friction coefficients are then estimated using linear regression.
+
 \subsection{Pendulum Modeling}
 
 The pendulum used in the motor friction tests consists of an aluminum rod of length \( l_{\text{arm}} = 0.19 \) meters and a ballast mass \( m_{\text{ballast}} = 0.301 \) kg attached at a distance \( r = 0.08 \) meters from the pivot. The total mass of the arm is \( m_{\text{arm}} = 0.034 \) kg. The pendulum is modeled as a rigid body rotating about the motor shaft with a moment of inertia \( I \) given by:

@@ -1,247 +1,92 @@
 \section{Link Length Optimization}
+This section details the optimization of the robot's link lengths to maximize jumping performance. The optimization ensures the robot can achieve sufficient jump heights for future reinforcement learning (RL) control policy training and demonstration. A grid search approach using a simplified Simscape robot model systematically explores different link length configurations.
+
+\subsection{Problem definition}
+The link lengths and initial pose critically determine the robot's jumping capability due to the passive knee spring actuation. Link lengths constrain the possible initial poses for a given jumping angle, while the pose determines spring compression and thus available potential energy. Additionally, link lengths affect the center of mass trajectory during jumps, influencing how gravitational and ground contact forces impact the robot's movement. A grid search using a simplified Simscape model (detailed in section \ref{sec:modeling}) identifies optimal link lengths.
+
+\subsection{Problem simplification}
+
+While the robot should jump both vertically and at angles to overcome obstacles, optimizing for angled jumps presents challenges. We want to directly compare the jumping performance of different link lengths, but it is not obvious how to place the initial pose of the robot to achieve any given jumping angle using only the passive actuation of the knee springs. This is a problem for future RL control policies.
 
 
-The robot must have reasonable jumping performance to be suitable for training and demonstrating the future RL control policies. The link lengths and the initial pose of the robot fully determine how it will jump, because there is no feedback control. The link lengths constrict the possible initial poses of the robot for a given jumping angle, and the pose detemines the spring compression which in turn determines how much potential energy the robot can utilize for the jump. Link also affect the position of the center of mass throughout the jump, which affects how gravitational force and forces from the legs contanct with the ground affect the movement of the robot. To find the optimal link lengths, a grid search was performed. To do this, a simplified model of the robot was created in Simscape, the details of this are covered in the section \ref{sec:modeling}.
+To simplify the optimization, only the vertical jumping performance was considered, so that different link lengths can be compared directly. Vetical jumps are achieved across link lenghts by flipping the front legs, such that the legs are symmetric by the vertical axis, as shown in figure \ref{fig:link_length_optimization:flipped_legs}. In this configuration, the movement of the legs during the jump is symmetric and the robot center of mass remains in the horizontal center of the robot, such that any horizontal component of the jump is canceled out. Though this is not the asymmetric leg configuration the robot will use in practice, it provides an approximation for the jumping performance of a given link length configuration. The metric used to evaluate the jumping performance is the maximum height reached by the center of mass of the robot body, minus the maximum standing height reached by the center of mass of the robot body when the legs are fully extended and the paws are in contact with the ground.
 
-The robot should be able to jump at both vertically and at an angle sufficent to overcome small obstacles and gaps. Though different link lengths may be optimal for different jumping angles. Comparing different link lengths for identical jumping angles is difficult for a couple of reasons. To directly compare angled jumping performance, the robot must be able to jump at the desired angle with different link lengths. This is not feasible, as in the absence of feedback control, it is not obvious how to place the initial pose of the robot to achieve the desired jumping angle using only the passive actuation of the knee springs. This is a problem for the future RL control policies. 
+Vertical jumps are also possible with the asymmetric configuration by horizontally shifting the paws toward the direction of the knees. However, determining the exact horizontal offset needed for arbitrary link lengths is non-trivial. For simplicity, we place the paws directly beneath the hip joints in the symmetric configuration. This approach slightly underestimates jumping performance when \(L_1 \neq L_2\) and slightly overestimates the jump height when \(L_1 = L_2\), because the asymmetric configuration would place paws offset from the hip joints for vertical jumps, which experimentation showed respectively increased and decreased the jump height. We accept this limitation as it significantly simplifies the optimization process.
 
-To simplify the optimization, only the vertical jumping performance was considered. For vertical jumps the robot can be made to jump directly upwards, so that different link lengths can be compared directly. This is done by flipping the front legs, such that the legs are symmetric by the vertical axis, as shown in figure \ref{fig:link_length_optimization:flipped_legs}. In this configuration, the movement of the legs during the jump is symmetric and the robot center of mass remains in the horizontal center of the robot, such that any horizontal component of the jump is canceled out. Though this is not the configuration the robot will use in practice, it is a good starting point for the optimization. The metric used to evaluate the jumping performance is the maximum height reached by the center of mass of the robot body, minus the maximum standing height reached by the center of mass of the robot body when the legs are fully extended. 
 
-Jumping performance in the symmetric configuration is an approximation of jumping performance in the asymmetric configuration. In the asymmetric configuration, the robots center of mass in translated horisonatally as the knees bend in the same direction, and horizontal forces do not cancel each other out. A vertical jump can be achieved by compensating for this by horitontally translating the paws of the robot toward the direction of the knees relative to the body. However, the exact amount of horizontal movement required for any given set of link lengths is not obvious.
-
-Thus we simplify the optimization by placing the paws directly underneath the hip joints when performing vertical jumps in the symmetric leg configuration. This will slightly underestimate jumping performance when the thigh and shank links are not equal, but we accept this as a reasonable trade off to make the optimization easier.
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/link_length_optimization/asymmetric_legs.png}
+        \caption{Normal asymmetric leg configuration}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/link_length_optimization/symmetric_legs.png}
+        \caption{Symmetric leg configuration for vertical jumping}
+    \end{subfigure}
+    \caption{Comparison of normal and symmetric leg configurations}
+    \label{fig:link_length_optimization:flipped_legs}
+\end{figure}
 
 
 \subsection{Initial Pose Calculation}
-The initial pose of the robot must be calculated for each set of link lengths. The pose is chosen such that:
-    the paw is in contact with the ground
-     the paw is directly underneath the hip joint
-     the angle of the knee is maximized to load the spring maximally, to maximize the potential energy of the jump
-     the knees to not penetrate the ground
-     knees bend outward to avoid colliding with each other
+For each set of link lengths, an initial pose must be calculated that satisfies several constraints:
 
-    
-     paws do not cross each other, as this would be a collision
-
-How the legs interact after the jump is not considered in the initial pose calculation with regard to avoiding collisions, as this is not a problem for the future RL control policies.Because of the symmetric leg configuraiton, the initial pose is the same for both front and back legs, and as a result the robot will jump vertically.
-     
-     
-There are three cases to consider.
-    Shank longer than thigh, thigh longer than shank, and thigh and shank equal length. 
-
-For all cases the position of the paw is a distance along the vertical axis from the hip joint. This distance is minimized while avoiding penetration of the ground by the knee. Then inverse kinematics is used to find the hip and knee angles that achieve this position. 
-
-For the case where shin and thigh are equal length, this distance is zero plus a small offset to make the inverse kinematics solution unique. 
-For the case where the shin is longer than the thigh, the distance is the shin length minus the thigh length, plus a small offset to avoid the legs being vertical and thus not getting high enough friction to push off the ground.
-For the case where the thigh is longer than the shin, the theta2 and thus spring load is maximized when the shin is horizontal on the ground. This constrains Theta1 and theta2 to sum to 0, and the inverse kinematics is solved thus: 
-\subsubsection{Inverse Kinematics for Thigh Longer Than Shin}
-
-When the thigh is longer than the shin, i.e., \( L_1 > L_2 \), we enforce that the shin remains horizontal in the initial pose. This constraint ensures that the knee angle is maximized to load the spring optimally. The inverse kinematics derivation proceeds as follows:
-
-\paragraph{1. Define the Problem Geometry}
-
-Consider the robot's leg with two links:
 \begin{itemize}
-    \item Thigh length: \( L_1 \)
-    \item Shin length: \( L_2 \)
+    \item Paws must contact the ground
+    \item Paws must be directly underneath their respective hip joints
+    \item Knee angles must be maximized to maximize spring potential energy
+    \item Knees must not penetrate the ground
+    \item Knees must bend outward to avoid collision
+    \item Paws must not cross each other
 \end{itemize}
-The hip joint is at the origin. The positive \( x \)-axis points to the right, and the positive \( y \)-axis points upwards. The paw (foot) is positioned at \( (x, y) \). The takeoff angle \( \theta_T \) is measured counterclockwise from the horizontal axis.
 
-\paragraph{2. Apply the Horizontal Shin Constraint}
+Due to the symmetric leg configuration, the initial pose is identical for both front and back legs, ensuring vertical jumps.
 
-To keep the shin horizontal, the sum of the hip angle \( \theta_1 \) and the knee angle \( \theta_2 \) must satisfy:
-\[
-\theta_1 + \theta_2 = 0 \implies \theta_2 = -\theta_1
-\]
+The pose calculation considers three cases based on link length ratios:
 
-\paragraph{3. Establish Position Relationships}
+\begin{enumerate}
+    \item \(L_1 = L_2\) (equal lengths)
+    \item \(L_2 > L_1\) (longer lower link)
+    \item \(L_1 > L_2\) (longer upper link)
+\end{enumerate}
 
-The paw's position is:
+For all cases, we calculate the minimum vertical distance \(d\) from hip to paw along the vertical axis. This distance should be as small as possible to maximize the knee angle and thus spring load while satisfying the physical constraints of the robot and keeping the paws in contact with the ground. Inverse kinematics then determines the hip and knee angles, selecting the solution where knees bend outward. The distance \(d\) is calculated as follows:
 
-substituting theta2 = -theta1 into the equations for x and y:   
-
-\[
-x = L_1 \cos(\theta_1) + L_2 \cos(-\theta_1) = L_1 \cos(\theta_1) + L_2 \cos(\theta_1)
-\]
-\[
-y = L_1 \sin(\theta_1) + L_2 \sin(-\theta_1) = L_1 \sin(\theta_1) - L_2 \sin(\theta_1)
-\]
-
-
-
-\paragraph{4. Incorporate the Takeoff Angle}
-
-The takeoff angle \( \theta_T \) dictates the jump direction:
-\[
-\tan(\theta_T) = \frac{y}{x} = \frac{L_1 \sin(\theta_1)}{L_1 \cos(\theta_1) + L_2}
-\]
-Solving for \( \theta_1 \):
-\[
-\tan(\theta_T) (\cos(\theta_1) + \frac{L_2}{L_1}) = \sin(\theta_1)
-\]
-\[
-\sin(\theta_1 - \theta_T) = \tan(\theta_T) \frac{L_2}{L_1}
-\]
-\[
-\theta_1 = \theta_T + \arcsin\left(\frac{L_2 \sin(\theta_T)}{L_1}\right)
-\]
-
-\paragraph{5. Calculate the Distance from Hip to Paw}
-
-Using Pythagoras:
-\[
-d = \sqrt{x^2 + y^2} = \sqrt{(L_1 \cos(\theta_1) + L_2)^2 + (L_1 \sin(\theta_1))^2} = \sqrt{L_1^2 + 2 L_1 L_2 \cos(\theta_1) + L_2^2}
-\]
-Substituting \( \theta_1 \):
-\[
-d = L_2 \cos(\theta_T) + \sqrt{L_1^2 - L_2^2 \sin^2(\theta_T)}
-\]
-
-\paragraph{6. Determine the Knee Angle}
-
-Given \( \theta_2 = -\theta_1 \):
-\[
-\theta_2 = -\left( \theta_T + \arcsin\left(\frac{L_2 \sin(\theta_T)}{L_1}\right) \right)
-\]
-
-\paragraph{7. Feasibility Condition}
-
-For the solution to be valid:
-\[
-\left| \frac{L_2 \sin(\theta_T)}{L_1} \right| \leq 1
-\]
-Otherwise, the desired paw position is unreachable with the given link lengths.
-
-For a vertical jump, the takeoff angle \( \theta_T = \frac{\pi}{2} \), so \( \sin(\theta_T) = 1 \) and \( \cos(\theta_T) = 0 \). This simplifies the final result:
-\[
-d = \sqrt{L_1^2 - L_2^2}
-\]
-\[
-\theta_1 = \frac{\pi}{2} + \arcsin\left(\frac{L_2}{L_1}\right)
-\]
-\[
-\theta_2 = -\left( \frac{\pi}{2} + \arcsin\left(\frac{L_2}{L_1}\right) \right)
-\]
-
-This derivation ensures the initial pose maximizes spring compression while keeping the shin horizontal, enabling an optimal vertical jump.
-
-
-
-
-
-
-
-\paragraph{1. Define the Problem Geometry}
-
-Consider the robot's leg consisting of two links:
 \begin{itemize}
-    \item Thigh length: \( L_1 \)
-    \item Shin length: \( L_2 \)
+    \item For \(L_1 = L_2\): \(d = \epsilon\), where \(\epsilon\) is a small offset ensuring unique inverse kinematics solutions
+    \item For \(L_2 > L_1\): \(d = L_2 - L_1 + \epsilon\), where \(\epsilon\) prevents vertical legs and ensures sufficient ground friction
+    \item For \(L_1 > L_2\): \(d = \sqrt{L_1^2 - L_2^2}\), derived when \(L_2\) is horizontal (maximizing spring load) and forms a right triangle with \(L_1\) and the hip-to-paw vector
 \end{itemize}
-The hip joint is at the origin, and the paw (foot) is positioned at coordinates \( (x, y) \). The takeoff angle is \( \theta_T \), measured counterclockwise from the horizontal axis.
 
-\paragraph{2. Apply the Horizontal Shin Constraint}
-
-To keep the shin horizontal, the sum of the hip angle \( \theta_1 \) and the knee angle \( \theta_2 \) must satisfy:
-\[
-\theta_1 + \theta_2 = 0
-\]
-This implies:
-\[
-\theta_2 = -\theta_1
-\]
-
-\paragraph{3. Establish Position Relationships}
-
-The paw's position can be expressed in terms of the link lengths and angles:
-\[
-x = L_1 \cos(\theta_1) + L_2 \cos(\theta_1 + \theta_2)
-\]
-\[
-y = L_1 \sin(\theta_1) + L_2 \sin(\theta_1 + \theta_2)
-\]
-Substituting \( \theta_2 = -\theta_1 \):
-\[
-x = L_1 \cos(\theta_1) + L_2 \cos(0) = L_1 \cos(\theta_1) + L_2
-\]
-\[
-y = L_1 \sin(\theta_1) + L_2 \sin(0) = L_1 \sin(\theta_1)
-\]
-
-\paragraph{4. Incorporate the Takeoff Angle}
-
-The takeoff angle \( \theta_T \) determines the direction of the jump. The paw's position must align with this angle:
-\[
-\tan(\theta_T) = \frac{y}{x} = \frac{L_1 \sin(\theta_1)}{L_1 \cos(\theta_1) + L_2}
-\]
-Solving for \( \theta_1 \):
-\[
-\tan(\theta_T) = \frac{\sin(\theta_1)}{\cos(\theta_1) + \frac{L_2}{L_1}}
-\]
-\[
-\tan(\theta_T) (\cos(\theta_1) + \frac{L_2}{L_1}) = \sin(\theta_1)
-\]
-\[
-\tan(\theta_T) \cos(\theta_1) + \tan(\theta_T) \frac{L_2}{L_1} = \sin(\theta_1)
-\]
-\[
-\sin(\theta_1) - \tan(\theta_T) \cos(\theta_1) = \tan(\theta_T) \frac{L_2}{L_1}
-\]
-\[
-\sin(\theta_1 - \theta_T) = \tan(\theta_T) \frac{L_2}{L_1}
-\]
-\[
-\theta_1 - \theta_T = \arcsin\left(\tan(\theta_T) \frac{L_2}{L_1}\right)
-\]
-\[
-\theta_1 = \theta_T + \arcsin\left(\frac{L_2 \sin(\theta_T)}{L_1}\right)
-\]
-
-\paragraph{5. Calculate the Distance from Hip to Paw}
-
-Using the Pythagorean theorem based on the paw's coordinates:
-\[
-d = \sqrt{x^2 + y^2} = \sqrt{(L_1 \cos(\theta_1) + L_2)^2 + (L_1 \sin(\theta_1))^2}
-\]
-Expanding and simplifying:
-\[
-d = \sqrt{L_1^2 \cos^2(\theta_1) + 2 L_1 L_2 \cos(\theta_1) + L_2^2 + L_1^2 \sin^2(\theta_1)}
-\]
-\[
-d = \sqrt{L_1^2 (\cos^2(\theta_1) + \sin^2(\theta_1)) + 2 L_1 L_2 \cos(\theta_1) + L_2^2}
-\]
-\[
-d = \sqrt{L_1^2 + 2 L_1 L_2 \cos(\theta_1) + L_2^2}
-\]
-Substituting \( \theta_1 = \theta_T + \arcsin\left(\frac{L_2 \sin(\theta_T)}{L_1}\right) \):
-\[
-d = L_2 \cos(\theta_T) + \sqrt{L_1^2 - L_2^2 \sin^2(\theta_T)}
-\]
-
-\paragraph{6. Determine the Knee Angle}
-
-Given \( \theta_2 = -\theta_1 \):
-\[
-\theta_2 = -\left( \theta_T + \arcsin\left(\frac{L_2 \sin(\theta_T)}{L_1}\right) \right)
-\]
-
-\paragraph{7. Feasibility Condition}
-
-For the inverse kinematics solution to be valid, the argument of the arcsine function must satisfy:
-\[
-\left| \frac{L_2 \sin(\theta_T)}{L_1} \right| \leq 1
-\]
-If this condition is not met, the desired paw position is unreachable with the given link lengths.
-
-This step-by-step derivation ensures that the initial pose maximizes spring compression while maintaining the shin's horizontal orientation, facilitating an optimal vertical jump.
-
-
-
-
-
-
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/link_length_optimization/equal_len_pose.png}
+        \caption{Equal lengths (L1=10cm, L2=10cm)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/link_length_optimization/longer_L2_pose.png}
+        \caption{Longer L2 (L1=15cm, L2=10cm)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/link_length_optimization/longer_L1_pose.png}
+        \caption{Longer L1 (L1=15cm, L2=10cm)}
+    \end{subfigure}
+    \caption{Initial poses for different link length ratios}
+    \label{fig:link_length_optimization:initial_poses}
+\end{figure}
 
 
 
 \subsection{Grid Search}
-The search space for the grid search is the ratio of the shank length to the thigh length, and the combined length of the thigh and shank. The search space is shown in figure \ref{fig:link_length_optimization:search_space}. This more effticely explores the relevant part of the link length space then a grid search with the shank length and thigh length as the variables, as early experimentation showed that the best link lenghts were near a ratio of 1. For each iteration, the mass of the robot is recalcualted with the updated link length. Results for identical searches in earth and mars gravity are shown in figure \ref{fig:results:grid_search_results}.
+The grid search explores two parameters: the ratio of L2 to L1 (ranging from 0.5 to 2.0 in steps of 0.1), and the combined length L1 + L2 (ranging from 10cm to 40cm in steps of 2cm). This parameterization, shown in figure \ref{fig:link_length_optimization:search_space}, effectively focuses the search around link length ratios near 1, where preliminary tests indicated generally better performance. For each parameter combination, Simcape automatically adjusts the robot's mass based on the updated link lengths. The search was performed under both Earth (9.81 m/s²) and Mars (3.72 m/s²) gravity, with results shown in figure \ref{fig:results:grid_search_results}.
+
