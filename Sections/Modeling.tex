@@ -134,6 +134,7 @@ The torsion spring was implemented in the model using Simscape's prismatic joint
 \end{figure}
 
 \subsection{Motor Modeling}
+\label{sec:motor_modeling}
 
 To be able to more accurately judge the jumping capability of different motors, a motor model in the form of a torque speed curve was implemented. The BLDC torque-speed curve presented in figure \ref{fig:bldc_torque_speed} is characterized by four parameters, namely the stall torque, the operating torque, the rated speed, and the maximum speed. Since motor suppliers contacted (primarily agf-rc and T-motor) were unable to provide most of the desired parameters, we chose a motor model with only two parameters, namely stall torque and maximum speed. The torque-speed model thus became a simple model where torque decreases linearly from stall torque, at speeds smaller than or equal to zero, to zero at speeds greater than or equal to maximum speed. The model is identical for negative velocities and torques, but with opposite signs. An example of the relation between desired torques and achieved torques for a given motor max speed can be seen in figure \ref{fig:torque_speed_func}.
 

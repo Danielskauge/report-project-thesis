@@ -124,6 +124,7 @@ As described in section \ref{sec:robot_kinematics}, the position of the end-effe
 \end{equation}
 
     \subsubsection{Force/Torque Mapping}
+    \label{sec:force_torque_mapping}
 
     Consider a general robotic manipulator, such as the one illustrated in figure \ref{fig:robotic_link_arm}, but with an arbitrary amount, $n$, of joints and links. Using the principle of conservation of power, one arrives at the formulation found in equation \ref{eq:power_conservation}.
 
@@ -137,6 +138,11 @@ As described in section \ref{sec:robot_kinematics}, the position of the end-effe
     Finally found northwestern book that says what I need: \cite{modern_robotics_book}. 
 
     Consider a robotic manipulator with $n$ joints, each with a joint angle $q_i$ and a joint torque $\tau_i$. The position of the end effector for such a system is given by equation \ref{eq:robot_kinematics}, and thus the formula in equation \ref{eq:jacobian_speed_mapping} can be used to map joint velocities to end effector velocities. 
+
+    \begin{equation}
+        \label{eq:force_torque_mapping}
+        \tau = J^T F
+    \end{equation}
 
 \subsection{Numerical Solvers}
 \label{sec:numerical_solvers}

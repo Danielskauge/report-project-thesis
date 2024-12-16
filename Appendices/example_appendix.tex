@@ -1,79 +1,42 @@
-\subsection{Hello World Example}
-
-\begin{verbatim}
-int main {
-    // This is a comment
-    std::cout << "Hello World from C++!" << std::endl;
-    std::cout << "I am using the default style to print this code in beautiful colors. Since the text is so long I have to include the 'breaklines' option as well" << std::endl;
-    return 0;
-}
-\end{verbatim}
-
-\vdots
-
-\begin{verbatim}
-# This is a comment
-print('Hello world from Python!')
-print('I am using the "rrt" style to print this code in beautiful colors')
-\end{verbatim}
-
-\vdots
-
-\begin{verbatim}
-% Content of HelloWorld.m
-disp('Hello World from Matlab!')
-\end{verbatim}
-\subsection{Flow Chart Example}
-
-\begin{center}
-\begin{tikzpicture}[node distance = 2cm, auto]
-    % Place nodes
-    \node [block] (init) {Learning \LaTeX};
-    \node [cloud, left of=init] (you) {You};
-    \node [block, below of=init] (new_project) {Making new project};
-    \node [decision, below of=new_project] (decide) {Is the template good enough?};
-    \node [block, right of=new_project, node distance=3cm] (no) {Improve the template};
-    \node [block, below of=decide, node distance=3cm] (yes) {Get to work!};
-
-    % Draw edges
-    \path [line] (init) -- (new_project);
-    \path [line] (new_project) -- (decide);
-    \path [line] (decide) -- node {Yes} (yes);
-    \path [line] (decide) -| node [near start] {No} (no);
-    \path [line] (no) -- (new_project);
-    \path [line,dashed] (you) -- (init);
-\end{tikzpicture}
-\end{center}
-
-\subsection{Sub-figures Example}
+\subsection{A06CLS V2 Website Information}
+This information is taken from the website: \url{https://www.agfrc.com/index.php?id=2666}
+\label{appendix:A06CLS_V2_website_information}
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[t]{0.450\textwidth}
-        \includegraphics[width=\textwidth]{Images/Sub-figures_Example/cavity_100_streamlines.png}
-        \caption*{$Re = 100$ - Exercise}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.441\textwidth}
-        \includegraphics[width=\textwidth]{Images/Sub-figures_Example/cavity_100_streamlines_ghia.png}
-        \caption*{$Re = 100$ \parencite{ghia_1982}}
-    \end{subfigure}
-    \\  % This makes a new line
-    \begin{subfigure}[t]{0.450\textwidth}
-        \includegraphics[width=\textwidth]{Images/Sub-figures_Example/cavity_400_streamlines.png}
-        \caption*{$Re = 400$ - Exercise}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.438\textwidth}
-        \includegraphics[width=\textwidth]{Images/Sub-figures_Example/cavity_400_streamlines_ghia.png}
-        \caption*{$Re = 400$ \parencite{ghia_1982}}
-    \end{subfigure}
-    \\  % This makes a new line
-    \begin{subfigure}[t]{0.450\textwidth}
-        \includegraphics[width=\textwidth]{Images/Sub-figures_Example/cavity_1000_streamlines.png}
-        \caption*{$Re = 1000$ - Exercise}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.438\textwidth}
-        \includegraphics[width=\textwidth]{Images/Sub-figures_Example/cavity_1000_streamlines_ghia.png}
-        \caption*{$Re = 1000$ \parencite{ghia_1982}}
-    \end{subfigure}
-    \caption[Streamline results]{Streamlines for the problem of a lid-driven cavity.}
-    \label{fig:cavity_streamline}
+    \includegraphics[width=0.5\textwidth]{Images/A06_motor_info_curt.png}
+    \caption{A06CLS V2 Motor Information (Curt)}
+    \label{fig:A06CLS_V2_motor_info_curt}
+\end{figure}
+
+\begin{comment}
+\subsection{A06CLS V2 Information Brochure}
+\label{appendix:A06CLS_V2_brochure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/A06_motor_info.jpg}
+    \caption{A06CLS V2 Motor Information}
+    \label{fig:A06CLS_V2_motor_info}
+\end{figure}
+\end{comment}
+
+\subsection{A20BHM Website Information}
+\label{appendix:A20_info}
+
+This information is taken from the website: \url{https://www.agf-rc.com/agfrc-a20bhm-21g-high-speed-0068sec-114kg-programmable-digital-brushless-48-84v-strength-steel-gear-micro-wing-servo-18010-for-airplane-aircraft-p4231199.html}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/A20_info.png}
+    %\caption{A20 Information}
+    \label{fig:A20_info}
+\end{figure}
+
+\subsection{A35CHM Motor Information}
+\label{appendix:A35CHM_motor_info}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/A35CHM_info.png}
+    \caption{A35CHM Motor Information}
+    \label{fig:A35CHM_info}
 \end{figure}
