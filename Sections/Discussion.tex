@@ -8,7 +8,7 @@ Given these constraints, we opted for shorter link lengths that balance jumping 
 \subsection{Limitations of the Symmetric Jump Model}
 The symmetric jumping configuration has key limitations in approximating asymmetric jumping performance. For asymmetric legs, achieving a specific jump angle requires careful paw placement relative to the hip joints - a relationship that varies with link lengths. While the symmetric model places paws directly under hips, this same placement in the asymmetric case produces angled rather than vertical jumps.
 
-Experiments show vertical jumps are possible with asymmetric legs by adjusting the hip-to-paw vector angle. However, the symmetric model only partially captures this through a constant angle offset when L2 > L1, which fails to produce vertical jumps across all link lengths.
+Experiments show vertical jumps are possible with asymmetric legs by adjusting the hip-to-paw vector angle. However, the symmetric model only partially captures this through a constant angle offset when $L2 > L1$, which fails to produce vertical jumps across all link lengths.
 
 This approach introduces systematic biases:
 \begin{itemize}
@@ -19,7 +19,7 @@ This approach introduces systematic biases:
 These biases help explain the sharp performance peak at L2 = L1 in the grid search results (figure \ref{fig:link_length_optimization:grid_search_results}) for both Earth and Mars gravity.
 
 \subsection{Control and Dynamic Challenges}
-The current open-loop jump control lacks feedback during jumps, limiting the future RL controller's ability to compensate for parameter variations like spring stiffness. This could potentially widen the sim-to-real gap.
+Because the current plan is to turn the knee motors off during jumps, because the torsional springs' power is so much higher than the motors peak power, and it is unknown how the motors will handle that, the current design lacks knee feedback capability during jumps. This could limit the future RL controller's ability to compensate for parameter variations like spring stiffness. This could potentially widen the sim-to-real gap.
 
 When knees bend in the same direction, the shifted center of mass causes uneven leg loading. The back legs bear more weight while the front legs accelerate faster, resulting in backward rotation that complicates aerial stabilization. These challenges could be addressed by using stronger rear springs/motors or by having the hip motors on during the jump with more power provided to the back legs.
 
@@ -31,3 +31,5 @@ The knee spring's equilibrium position at $\theta_2=0$ (straight leg) may compli
 
 \subsection{Future work}
 The upcoming masters thesis will investigate adding hip motor actuation during jumps to enhance performance and enable feedback control. Then we will use our optimized design to construct the physical robot and create an accurate model in Nvidia Isaac Sim. This model will be used to train reinforcement learning controllers for jumping, aerial stabilization, and landing. Domain randomization techniques will help minimize the sim-to-real gap, and curriculum learning will be explored to make the learning process more tractable. Finally, we will evaluate the trained policies on the physical robot in practical jumping scenarios.
+
+Due to the oversights addressed in section \ref{sec:design_motor_only_jumps}, the promising A80BHP-H motor was overlooked when selecting motors. This motor not only has almost twice the stall torque of the current knee motor, it also has twice the operating velocity. Future work will include investigating the jumping capabilities of a robot combining this motor with a torsional spring.
