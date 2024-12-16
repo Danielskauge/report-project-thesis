@@ -1,7 +1,33 @@
 \section{Discussion}
 
-\subsection{Discussion of Results}
+\subsection{Link Length Optimization Trade-offs}
+The optimal link lengths found for both Earth and Mars gravity present practical challenges for the mechanical design. The longer lengths would require either elongating the robot body to prevent leg collisions, or translating the hip joints outward. Body elongation would increase overall weight, while outward hip translation raises collision risks during aerial stabilization. Additionally, longer legs increase the inertia that motors must overcome during aerial maneuvers, potentially slowing stabilization response.
 
-\subsection{Symmetric Leg Configuratio in link length optimization}
+Given these constraints, we opted for shorter link lengths that balance jumping performance with mechanical practicality. Future work could incorporate body dimensions into the optimization process. Additionally, activating hip motors during jumps may yield different optima that better align with design constraints.
 
-\subsection{Landing with knee springs}
+\subsection{Limitations of the Symmetric Jump Model}
+The symmetric jumping configuration has key limitations in approximating asymmetric jumping performance. For asymmetric legs, achieving a specific jump angle requires careful paw placement relative to the hip joints - a relationship that varies with link lengths. While the symmetric model places paws directly under hips, this same placement in the asymmetric case produces angled rather than vertical jumps.
+
+Experiments show vertical jumps are possible with asymmetric legs by adjusting the hip-to-paw vector angle. However, the symmetric model only partially captures this through a constant angle offset when L2 > L1, which fails to produce vertical jumps across all link lengths.
+
+This approach introduces systematic biases:
+\begin{itemize}
+    \item When \(L_1 \neq L_2\): Underestimates jump height since asymmetric vertical jumps require paw positions that angle L2 and L1 more horizontally, better converting angular to vertical velocity with less slipping
+    \item When \(L_1 = L_2\): Overestimates jump height since achieving vertical jumps requires L2 to be less horizontal, reducing velocity conversion efficiency
+\end{itemize}
+
+These biases help explain the sharp performance peak at L2 = L1 in the grid search results (figure \ref{fig:link_length_optimization:grid_search_results}) for both Earth and Mars gravity.
+
+\subsection{Control and Dynamic Challenges}
+The current open-loop jump control lacks feedback during jumps, limiting the future RL controller's ability to compensate for parameter variations like spring stiffness. This could potentially widen the sim-to-real gap.
+
+When knees bend in the same direction, the shifted center of mass causes uneven leg loading. The back legs bear more weight while the front legs accelerate faster, resulting in backward rotation that complicates aerial stabilization. These challenges could be addressed by using stronger rear springs/motors or by having the hip motors on during the jump with more power provided to the back legs.
+
+\subsection{Design Considerations for Landing}
+The knee spring's equilibrium position at θ2=0 (straight leg) may complicate landing. To achieve a crouched landing pose, knee motors must work against spring force, increasing response time. Further testing is needed to quantify motor response times for various knee angles.
+
+\section{Conclusion}
+
+
+\subsection{Future work}
+The upcoming masters thesis will investigate adding hip motor actuation during jumps to enhance performance and enable feedback control. Then we will use our optimized design to construct the physical robot and create an accurate model in Nvidia Isaac Sim. This model will be used to train reinforcement learning controllers for jumping, aerial stabilization, and landing. Domain randomization techniques will help minimize the sim-to-real gap, and curriculum learning will be explored to make the learning process more tractable. Finally, we will evaluate the trained policies on the physical robot in practical jumping scenarios.
