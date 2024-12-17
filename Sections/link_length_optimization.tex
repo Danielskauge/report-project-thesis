@@ -1,8 +1,9 @@
 \section{Link Length Optimization}
+\label{sec:link_length_optimization}
 This section details the optimization of the robot's link lengths to maximize jumping performance. The optimization ensures the robot can achieve sufficient jump heights for future reinforcement learning (RL) control policy training and demonstration. A grid search approach using a simplified Simscape robot model systematically explores different link length configurations.
 
 \subsection{Problem definition}
-The link lengths and initial pose critically determine the robot's jumping capability due to the passive knee spring actuation. Link lengths constrain the possible initial poses for a given jumping angle, while the pose determines spring compression and thus available potential energy. Additionally, link lengths affect the center of mass trajectory during jumps, influencing how gravitational and ground contact forces impact the robot's movement. A grid search using a simplified Simscape model (detailed in section \ref{sec:modeling}) identifies optimal link lengths.
+The link lengths and initial pose critically determine the robot's jumping capability due to the passive knee spring actuation. Link lengths constrain the possible initial poses for a given jumping angle, while the pose determines spring compression and thus available potential energy. Additionally, link lengths affect the center of mass trajectory during jumps, influencing how gravitational and ground contact forces impact the robot's movement. A grid search using a simplified Simscape model (detailed in section \ref{sec:modeling_and_simulation}) identifies optimal link lengths.
 
 \subsection{Problem simplification}
 
@@ -11,10 +12,26 @@ While the robot should jump both vertically and at angles to overcome obstacles,
 
 To simplify the optimization, only the vertical jumping performance was considered, so that different link lengths can be compared directly. Vetical jumps are achieved across link lenghts by flipping the front legs, such that the legs are symmetric by the vertical axis, as shown in figure \ref{fig:link_length_optimization:flipped_legs}. In this configuration, the movement of the legs during the jump is symmetric and the robot center of mass remains in the horizontal center of the robot, such that any horizontal component of the jump is canceled out. Though this is not the asymmetric leg configuration the robot will use in practice, it provides an approximation for the jumping performance of a given link length configuration. The metric used to evaluate the jumping performance is the maximum height reached by the center of mass of the robot body, minus the maximum standing height reached by the center of mass of the robot body when the legs are fully extended and the paws are in contact with the ground.
 
-The asymmetric leg configuration can also achieve vertical jumps by adjusting the angle between the hip-to-paw vector and vertical, as shown in figure \ref{fig:link_length_optimization:asymmetric_legs_vertical_jump}. However, finding or calculating the optimal offset for arbitrary link lengths is complex. We therefore simplify by placing paws directly beneath hips, except when L2>L1. While this produces less realistic jump heights, it greatly simplifies optimization.
+The asymmetric leg configuration can also achieve vertical jumps by adjusting the angle between the hip-to-paw vector and vertical. However, finding or calculating the optimal angle offset for arbitrary link lengths is complex. We therefore simplify by placing paws directly beneath hips, except when L2>L1. While this produces less realistic jump heights, it greatly simplifies optimization.
 
-For L2>L1 configurations, placing paws directly under hips results in near-vertical legs that slip during jumps. We prevent this by translating paws slightly inward (figure \ref{fig:link_length_optimization:adjusted_paws}). This better approximates the practical asymmetric case where paws require similar translation for vertical jumps. To handle the increased opposing horizontal forces between paws in the symmetric configuration, we double the friction coefficients from 1.0/0.8 to 2.0/1.6 (static/kinetic), which further reduces slipping.
+For L2>L1 configurations, placing paws directly under hips results in near-vertical legs that slip during jumps. We prevent this by translating paws slightly inward towards the body. This better approximates the practical asymmetric case where paws require similar translation for vertical jumps. To handle the increased opposing horizontal forces between paws in the symmetric configuration, we double the friction coefficients from 1.0/0.8 to 2.0/1.6 (static/kinetic), which further reduces slipping.
 
+% \begin{figure}[h]
+%     \centering
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{Images/results/asymmetric_legs_angle_adjustment.png}
+%         \caption{Normal asymmetric leg configuration}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{Images/results/asymmetric_legs_angle_adjustment_jumping.png}
+%         \caption{Symmetric leg configuration for vertical jumping}
+%     \end{subfigure}
+%     \caption{Asymmetric and symmetric leg configurations}
+%     \label{fig:link_length_optimization:asymmetric_legs_vertical_jump}
+% \end{figure}
 
 \begin{figure}[h]
     \centering
@@ -85,8 +102,7 @@ The distance \(d\) should be as small as possible to maximize the knee angle and
 
 
 \subsection{Grid Search}
-The grid search explores two parameters: the ratio of L2 to L1 (ranging from 0.5 to 2.0 in steps of 0.1), and the combined length L1 + L2 (ranging from 10cm to 40cm in steps of 2cm). This parameterization, shown in figure \ref{fig:link_length_optimization:search_space}, effectively focuses the search around link length ratios near 1, where preliminary tests indicated generally better performance. For each parameter combination, Simcape automatically adjusts the robot's mass based on the updated link lengths. The search was performed under both Earth (9.81 m/s²) and Mars (3.72 m/s²) gravity, with results shown in figure \ref{fig:results:grid_search_results}.
-
+The grid search varies two parameters: L2/L1 ratio, and total leg length L1+L2, focusing around L2/L1≈1 where preliminary tests indicated generally better performance. Simscape updates the robot mass for each parameter set. Tests were run in both Earth (9.81 m/s²) and Mars (3.72 m/s²) gravity, with results in figure \ref{fig:results:grid_search_results}.
 
 
 \subsection{later Discussion}
