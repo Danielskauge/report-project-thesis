@@ -30,7 +30,7 @@ Regarding the naming conventions presented in figure \ref{fig:name_conventions},
 
 %TODO: Add body coordsys in both figures? So I can explain that positive rotation for both sides corresponds to positive rotation about the body y axis in nominal position. 
 
-As can be seen in both figure \ref{fig:name_conventions} and figure \ref{fig:angle_conventions}, in addition to the main body and legs colored in grey, the robot model also contains large purple blocks. These blocks represent motor masses, and their mass can be adjusted to represent different motors. 
+As can be seen in both figure \ref{fig:name_conventions} and figure \ref{fig:angle_conventions}, in addition to the main body and legs colored in grey, the robot model also contains large purple blocks. These blocks represent motor masses, and their mass can be adjusted to represent different motors. In the current figures, the hip motors are A06CLS V2 motors, and the knee motors are A80BHP-H motors. 
 
 \begin{figure}
     \centering
@@ -51,9 +51,28 @@ As can be seen in both figure \ref{fig:name_conventions} and figure \ref{fig:ang
 
 In Simscape, the mass and inertia properties of a rigid body can be specified by the user or automatically calculated based on the body's geometry and material properties. Hybrid solutions are also possible, where the user specifies some properties and Simscape calculates the rest \cite{simscape_tutorial}. 
 
-In the case of this model, a summary of the origin of the mass and inertia properties of the rigid bodies can be found in table \ref{tab:mass_inertia_properties}. Exceptions are the properties of the main body and the paws, which will be specified in more detail in the two next paragraphs. For the parts whose mass and inertia are calculated by the geometry, this geometry will be specified in detail whenever the model is used, for example, section \ref{sec:link_length_optimization}, the link-length optimization section, will specify the geometry assumed during the optimization. 
+In the case of this model, a summary of the origin of the mass and inertia properties of the rigid bodies can be found in table \ref{tab:mass_inertia_origins}. Exceptions are the properties of the main body and the paws, which will be specified in more detail in the two next paragraphs. For the parts whose mass and inertia are calculated by the geometry, a summary can be found in table \ref{tab:mass_geometry_properties}. 
 
-The mass properties of the main body are based on the hardware components used by the Eurepus robot constructed by Maurer and El Agroudi \cite{finn_tarek_master}. Since early in the design process a rough estimate was needed for the robot body mass, and it seemed likely that the electronic solution, apart from the motors, would be similar to the Eurepus robot, an approximate mass of the main body was calculated based on the mass of some of the Eurepus robot's electronics plus an approximate amount of Nylon body material, four motors, and a random chosen microcontroller (MCU) mass. The formula used for the approximate of the main body mass can be found in equations \ref{eq:Nylon_plate} to \ref{eq:main_body_mass}. The masses corresponding to variables in equations \ref{eq:Nylon_plate} to \ref{eq:main_body_mass} can be found in table \ref{tab:component_masses}. The motor mass chosen in table \ref{tab:component_masses} corresponds to the mass of the agfrc A20BHM motor. This motor was chosen because, although the current plan is to use the A06CLS V2 motor, which is lighter, we would rather overestimate the mass of the main body than underestimate it, and a change of motor is one of the more likely changes to the robot design, as well as one of the changes that would increase the mass of the robot the most. TODO: Add method used for the inertia as well. 
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Component} & \textbf{Dimensions (cm)} & \textbf{Density (kg/m$^3$)} & \textbf{Mass (g)}\\
+\hline
+Thigh & L1 x 0.5 x 0.25 & 2700 & Calculated \\
+Shank & L2 x 0.5 x 0.25 & 2700 & Calculated \\
+Hip Motor (A06CLS V2) & 2 x 0.8 x 1.78 & Calculated &  7g \\
+Knee Motor (A20BHM) & 2.3 x 1.2 x 2.75 & Calculated & 20g \\
+Knee Motor (A80BHP-H) & 4.0 x 2.0 x 3.75 & Calculated & 79g \\
+Thigh Spine & 2 x 0.5 x 0.25 & 2700 & Calculated \\
+Shank Spine & 1 x 0.5 x 0.25 & 2700 & Calculated \\
+\hline
+\end{tabular}
+\caption{Dimensions and density of the rigid bodies in the robot model. L1 and L2 have no set size, but are the variables we intend to optimize over. }
+\label{tab:mass_geometry_properties}
+\end{table}
+
+The mass properties of the main body are based on the hardware components used by the Eurepus robot constructed by Maurer and El Agroudi \cite{finn_tarek_master}. Since early in the design process a rough estimate was needed for the robot body mass, and it seemed likely that the electronic solution, apart from the motors, would be similar to the Eurepus robot, an approximate mass of the main body was calculated based on the mass of some of the Eurepus robot's electronics plus an approximate amount of Nylon body material, four motors, and a random chosen microcontroller (MCU) mass. The formula used for the approximate of the main body mass can be found in equations \ref{eq:Nylon_plate} to \ref{eq:main_body_mass}. The masses corresponding to variables in equations \ref{eq:Nylon_plate} to \ref{eq:main_body_mass} can be found in table \ref{tab:component_masses}. The motor mass chosen in table \ref{tab:component_masses} corresponds to the mass of the AGF-RC A20BHM motor. This motor was chosen because, although the current plan is to use the A06CLS V2 motor, which is lighter, we would rather overestimate the mass of the main body than underestimate it, and a change of motor is one of the more likely changes to the robot design, as well as one of the changes that would increase the mass of the robot the most. TODO: Add method used for the inertia as well. 
 
 The geometrical, mass and inertia properties of the paws differ based on which of two scenarios we intend to simulate. The first scenario is the normal jumping scenario, in which the paw mass is simply set to 1000 $kg/{m^3}$, though choosing the actual density of rubber would maybe be more appropriate. The dimensions of the paw are in this scenario simply chosen so that the diameter coincides exactly with $max(\text{shank width, shank height})$. The second scenario is the one described in section \ref{sec:hip_motor_dimensioning_test_design}, where the paw mass and volume is increased to estimate hip flexor/extensor motor requirements. 
 
@@ -75,7 +94,7 @@ Paw & See section \ref{sec:mass_inertia_properties} & See section \ref{sec:mass_
 \hline
 \end{tabular}
 \caption{Mass and inertia properties of the rigid bodies in the robot model. A list of the Eurepus robot's electronics can be found in \cite{finn_tarek_master}. }
-\label{tab:mass_inertia_properties}
+\label{tab:mass_inertia_origins}
 \end{table}
 
 \begin{equation}
