@@ -1,7 +1,7 @@
 \section{Results}
 
 \subsection{Motor Friction Estimation}
-Pendulum angle \(\theta\) was sampled with a sampling rate of 60Hz. \(\dot{\theta}\) and \(\ddot{\theta}\) were derived from \(\theta\) using numerical differentiation. The viscous damping coefficient \( b \) was found to be \( 0.001 \) Nm/rad/s for the hip motors (A20 etc) and \( 0.0001 \) Nm/rad/s for the knee motors (A14 etc). Figures \ref{fig:results:motor_friction_estimation:linear_regression_knee_motor} and \ref{fig:results:motor_friction_estimation:linear_regression_hip_motor} show the the predicted \(\dot{\theta}\) from the physical models of the pendulum using the estimated viscous damping coefficients, versus the derived \(\dot{\theta}\).
+Pendulum angle \(\theta\) was sampled with a sampling rate of 60Hz. \(\dot{\theta}\) and \(\ddot{\theta}\) were derived from \(\theta\) using numerical differentiation. The viscous damping coefficient \( b \) was found to be \( 0.001 \) Nm/rad/s for the hip motors (A20BHM) and \( 0.0001 \) Nm/rad/s for the knee motors (A06CLS V2 etc). Figures \ref{fig:results:motor_friction_estimation:linear_regression_knee_motor} and \ref{fig:results:motor_friction_estimation:linear_regression_hip_motor} show the the predicted \(\dot{\theta}\) from the physical models of the pendulum using the estimated viscous damping coefficients, versus the derived \(\dot{\theta}\).
 
 \begin{figure}[h]
     \centering
@@ -62,7 +62,7 @@ The optimum total length is 8cm longer under Mars gravity. In both Mars and Eart
 \subsection{Hip Motor Dimensioning Test}
 \label{sec:hip_motor_dimensioning_test}
 
-As can be seen in figure \ref{fig:hip_motor_strength_test}, the hip motors follow the angle reference well, achieving three back and forth swings of 90 degrees over a one second period. The torque output of the motors during this maneuver can be seen in figure \ref{fig:hip_motor_torque_test}. 
+As can be seen in figure \ref{fig:hip_motor_strength_test}, the hip motors follow the angle reference well, achieving three back and forth swings of 90 degrees over a one second period. The torque output of the motors during this maneuver can be seen in figure \ref{fig:hip_motor_torque_test}. In other words, the hip motors satisfy the heuristic as presented in \cite{finn_tarek_master}.
 
 \begin{figure}[H]
     \centering
@@ -70,8 +70,6 @@ As can be seen in figure \ref{fig:hip_motor_strength_test}, the hip motors follo
     \caption{Commanded and actual hip joint angle achieved during the hip motor strength test simulation. }
     \label{fig:hip_motor_strength_test}
 \end{figure}
-
-figure \ref{fig:hip_motor_torque_test}.
 
 \begin{figure}[H]
     \centering
