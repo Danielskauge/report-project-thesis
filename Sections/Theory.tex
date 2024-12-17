@@ -70,7 +70,7 @@ where \( \tau \) is the torque, \( k \) is the torsion spring constant, and \( \
 
 Both types of springs are widely used in various mechanical systems to provide force or torque, absorb shock, and store energy.
 
-\subsection{Kinematics, Jacobians, and Virtual Work}
+\subsection{Kinematics}
     \subsubsection{Robot Kinematics}
     \label{sec:robot_kinematics}
 Consider a robotic link arm existing in $\mathbb{R}^2$ consisting of $n$ links, each with a length $l_i$ and a joint angle $q_i$. The position of the end-effector is given by the vector $\mathbf{x} = [x, y]^T$, where $x$ and $y$ are the coordinates of the end-effector in the global coordinate system. Using simple trigonometry, the position of the end-effector can be expressed as a function of the joint angles and link lengths as seen in equation \ref{eq:robot_kinematics}. 
@@ -82,8 +82,8 @@ Axes and joint angles corresponding to the expression in equation \ref{eq:robot_
         x \\
         y
     \end{bmatrix} = \begin{bmatrix}
-        \sum_{i=1}^{n} l_i \cos(q_i) \\
-        \sum_{i=1}^{n} l_i \sin(q_i)
+        \sum_{i=1}^{n} l_i \cos\left(\sum_{j=1}^{i} q_j\right) \\
+        \sum_{i=1}^{n} l_i \sin\left(\sum_{j=1}^{i} q_j\right)
     \end{bmatrix}
 \end{equation}
 
@@ -143,6 +143,35 @@ As described in section \ref{sec:robot_kinematics}, the position of the end-effe
         \tau = J^T F
     \end{equation}
 
+    \subsubsection{Inverse Kinematics}
+    Inverse kinematics solves for joint angles that achieve a desired end-effector pose. For a planar two-link manipulator with link lengths \(L_1\) and \(L_2\), given a desired end-effector position \((x,y)\), the joint angles \(\theta_1\) and \(\theta_2\) can be found analytically.
+
+    The forward kinematics equations are decribed by the 2-link case of equation \ref{eq:robot_kinematics}.
+    
+    \begin{equation}
+    x = L_1 \cos(\theta_1) + L_2 \cos(\theta_1 + \theta_2)
+    \end{equation}
+    
+    \begin{equation}
+    y = L_1 \sin(\theta_1) + L_2 \sin(\theta_1 + \theta_2)
+    \end{equation}
+    
+    From the law of cosines, \(\theta_2\) is:
+    
+    \begin{equation}
+    \theta_2 = \pm \arccos\left(\frac{x^2 + y^2 - L_1^2 - L_2^2}{2L_1L_2}\right)
+    \end{equation}
+    
+    The angle \(\theta_1\) is then:
+    
+    \begin{equation}
+    \theta_1 = \arctan2(y,x) - \arctan2(L_2\sin(\theta_2), L_1 + L_2\cos(\theta_2))
+    \end{equation}
+    
+    The ± in the equation for \(\theta_2\) indicates that two solutions exist for most end-effector positions—one with the second joint angle positive and one negative. When \(L_1 = L_2\), a singularity occurs at \((0,0)\) where infinite solutions exist. At the workspace boundary where \(x^2 + y^2 = (L_1 + L_2)^2\), only one solution exists.
+
+
+
 \subsection{Contact Friction}
 \label{sec:contact_friction}
 TODO
@@ -186,23 +215,4 @@ The solution is therefore:
 \]
 
 This solution minimizes the sum of squared residuals and provides the optimal parameters \(\beta\) in the least squares sense.
-
-\subsection{Inverse Kinematics}
-Inverse kinematics solves for joint angles that achieve a desired end-effector pose. For a planar two-link manipulator with link lengths \(L_1\) and \(L_2\), given a desired end-effector position \((x,y)\), the joint angles \(\theta_1\) and \(\theta_2\) can be found analytically.
-
-From the law of cosines, \(\theta_2\) is:
-
-\[
-\theta_2 = \pm \arccos\left(\frac{x^2 + y^2 - L_1^2 - L_2^2}{2L_1L_2}\right)
-\]
-
-The angle \(\theta_1\) is then:
-
-\[
-\theta_1 = \arctan2(y,x) - \arctan2(L_2\sin(\theta_2), L_1 + L_2\cos(\theta_2))
-\]
-
-The ± in the equation for \(\theta_2\) indicates that two solutions exist for most end-effector positions - one with the second joint angle positive and one negative. When \(L_1 = L_2\), a singularity occurs at \((0,0)\) where infinite solutions exist. At the workspace boundary where \(x^2 + y^2 = (L_1 + L_2)^2\), only one solution exists.
-
-
 
