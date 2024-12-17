@@ -1,0 +1,620 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{finn_tarek_master}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=e630e7b955c13da0bee8ef2a9a626e93}{%
+           family={El-Agroudi},
+           familyi={E\bibinithyphendelim A\bibinitperiod},
+           given={Tarek},
+           giveni={T\bibinitperiod}}}%
+        {{hash=64c36c000229aa80e7f3fca8cd18905f}{%
+           family={Gross\bibnamedelima Maurer},
+           familyi={G\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Finn},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{institution}{2}{%
+        {Norwegian University of Science}%
+        {Technology}%
+      }
+      \strng{namehash}{72f730144706237b80ac0b3f200c5c05}
+      \strng{fullhash}{72f730144706237b80ac0b3f200c5c05}
+      \strng{fullhashraw}{72f730144706237b80ac0b3f200c5c05}
+      \strng{bibnamehash}{72f730144706237b80ac0b3f200c5c05}
+      \strng{authorbibnamehash}{72f730144706237b80ac0b3f200c5c05}
+      \strng{authornamehash}{72f730144706237b80ac0b3f200c5c05}
+      \strng{authorfullhash}{72f730144706237b80ac0b3f200c5c05}
+      \strng{authorfullhashraw}{72f730144706237b80ac0b3f200c5c05}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{In-Flight Attitude Control of a Quadruped in Low-Gravity Environments using Deep Reinforcement Learning}
+      \field{year}{2024}
+    \endentry
+    \entry{lavatubes}{misc}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=dc7f8ab2783e979345edbfcc525318a3}{%
+           family={Daga},
+           familyi={D\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{b10683e2429f16f37d33d9a915750e52}
+      \strng{fullhash}{b10683e2429f16f37d33d9a915750e52}
+      \strng{fullhashraw}{b10683e2429f16f37d33d9a915750e52}
+      \strng{bibnamehash}{b10683e2429f16f37d33d9a915750e52}
+      \strng{authorbibnamehash}{b10683e2429f16f37d33d9a915750e52}
+      \strng{authornamehash}{b10683e2429f16f37d33d9a915750e52}
+      \strng{authorfullhash}{b10683e2429f16f37d33d9a915750e52}
+      \strng{authorfullhashraw}{b10683e2429f16f37d33d9a915750e52}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{White Paper submitted to the Planetary Sciences Decadal Survey 2013-2022}
+      \field{title}{Lunar and Martian Lava Tube Exploration as Part of an Overall Scientific Survey}
+      \field{year}{2022}
+    \endentry
+    \entry{modsim}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=b9316c6aefaa8e5eb8470d4221e0fef1}{%
+           family={Egeland},
+           familyi={E\bibinitperiod},
+           given={Olav},
+           giveni={O\bibinitperiod}}}%
+        {{hash=db7b58731e1d1406085236238be06461}{%
+           family={Gravdahl},
+           familyi={G\bibinitperiod},
+           given={Jan\bibnamedelima Tommy},
+           giveni={J\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Trondheim, Norway}%
+      }
+      \list{publisher}{1}{%
+        {Marine Cybernetics AS}%
+      }
+      \strng{namehash}{6e18ab2061e21a067d2e05dee07c22bb}
+      \strng{fullhash}{6e18ab2061e21a067d2e05dee07c22bb}
+      \strng{fullhashraw}{6e18ab2061e21a067d2e05dee07c22bb}
+      \strng{bibnamehash}{6e18ab2061e21a067d2e05dee07c22bb}
+      \strng{authorbibnamehash}{6e18ab2061e21a067d2e05dee07c22bb}
+      \strng{authornamehash}{6e18ab2061e21a067d2e05dee07c22bb}
+      \strng{authorfullhash}{6e18ab2061e21a067d2e05dee07c22bb}
+      \strng{authorfullhashraw}{6e18ab2061e21a067d2e05dee07c22bb}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{For ordering, visit \url{http://www.marinecybernetics.com} or contact info@marinecybernetics.com}
+      \field{title}{Marine Cybernetics}
+      \field{year}{2002}
+      \verb{urlraw}
+      \verb http://www.marinecybernetics.com
+      \endverb
+      \verb{url}
+      \verb http://www.marinecybernetics.com
+      \endverb
+    \endentry
+    \entry{stiff_contact_ODE_1}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=83e9309b497414bd7c7550110d37b3d7}{%
+           family={Hairer},
+           familyi={H\bibinitperiod},
+           given={Ernst},
+           giveni={E\bibinitperiod}}}%
+        {{hash=9a61cdcbc8a5b325ba3aa8e80f7d1900}{%
+           family={Lubich},
+           familyi={L\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=6715424cc951a02c09b3082a661642ab}{%
+           family={Wanner},
+           familyi={W\bibinitperiod},
+           given={Gerhard},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Science \& Business Media}%
+      }
+      \strng{namehash}{6b65ffa33296e7c8499bc72738749672}
+      \strng{fullhash}{6b65ffa33296e7c8499bc72738749672}
+      \strng{fullhashraw}{6b65ffa33296e7c8499bc72738749672}
+      \strng{bibnamehash}{6b65ffa33296e7c8499bc72738749672}
+      \strng{authorbibnamehash}{6b65ffa33296e7c8499bc72738749672}
+      \strng{authornamehash}{6b65ffa33296e7c8499bc72738749672}
+      \strng{authorfullhash}{6b65ffa33296e7c8499bc72738749672}
+      \strng{authorfullhashraw}{6b65ffa33296e7c8499bc72738749672}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Geometric numerical integration: structure-preserving algorithms for ordinary differential equations}
+      \field{volume}{31}
+      \field{year}{2006}
+    \endentry
+    \entry{hutter_anymal_2016}{inproceedings}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=164607f9daa616a03bed0e2bf6531a8d}{%
+           family={Hutter},
+           familyi={H\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{477fca958e75709cb36e5e12a4de0218}
+      \strng{fullhash}{477fca958e75709cb36e5e12a4de0218}
+      \strng{fullhashraw}{477fca958e75709cb36e5e12a4de0218}
+      \strng{bibnamehash}{477fca958e75709cb36e5e12a4de0218}
+      \strng{authorbibnamehash}{477fca958e75709cb36e5e12a4de0218}
+      \strng{authornamehash}{477fca958e75709cb36e5e12a4de0218}
+      \strng{authorfullhash}{477fca958e75709cb36e5e12a4de0218}
+      \strng{authorfullhashraw}{477fca958e75709cb36e5e12a4de0218}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2016 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}
+      \field{month}{8}
+      \field{title}{{ANYmal} - a Highly Mobile and Dynamic Quadrupedal Robot}
+      \field{year}{2016}
+      \field{pages}{38\bibrangedash 44}
+      \range{pages}{7}
+    \endentry
+    \entry{modern_robotics_book}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=ab9086b1452a1a9813fc6765151b4f61}{%
+           family={Lynch},
+           familyi={L\bibinitperiod},
+           given={Kevin\bibnamedelima M.},
+           giveni={K\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=66f19f2d439b6eb60c024ab622b0389f}{%
+           family={Park},
+           familyi={P\bibinitperiod},
+           given={Frank\bibnamedelima C.},
+           giveni={F\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Pres}%
+      }
+      \strng{namehash}{8d01efb70f6cec86f711e78e22f97a48}
+      \strng{fullhash}{8d01efb70f6cec86f711e78e22f97a48}
+      \strng{fullhashraw}{8d01efb70f6cec86f711e78e22f97a48}
+      \strng{bibnamehash}{8d01efb70f6cec86f711e78e22f97a48}
+      \strng{authorbibnamehash}{8d01efb70f6cec86f711e78e22f97a48}
+      \strng{authornamehash}{8d01efb70f6cec86f711e78e22f97a48}
+      \strng{authorfullhash}{8d01efb70f6cec86f711e78e22f97a48}
+      \strng{authorfullhashraw}{8d01efb70f6cec86f711e78e22f97a48}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978110715630}
+      \field{title}{MODERN ROBOTICS: MECHANICS, PLANNING, AND CONTROL}
+      \field{year}{2017}
+    \endentry
+    \entry{simscape_tutorial}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=2d2b0d998977e6379aad61f1b56ac3c1}{%
+           family={{MathWorks}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{2d2b0d998977e6379aad61f1b56ac3c1}
+      \strng{fullhash}{2d2b0d998977e6379aad61f1b56ac3c1}
+      \strng{fullhashraw}{2d2b0d998977e6379aad61f1b56ac3c1}
+      \strng{bibnamehash}{2d2b0d998977e6379aad61f1b56ac3c1}
+      \strng{authorbibnamehash}{2d2b0d998977e6379aad61f1b56ac3c1}
+      \strng{authornamehash}{2d2b0d998977e6379aad61f1b56ac3c1}
+      \strng{authorfullhash}{2d2b0d998977e6379aad61f1b56ac3c1}
+      \strng{authorfullhashraw}{2d2b0d998977e6379aad61f1b56ac3c1}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://se.mathworks.com/help/simscape/getting-started-with-simscape.html}}
+      \field{note}{Accessed: 2024-12-15}
+      \field{title}{Getting Started with Simscape}
+      \field{year}{2024}
+    \endentry
+    \entry{Axel}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=bf5e4cba88bd8cad6d6a76c9d7dce85d}{%
+           family={Nesnas},
+           familyi={N\bibinitperiod},
+           given={I.\bibnamedelimi A.},
+           giveni={I\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{2bcb528dbd3316dd0acc961080814ab7}
+      \strng{fullhash}{2bcb528dbd3316dd0acc961080814ab7}
+      \strng{fullhashraw}{2bcb528dbd3316dd0acc961080814ab7}
+      \strng{bibnamehash}{2bcb528dbd3316dd0acc961080814ab7}
+      \strng{authorbibnamehash}{2bcb528dbd3316dd0acc961080814ab7}
+      \strng{authornamehash}{2bcb528dbd3316dd0acc961080814ab7}
+      \strng{authorfullhash}{2bcb528dbd3316dd0acc961080814ab7}
+      \strng{authorfullhashraw}{2bcb528dbd3316dd0acc961080814ab7}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Field Robotics}
+      \field{number}{4}
+      \field{title}{Axel and Duaxel Rovers for the Sustainable Exploration of Extreme Terrains}
+      \field{volume}{29}
+      \field{year}{2012}
+      \field{pages}{663\bibrangedash 685}
+      \range{pages}{23}
+    \endentry
+    \entry{ReachBot}{inproceedings}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=8d19d7e01e0bc1a7f1cc5642a68f4dc0}{%
+           family={Newdick},
+           familyi={N\bibinitperiod},
+           given={Stephanie},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{631f135cf84b5b82c3c355c9769c7907}
+      \strng{fullhash}{631f135cf84b5b82c3c355c9769c7907}
+      \strng{fullhashraw}{631f135cf84b5b82c3c355c9769c7907}
+      \strng{bibnamehash}{631f135cf84b5b82c3c355c9769c7907}
+      \strng{authorbibnamehash}{631f135cf84b5b82c3c355c9769c7907}
+      \strng{authornamehash}{631f135cf84b5b82c3c355c9769c7907}
+      \strng{authorfullhash}{631f135cf84b5b82c3c355c9769c7907}
+      \strng{authorfullhashraw}{631f135cf84b5b82c3c355c9769c7907}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2023 IEEE Aerospace Conference}
+      \field{title}{Designing ReachBot: System Design Process with a Case Study of a Martian Lava Tube Mission}
+      \field{year}{2023}
+      \field{pages}{1\bibrangedash 9}
+      \range{pages}{9}
+    \endentry
+    \entry{OLYMPUS1}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=7ed9069c297fb1b66581242f3cd7ea01}{%
+           family={Olsen},
+           familyi={O\bibinitperiod},
+           given={Jørgen\bibnamedelima Anker},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=607eea23552518c3e54a04a592995738}{%
+           family={Alexis},
+           familyi={A\bibinitperiod},
+           given={Kostas},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{fullhash}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{fullhashraw}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{bibnamehash}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{authorbibnamehash}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{authornamehash}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{authorfullhash}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{authorfullhashraw}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \field{extraname}{1}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2023 21st International Conference on Advanced Robotics (ICAR)}
+      \field{title}{Design and Experimental Verification of a Jumping Legged Robot for Martian Lava Tube Exploration}
+      \field{year}{2023}
+      \field{pages}{452\bibrangedash 459}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/ICAR58858.2023.10406863
+      \endverb
+      \keyw{Legged locomotion;Mars;Lava;Springs;Robots;Gravity;Testing}
+    \endentry
+    \entry{OLYMPUS2}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=7ed9069c297fb1b66581242f3cd7ea01}{%
+           family={Olsen},
+           familyi={O\bibinitperiod},
+           given={Jørgen\bibnamedelima Anker},
+           giveni={J\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=607eea23552518c3e54a04a592995738}{%
+           family={Alexis},
+           familyi={A\bibinitperiod},
+           given={Kostas},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{fullhash}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{fullhashraw}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{bibnamehash}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{authorbibnamehash}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{authornamehash}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{authorfullhash}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \strng{authorfullhashraw}{46786e6e3afb5ed66ac6ca8ae5602e9f}
+      \field{extraname}{2}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.RO}
+      \field{eprinttype}{arXiv}
+      \field{title}{Martian Lava Tube Exploration Using Jumping Legged Robots: A Concept Study}
+      \field{year}{2023}
+      \verb{eprint}
+      \verb 2310.14876
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2310.14876
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2310.14876
+      \endverb
+    \endentry
+    \entry{GRILLO}{inproceedings}{}{}
+      \name{author}{3}{}{%
+        {{hash=00a104b291f4462ae893816275beab83}{%
+           family={Scarfogliero},
+           familyi={S\bibinitperiod},
+           given={Umberto},
+           giveni={U\bibinitperiod}}}%
+        {{hash=72569eca2cdd0c970bef6b025bd27947}{%
+           family={Stefanini},
+           familyi={S\bibinitperiod},
+           given={Cesare},
+           giveni={C\bibinitperiod}}}%
+        {{hash=6583d85df524b0836c2a68830b29038a}{%
+           family={Dario},
+           familyi={D\bibinitperiod},
+           given={Paolo},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{4a0ae349d8ce2f591bdb8538ad82baaf}
+      \strng{fullhash}{4a0ae349d8ce2f591bdb8538ad82baaf}
+      \strng{fullhashraw}{4a0ae349d8ce2f591bdb8538ad82baaf}
+      \strng{bibnamehash}{4a0ae349d8ce2f591bdb8538ad82baaf}
+      \strng{authorbibnamehash}{4a0ae349d8ce2f591bdb8538ad82baaf}
+      \strng{authornamehash}{4a0ae349d8ce2f591bdb8538ad82baaf}
+      \strng{authorfullhash}{4a0ae349d8ce2f591bdb8538ad82baaf}
+      \strng{authorfullhashraw}{4a0ae349d8ce2f591bdb8538ad82baaf}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings 2007 IEEE International Conference on Robotics and Automation}
+      \field{title}{Design and Development of the Long-Jumping "Grillo" Mini Robot}
+      \field{year}{2007}
+      \field{pages}{467\bibrangedash 472}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ROBOT.2007.363830
+      \endverb
+      \keyw{Robots;Animals;Legged locomotion;DC motors;Robotics and automation;Springs;Friction;Switches;Design engineering;Feedforward systems}
+    \endentry
+    \entry{RAVEN}{article}{}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{3}{}{%
+        {{hash=860d5c8751aaa31398c4da382c1c7d6d}{%
+           family={Shin},
+           familyi={S\bibinitperiod},
+           given={W.D.},
+           giveni={W\bibinitperiod}}}%
+        {{hash=5b2aa3134c93f66aa7259b1a2ac0f831}{%
+           family={Phan},
+           familyi={P\bibinitperiod},
+           given={H.V.},
+           giveni={H\bibinitperiod}}}%
+        {{hash=9773365d88c621b1ba7e7607bc285509}{%
+           family={Daley},
+           familyi={D\bibinitperiod},
+           given={M.A.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{2b66109516faee9a10ec95de59c54e1b}
+      \strng{fullhash}{2b66109516faee9a10ec95de59c54e1b}
+      \strng{fullhashraw}{2b66109516faee9a10ec95de59c54e1b}
+      \strng{bibnamehash}{2b66109516faee9a10ec95de59c54e1b}
+      \strng{authorbibnamehash}{2b66109516faee9a10ec95de59c54e1b}
+      \strng{authornamehash}{2b66109516faee9a10ec95de59c54e1b}
+      \strng{authorfullhash}{2b66109516faee9a10ec95de59c54e1b}
+      \strng{authorfullhashraw}{2b66109516faee9a10ec95de59c54e1b}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature}
+      \field{title}{Fast ground-to-air transition with avian-inspired multifunctional legs}
+      \field{volume}{636}
+      \field{year}{2024}
+      \field{pages}{86\bibrangedash 91}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1038/s41586-024-08228-9
+      \endverb
+    \endentry
+    \entry{stiff_contact_ODE_2}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=f5003f438d27eacbb94f94bace68fd4f}{%
+           family={Stewart},
+           familyi={S\bibinitperiod},
+           given={David\bibnamedelima E},
+           giveni={D\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SIAM}%
+      }
+      \strng{namehash}{f5003f438d27eacbb94f94bace68fd4f}
+      \strng{fullhash}{f5003f438d27eacbb94f94bace68fd4f}
+      \strng{fullhashraw}{f5003f438d27eacbb94f94bace68fd4f}
+      \strng{bibnamehash}{f5003f438d27eacbb94f94bace68fd4f}
+      \strng{authorbibnamehash}{f5003f438d27eacbb94f94bace68fd4f}
+      \strng{authornamehash}{f5003f438d27eacbb94f94bace68fd4f}
+      \strng{authorfullhash}{f5003f438d27eacbb94f94bace68fd4f}
+      \strng{authorfullhashraw}{f5003f438d27eacbb94f94bace68fd4f}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM review}
+      \field{number}{1}
+      \field{title}{Rigid-body dynamics with friction and impact}
+      \field{volume}{42}
+      \field{year}{2000}
+      \field{pages}{3\bibrangedash 39}
+      \range{pages}{37}
+    \endentry
+    \entry{MATLAB_ODE}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=8687eae34a3830fc0c113d9d65382e90}{%
+           family={The\bibnamedelima MathWorks},
+           familyi={T\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Natick, MA}%
+      }
+      \list{organization}{1}{%
+        {The MathWorks, Inc.}%
+      }
+      \strng{namehash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{fullhash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{fullhashraw}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{bibnamehash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{authorbibnamehash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{authornamehash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{authorfullhash}{8687eae34a3830fc0c113d9d65382e90}
+      \strng{authorfullhashraw}{8687eae34a3830fc0c113d9d65382e90}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{MATLAB ODE Suite}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.mathworks.com/help/matlab/ref/ode15s.html
+      \endverb
+      \verb{url}
+      \verb https://www.mathworks.com/help/matlab/ref/ode15s.html
+      \endverb
+    \endentry
+    \entry{proprioceptive}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=fb6e66ed067109a81d392beff7094904}{%
+           family={Wensing},
+           familyi={W\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod}}}%
+        {{hash=97c468405701b1d6b3831f88ce1162be}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Albert},
+           giveni={A\bibinitperiod}}}%
+        {{hash=86afbee3fcffd59af5911471adbaea1e}{%
+           family={Seok},
+           familyi={S\bibinitperiod},
+           given={Sangok},
+           giveni={S\bibinitperiod}}}%
+        {{hash=3084a0b4084e547f16499fd2c4d0d030}{%
+           family={Otten},
+           familyi={O\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=26aeed43508b1983aaf3154e1c9fd0fb}{%
+           family={Lang},
+           familyi={L\bibinitperiod},
+           given={Jeffrey},
+           giveni={J\bibinitperiod}}}%
+        {{hash=23a30c71925ebf508cf3e30627b69403}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Sangbae},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{a83a2afe9cd309eef834cd994678fa48}
+      \strng{fullhash}{e78f3827f276e4d325f089dc71b9209a}
+      \strng{fullhashraw}{e78f3827f276e4d325f089dc71b9209a}
+      \strng{bibnamehash}{a83a2afe9cd309eef834cd994678fa48}
+      \strng{authorbibnamehash}{a83a2afe9cd309eef834cd994678fa48}
+      \strng{authornamehash}{a83a2afe9cd309eef834cd994678fa48}
+      \strng{authorfullhash}{e78f3827f276e4d325f089dc71b9209a}
+      \strng{authorfullhashraw}{e78f3827f276e4d325f089dc71b9209a}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Robotics}
+      \field{month}{01}
+      \field{title}{Proprioceptive Actuator Design in the MIT Cheetah: Impact Mitigation and High-Bandwidth Physical Interaction for Dynamic Legged Robots}
+      \field{volume}{PP}
+      \field{year}{2017}
+      \field{pages}{1\bibrangedash 14}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1109/TRO.2016.2640183
+      \endverb
+    \endentry
+    \entry{mars_rovers_x6}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=8c6e9bb16b609d92bb622d25a7cc95bc}{%
+           family={Zarei},
+           familyi={Z\bibinitperiod},
+           given={Mahboubeh},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c89003fabbac2eba900f2cbf0f695cf8}{%
+           family={Chhabra},
+           familyi={C\bibinitperiod},
+           given={Robin},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{c9d0391aa7df2e3def7128cb4d7cdbfd}
+      \strng{fullhash}{c9d0391aa7df2e3def7128cb4d7cdbfd}
+      \strng{fullhashraw}{c9d0391aa7df2e3def7128cb4d7cdbfd}
+      \strng{bibnamehash}{c9d0391aa7df2e3def7128cb4d7cdbfd}
+      \strng{authorbibnamehash}{c9d0391aa7df2e3def7128cb4d7cdbfd}
+      \strng{authornamehash}{c9d0391aa7df2e3def7128cb4d7cdbfd}
+      \strng{authorfullhash}{c9d0391aa7df2e3def7128cb4d7cdbfd}
+      \strng{authorfullhashraw}{c9d0391aa7df2e3def7128cb4d7cdbfd}
+      \field{sortinit}{Z}
+      \field{sortinithash}{96892c0b0a36bb8557c40c49813d48b3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2673-5075}
+      \field{journaltitle}{Frontiers in Space Technologies}
+      \field{title}{Advancements in Autonomous Mobility of Planetary Wheeled Mobile Robots: A Review}
+      \field{volume}{3}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.3389/frspt.2022.1080291
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
