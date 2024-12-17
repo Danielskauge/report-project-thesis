@@ -9,12 +9,12 @@ The link lengths and initial pose critically determine the robot's jumping capab
 
 While the robot should jump both vertically and at angles to overcome obstacles, optimizing for angled jumps presents challenges. We want to directly compare the jumping performance of different link lengths, but it is not obvious how to place the initial pose of the robot to achieve any given jumping angle using only the passive actuation of the knee springs. This is a problem for future RL control policies.
 
+%TODO: Daniel, missing figure
+To simplify the optimization, only the vertical jumping performance was considered, so that different link lengths can be compared directly. Vertical jumps are achieved across link lenghts by flipping the front legs, such that the legs are symmetric by the vertical axis, as shown in figure \ref{fig:link_length_optimization:flipped_legs}. In this configuration, the movement of the legs during the jump is symmetric and the robot center of mass remains in the horizontal center of the robot, such that any horizontal component of the jump is canceled out. Though this is not the asymmetric leg configuration the robot will use in practice, it provides an approximation for the jumping performance of a given link length configuration. The metric used to evaluate the jumping performance is the maximum height reached by the center of mass of the robot body, minus the maximum standing height reached by the center of mass of the robot body when the legs are fully extended and the paws are in contact with the ground.
 
-To simplify the optimization, only the vertical jumping performance was considered, so that different link lengths can be compared directly. Vetical jumps are achieved across link lenghts by flipping the front legs, such that the legs are symmetric by the vertical axis, as shown in figure \ref{fig:link_length_optimization:flipped_legs}. In this configuration, the movement of the legs during the jump is symmetric and the robot center of mass remains in the horizontal center of the robot, such that any horizontal component of the jump is canceled out. Though this is not the asymmetric leg configuration the robot will use in practice, it provides an approximation for the jumping performance of a given link length configuration. The metric used to evaluate the jumping performance is the maximum height reached by the center of mass of the robot body, minus the maximum standing height reached by the center of mass of the robot body when the legs are fully extended and the paws are in contact with the ground.
+The asymmetric leg configuration can also achieve vertical jumps by adjusting the angle between the hip-to-paw vector and vertical, as shown in figure \ref{fig:link_length_optimization:asymmetric_legs_vertical_jump}. However, finding or calculating the optimal offset for arbitrary link lengths is complex. We therefore simplify by placing paws directly beneath hips, except when $L2>L1$. While this produces less realistic jump heights, it greatly simplifies optimization.
 
-The asymmetric leg configuration can also achieve vertical jumps by adjusting the angle between the hip-to-paw vector and vertical. However, finding or calculating the optimal angle offset for arbitrary link lengths is complex. We therefore simplify by placing paws directly beneath hips, except when L2>L1. While this produces less realistic jump heights, it greatly simplifies optimization.
-
-For L2>L1 configurations, placing paws directly under hips results in near-vertical legs that slip during jumps. We prevent this by translating paws slightly inward towards the body. This better approximates the practical asymmetric case where paws require similar translation for vertical jumps. To handle the increased opposing horizontal forces between paws in the symmetric configuration, we double the friction coefficients from 1.0/0.8 to 2.0/1.6 (static/kinetic), which further reduces slipping.
+For $L2>L1$ configurations, placing paws directly under hips results in near-vertical legs that slip during jumps. We prevent this by translating paws slightly inward (figure \ref{fig:link_length_optimization:adjusted_paws}). This better approximates the practical asymmetric case where paws require similar translation for vertical jumps. To handle the increased opposing horizontal forces between paws in the symmetric configuration, we double the friction coefficients from 1.0/0.8 to 2.0/1.6 (static/kinetic), which further reduces slipping.
 
 % \begin{figure}[h]
 %     \centering
@@ -56,7 +56,7 @@ For each set of link lengths, an initial pose must be calculated that satisfies 
 
 The initial pose must satisfy four key constraints: the paws must maintain ground contact, knee angles must be maximized to store maximum spring potential energy, knees cannot penetrate the ground, and both knees bend outward rather than inward to avoid self-collision.
 
-Due to the symmetric leg configuration, the initial pose is identical but flippedfor both front and back legs, ensuring vertical jumps.
+Due to the symmetric leg configuration, the initial pose is identical but flipped for both front and back legs, ensuring vertical jumps.
 
 The pose calculation considers three cases based on link length ratios:
 
@@ -66,7 +66,7 @@ The pose calculation considers three cases based on link length ratios:
     \item \(L_1 > L_2\) (longer upper link)
 \end{enumerate}
 
-For all cases, we calculate the distance \(d\) from hip to paw. For cases L1=L2 and L1>L2, where paw is placed directly under hip, this distance is vertical from the hip. For case L2>L1, where paw is translated horizontally inwards towards the body, this distance is along a vector with angle 0.3 radians inwards towards the bodyfrom the vertical. This offset was found to avoid any slipping in most cases, while simulationously making jumps in the asymmetric leg configuration more realistic. 
+For all cases, we calculate the distance \(d\) from hip to paw. For cases $L1=L2$ and $L1>L2$, where paw is placed directly under hip, this distance is vertical from the hip. For case $L2>L1$, where paw is translated horizontally inwards towards the body, this distance is along a vector with angle 0.3 radians inwards towards the body from the vertical. This offset was found to avoid any slipping in most cases, while simultaneously making jumps in the asymmetric leg configuration more realistic. 
 
 The distance \(d\) should be as small as possible to maximize the knee angle and thus spring load while satisfying the physical constraints of the robot and keeping the paws in contact with the ground. Inverse kinematics then determines the hip and knee angles, selecting the solution where knees bend outward. The distance \(d\) is calculated as follows:
 
