@@ -25,37 +25,5 @@
     "editor.wordWrap": "on",
     "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.view.pdf.refresh.mode": "auto",
-    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
-    "files.exclude": {
-        "**/*.aux": true,
-        "**/*.bbl": true,
-        "**/*.bcf": true,
-        "**/*.blg": true,
-        "**/*.idx": true,
-        "**/*.ind": true,
-        "**/*.lof": true,
-        "**/*.lot": true,
-        "**/*.out": true,
-        "**/*.toc": true,
-        "**/*.acn": true,
-        "**/*.acr": true,
-        "**/*.alg": true,
-        "**/*.glg": true,
-        "**/*.glo": true,
-        "**/*.gls": true,
-        "**/*.ist": true,
-        "**/*.fls": true,
-        "**/*.log": true,
-        "**/*.fdb_latexmk": true,
-        "**/*.snm": true,
-        "**/*.synctex(busy)": true,
-        "**/*.synctex.gz(busy)": true,
-        "**/*.nav": true,
-        "**/*.vrb": true,
-        "**/*.run.xml": true,
-        "**/_minted*": false,
-        "**/*.pyg": true,
-        "**/*.synctex.gz": true
-        
-    }
+    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click"
 }
