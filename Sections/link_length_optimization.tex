@@ -14,24 +14,60 @@ To simplify the optimization, only the vertical jumping performance was consider
 
 The asymmetric leg configuration can also achieve vertical jumps by adjusting the angle between the hip-to-paw vector and vertical, as shown in figure \ref{fig:link_length_optimization:asymmetric_legs_vertical_jump}. However, finding or calculating the optimal offset for arbitrary link lengths is complex. We therefore simplify by placing paws directly beneath hips, except when $L2>L1$. While this produces less realistic jump heights, it greatly simplifies optimization.
 
-For $L2>L1$ configurations, placing paws directly under hips results in near-vertical legs that slip during jumps. We prevent this by translating paws slightly inward (figure \ref{fig:link_length_optimization:adjusted_paws}). This better approximates the practical asymmetric case where paws require similar translation for vertical jumps. To handle the increased opposing horizontal forces between paws in the symmetric configuration, we double the friction coefficients from 1.0/0.8 to 2.0/1.6 (static/kinetic), which further reduces slipping.
+For $L2>L1$ configurations, placing paws directly under hips results in near-vertical legs that slip during jumps. We prevent this by translating paws slightly inward (figure \ref{fig:link_length_optimization:symmetric_config_adjusted_paws}). This better approximates the practical asymmetric case where paws require similar translation for vertical jumps. To handle the increased opposing horizontal forces between paws in the symmetric configuration, we double the friction coefficients from 1.0/0.8 to 2.0/1.6 (static/kinetic), which further reduces slipping.
 
-% \begin{figure}[h]
-%     \centering
-%     \begin{subfigure}[b]{0.48\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{Images/results/asymmetric_legs_angle_adjustment.png}
-%         \caption{Normal asymmetric leg configuration}
-%     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}[b]{0.48\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{Images/results/asymmetric_legs_angle_adjustment_jumping.png}
-%         \caption{Symmetric leg configuration for vertical jumping}
-%     \end{subfigure}
-%     \caption{Asymmetric and symmetric leg configurations}
-%     \label{fig:link_length_optimization:asymmetric_legs_vertical_jump}
-% \end{figure}
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/link_length_optimization/unadjusted_paw_pose.png}
+        \caption{Initial pose with unadjusted paws}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/link_length_optimization/unadjusted_paw_jump.png}
+        \caption{Resulting angled jump}
+    \end{subfigure}
+    \caption{Unadjusted paw placement results in angled jump}
+    \label{fig:link_length_optimization:unadjusted_jump}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/link_length_optimization/adjusted_paw_pose.png}
+        \caption{Initial pose with adjusted paws}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/link_length_optimization/adjusted_paw_jump.png}
+        \caption{Resulting vertical jump}
+    \end{subfigure}
+    \caption{Adjusted paw placement enables vertical jump}
+    \label{fig:link_length_optimization:adjusted_jump}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/link_length_optimization/symmetric_unadjusted_paws.png}
+        \caption{Paws directly under hips leading to near-vertical legs}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/link_length_optimization/symmetric_adjusted_paws.png}
+        \caption{Paws translated inward to make legs more horizontal, which reduces slipping}
+    \end{subfigure}
+    \caption{Paw placement adjustment for $L2>L1$ configurations}
+    \label{fig:link_length_optimization:symmetric_config_adjusted_paws}
+\end{figure}
+
 
 \begin{figure}[h]
     \centering
