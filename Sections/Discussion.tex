@@ -26,10 +26,24 @@ When knees bend in the same direction, the shifted center of mass causes uneven 
 \subsection{Design Considerations for Landing}
 The knee spring's equilibrium position at $\theta_2=0$ (straight leg) may complicate landing. To achieve a crouched landing pose, knee motors must work against spring force, increasing response time. Further testing is needed to quantify motor response times for various knee angles.
 
-\section{Conclusion}
+\subsection{Lack of Hardware Tests}
+While simulation results are promising, the absence of hardware testing introduces several uncertainties. The simulated optimal link lengths may differ from real-world optima due to unmodeled dynamics and approximations. These include but are not limited to: 
+\begin{itemize}
+    \item Unmodeled frictions, for example friction between springs and motor housing
+    \item The transversal motors' ability to withstand torque around their rotation axis during jumps
+    \item The actual mass distribution likely differs from current models, which approximate legs and torso as uniform density rectangular prisms
+    \item The torso mass and inertia properties are approximated as described in section \ref{sec:mass_inertia_properties:}, which may not be accurate
+    \item Simplified viscous friction models for motors
+\end{itemize}
+
+These approximations, combined with simplified torso mass and inertia properties detailed in section \ref{sec:mass_inertia_properties:}, may lead to meaningful discrepancies between simulation and reality.
+
+\subsection{Motor Loading Uncertainty}
+A critical uncertainty is the knee motors' ability to maintain stall torque while loading the springs. As discussed in section \ref{fig:bldc_torque_speed}, prolonged stall torque risks motor overheating. The time required to fully load springs at stall torque remains unknown, making it unclear whether motors can safely achieve maximum spring compression. This uncertainty could significantly impact the robot's jumping performance and motor longevity.
+
+As detailed in section \ref{sec:motor_modeling}, the reccomended safety margin for stall torque is about 20\%. Our margin is smaller at 12\%, which increases the risk that the motors will not be able to load the springs maximally.
+
+\subsection{Lack of feedback control during jumps}
+The current design lacks motor actuation and thus feedback control during jumps, which stops the future RL controller's ability to compensate for parameter variations like spring stiffness. This could potentially widen the sim-to-real gap. Introducting hip motor actuation during jumps would allow feedback control, which is why it will be investigated in the upcoming masters thesis.
 
 
-\subsection{Future work}
-The upcoming masters thesis will investigate adding hip motor actuation during jumps to enhance performance and enable feedback control. Then we will use our optimized design to construct the physical robot and create an accurate model in Nvidia Isaac Sim. This model will be used to train reinforcement learning controllers for jumping, aerial stabilization, and landing. Domain randomization techniques will help minimize the sim-to-real gap, and curriculum learning will be explored to make the learning process more tractable. Finally, we will evaluate the trained policies on the physical robot in practical jumping scenarios.
-
-Due to the oversights addressed in section \ref{sec:design_motor_only_jumps}, the promising A80BHP-H motor was overlooked when selecting motors. This motor not only has almost twice the stall torque of the current knee motor, it also has twice the operating velocity. Future work will include investigating the jumping capabilities of a robot combining this motor with a torsional spring.
