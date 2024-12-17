@@ -47,3 +47,8 @@ As detailed in section \ref{sec:motor_modeling}, the reccomended safety margin f
 The current design lacks motor actuation and thus feedback control during jumps, which stops the future RL controller's ability to compensate for parameter variations like spring stiffness. This could potentially widen the sim-to-real gap. Introducting hip motor actuation during jumps would allow feedback control, which is why it will be investigated in the upcoming masters thesis.
 
 
+\subsection{Future work}
+\label{sec:future_work}
+The upcoming masters thesis will investigate adding hip motor actuation during jumps to enhance performance and enable feedback control. Then we will use our optimized design to construct the physical robot and create an accurate model in Nvidia Isaac Sim. This model will be used to train reinforcement learning controllers for jumping, aerial stabilization, and landing. Domain randomization techniques will help minimize the sim-to-real gap, and curriculum learning will be explored to make the learning process more tractable. Finally, we will evaluate the trained policies on the physical robot in practical jumping scenarios.
+
+Due to the oversights addressed in section \ref{sec:design_motor_only_jumps}, the promising A80BHP-H motor was overlooked when selecting motors. This motor not only has almost twice the stall torque of the current knee motor, it also has twice the operating velocity. Future work will include investigating the jumping capabilities of a robot combining this motor with a torsional spring.
