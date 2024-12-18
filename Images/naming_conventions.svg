@@ -38,8 +38,11 @@
        width="222.25"
        height="245.00418"
        id="page7"
-       margin="14.836324 0 42.462582"
-       bleed="0" /></sodipodi:namedview><defs
+       margin="14.836324 0 42.462582 0"
+       bleed="0"
+       inkscape:export-filename="naming_conventions.png"
+       inkscape:export-xdpi="205.71428"
+       inkscape:export-ydpi="205.71428" /></sodipodi:namedview><defs
      id="defs1" /><g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
