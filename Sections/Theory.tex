@@ -219,6 +219,17 @@ The solution is therefore:
 
 This solution minimizes the sum of squared residuals and provides the optimal parameters \(\beta\) in the least squares sense.
 
+\subsection{Mean Square Error}
+Mean square error (MSE) measures the average squared difference between predicted values and actual values. For a set of \(n\) predictions \(\hat{y}_i\) and corresponding true values \(y_i\), MSE is defined as:
+
+\begin{equation}
+\label{eq:mse}
+\text{MSE} = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_i)^2
+\end{equation}
+
+MSE penalizes larger errors more heavily due to the squared term, making it useful for evaluating model fit quality. A lower MSE indicates better model performance.
+
+
 \subsection{Moving Average Filter}
 A moving average filter smooths data by replacing each point with the average of a window of neighboring points. For a window size \(w\), the filtered value \(y_i\) at index \(i\) is:
 
@@ -242,10 +253,9 @@ Centered finite differences approximate derivatives using symmetric sampling aro
 \ddot{x}_i = \frac{x_{i+1} - 2x_i + x_{i-1}}{(\Delta t)^2}
 \end{equation}
 
-\subsection{Inertia Calculations and Parallel Axis Theorem}
-\label{sec:inertia_calculations}
-
-Calculating the moment of inertia for various components is essential in understanding the dynamics of rotating systems. The moment of inertia, \(I\), quantifies the rotational inertia of an object, indicating how much torque is required for a desired angular acceleration.
+\subsection{Inertia}
+\label{sec:inertia}
+The moment of inertia, \(I\), quantifies the rotational inertia of an object, indicating how much torque is required for a desired angular acceleration.
 
 \subsubsection{Parallel Axis Theorem}
 The Parallel Axis Theorem allows the calculation of the moment of inertia of a body about any axis, given its moment of inertia about a parallel axis through its center of mass. It is mathematically expressed as:
