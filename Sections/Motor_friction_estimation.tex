@@ -1,7 +1,27 @@
 \section{Motor Friction Estimation}
 \label{sec:motor_friction_estimation}
 
-This section details the estimation of the motor friction coefficients using a pendulum model. The pendulum is used to measure the motor friction coefficients by measuring the angular velocity and acceleration of the pendulum as it is released from a known initial angle. The friction coefficients are then estimated using linear regression. The setup in the case of the big motor is shown in figure \ref{fig:results:motor_friction_estimation:pendulum_setup}.
+This section details the estimation of parameters of the motor friction models for the hip and knee motors. The motor act as the pivot point for a pendulum, which consists of an aluminum rod attached to the motor shaft with a ballast mass attached. The pendulum is released from a horizontal position and the angular velocity and acceleration are measured. These measurements allow us to estimate the motor friction coefficients using linear regression. The experimental setup for the big motor is shown in figure \ref{fig:results:motor_friction_estimation:pendulum_setup}.
+
+We chose a linear friction model as described in section \ref{sec:motor_friction_models}, consisting of only viscous friction, as it is a good fit for the data.
+
+Pendulum angles were sampled by manually annotating the pendulum angle in the video frames at 60hz, using the program Tracker \cite{tracker}. 
+
+The angular velocity \( \dot{\theta} \) and acceleration \( \ddot{\theta} \) are computed using centered finite differences:
+
+\[
+\dot{\theta}_i = \frac{\theta_{i+1} - \theta_{i-1}}{2\Delta t}
+\]
+
+\[
+\ddot{\theta}_i = \frac{\theta_{i+1} - 2\theta_i + \theta_{i-1}}{(\Delta t)^2}
+\]
+
+where \(\Delta t\) is the time step between measurements.
+
+
+
+
 
 \begin{figure}[h]
     \centering
@@ -11,8 +31,9 @@ This section details the estimation of the motor friction coefficients using a p
 \end{figure}
 
 \subsection{Pendulum Modeling}
+The pendulum used in the motor friction tests consists of an aluminum rod of length \( l_{\text{arm}} = 0.21 \) meters and a ballast mass \( m_{\text{ballast}} = 0.301 \) kg attached at a distance \( d_{\text{ballast}} = 0.20 \) meters from the pivot. The total mass of the arm is \( m_{\text{arm}} = 0.034 \) kg. The pendulum is modeled as a rigid body rotating about the motor shaft with a moment of inertia \( I \) given by:
 
-The pendulum used in the motor friction tests consists of an aluminum rod of length \( l_{\text{arm}} = 0.19 \) meters and a ballast mass \( m_{\text{ballast}} = 0.301 \) kg attached at a distance \( r = 0.08 \) meters from the pivot. The total mass of the arm is \( m_{\text{arm}} = 0.034 \) kg. The pendulum is modeled as a rigid body rotating about the motor shaft with a moment of inertia \( I \) given by:
+
 
 \[
 I = \frac{1}{3} m_{\text{arm}} l_{\text{arm}}^2 + m_{\text{ballast}} r^2
@@ -36,7 +57,7 @@ where:
 Rearranging the equation for linear regression purposes:
 
 \[
-    I \ddot{\theta} + (m_{\text{arm}} \frac{l_{\text{arm}}}{2} + m_{\text{ballast}} r) g \sin(\theta) = -b \dot{\theta}
+    I \ddot{\theta} + (m_{\text{arm}} \frac{l_{\text{arm}}}{2} + m_{\text{ballast}} d_{\text{ballast}}) g \sin(\theta) = -b \dot{\theta}
 \]
 
 This can be expressed in the form:
@@ -47,22 +68,10 @@ Y = X \beta
 
 where:
 \begin{itemize}
-    \item \( Y = -I \ddot{\theta} - (m_{\text{arm}} \frac{l_{\text{arm}}}{2} + m_{\text{ballast}} r) g \sin(\theta) \),
+    \item \( Y = -I \ddot{\theta} - (m_{\text{arm}} \frac{l_{\text{arm}}}{2} + m_{\text{ballast}} d_{\text{ballast}}) g \sin(\theta) \),
     \item \( X = \dot{\theta} \),
     \item \( \beta = b \).
 \end{itemize}
-
-The angular velocity \( \dot{\theta} \) and acceleration \( \ddot{\theta} \) are computed using centered finite differences:
-
-\[
-\dot{\theta}_i = \frac{\theta_{i+1} - \theta_{i-1}}{2\Delta t}
-\]
-
-\[
-\ddot{\theta}_i = \frac{\theta_{i+1} - 2\theta_i + \theta_{i-1}}{(\Delta t)^2}
-\]
-
-where \(\Delta t\) is the time step between measurements.
 
 The linear least squares solution for \( \beta \) is given by:
 
@@ -72,7 +81,4 @@ The linear least squares solution for \( \beta \) is given by:
 
 This yields the viscous damping coefficient \( b \).
 
-The viscous damping coefficient \( b \) is found to be \( 0.001 \) Nm/rad/s for the hip motors (A20 etc) and \( 0.0001 \) Nm/rad/s for the knee motors (A14 etc).
-
-A plot of the data and the linear regression fit is shown in figure \ref{fig:results:motor_friction_estimation:linear_regression}.
-
+Results are detailed in section\ref{sec:results:motor_friction_estimation}.
