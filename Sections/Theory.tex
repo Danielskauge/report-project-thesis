@@ -12,6 +12,8 @@
         \label{fig:bldc_torque_speed}
     \end{figure}
 
+    For a given application requiring a given peak torque, it is common to add a safety margin of at least 20\%, after you have adjusted for other known factors such as friction \cite{Microchip_BLDC}.
+
 \subsection{Gear Transmission Friction Model}
 
     Although electric motors for robotics are available for a wide power range, they are often too high speed and low power to do any useful work. For this reason, it is often necessary to use a gear transmission to increase the torque and reduce the speed of the motor. 
@@ -69,12 +71,12 @@ Both types of springs are widely used in various mechanical systems to provide f
 \subsection{Kinematics}
     \subsubsection{Robot Kinematics}
     \label{sec:robot_kinematics}
-Consider a robotic link arm existing in $\mathbb{R}^2$ consisting of $n$ links, each with a length $l_i$ and a joint angle $\theta_i$. The position of the end-effector is given by the vector $\mathbf{x} = [x, y]^T$, where $x$ and $y$ are the coordinates of the end-effector in the global coordinate system. Using simple trigonometry, the position of the end-effector can be expressed as a function of the joint angles and link lengths as seen in equation \ref{eq:robot_kinematics}. 
+Consider a robotic link arm existing in $\mathbb{R}^2$ consisting of $n$ links, each with a length $l_i$ and a joint angle $\theta_i$. The position of the end-effector is given by the vector $\bm{x} = [x, y]^T$, where $x$ and $y$ are the coordinates of the end-effector in the global coordinate system. Using simple trigonometry, the position of the end-effector can be expressed as a function of the joint angles and link lengths as seen in equation \ref{eq:robot_kinematics}. 
 Axes and joint angles corresponding to the expression in equation \ref{eq:robot_kinematics} can be seen in figure \ref{fig:robotic_link_arm}. 
 
 \begin{equation}
     \label{eq:robot_kinematics}
-    \mathbf{x} = \begin{bmatrix}
+    \bm{x} = \begin{bmatrix}
         x \\
         y
     \end{bmatrix} = \begin{bmatrix}
@@ -93,7 +95,7 @@ Axes and joint angles corresponding to the expression in equation \ref{eq:robot_
 
     \subsubsection{Jacobian Matrix}
 
-As described in section \ref{sec:robot_kinematics}, the position of the end-effector can be expressed as a function of the joint angles and link lengths. In robotics, it is often useful to express the relationship between infinitesimal changes in the joint angles and the resulting change in the end-effector position. As can be seen in equation \ref{eq:infinitesimal_change}, infinitesimal changes in variables $\delta y$ and $\delta x$ can be described by means of the partial derivative \cite{modsim}. If this is compared to the definition of the jacobian in equation \ref{eq:jacobian}, it is clear that the jacobian matrix $\mathbf{J}$ can be used to map infinitesimal changes in joint angles to changes in the end-effector position, as illustrated in equation \ref{eq:jacobian_pos_mapping}. Using the chain rule on \ref{eq:robot_kinematics} one can also arrive at equation \ref{eq:jacobian_speed_mapping}, which maps joint velocities to end-effector velocities by means of the jacobian.
+As described in section \ref{sec:robot_kinematics}, the position of the end-effector can be expressed as a function of the joint angles and link lengths. In robotics, it is often useful to express the relationship between infinitesimal changes in the joint angles and the resulting change in the end-effector position. As can be seen in equation \ref{eq:infinitesimal_change}, infinitesimal changes in variables $\delta y$ and $\delta x$ can be described by means of the partial derivative \cite{modsim}. If this is compared to the definition of the jacobian in equation \ref{eq:jacobian}, it is clear that the jacobian matrix $\bm{J}$ can be used to map infinitesimal changes in joint angles to changes in the end-effector position, as illustrated in equation \ref{eq:jacobian_pos_mapping}. Using the chain rule on \ref{eq:robot_kinematics} one can also arrive at equation \ref{eq:jacobian_speed_mapping}, which maps joint velocities to end-effector velocities by means of the jacobian.
 
 \begin{equation}
     \label{eq:infinitesimal_change}
@@ -102,7 +104,7 @@ As described in section \ref{sec:robot_kinematics}, the position of the end-effe
 
 \begin{equation}
     \label{eq:jacobian}
-    \mathbf{J} = \begin{bmatrix}
+    \bm{J} = \begin{bmatrix}
         \frac{\partial x}{\partial q_1} & \frac{\partial x}{\partial q_2} & \cdots & \frac{\partial x}{\partial q_n} \\
         \frac{\partial y}{\partial q_1} & \frac{\partial y}{\partial q_2} & \cdots & \frac{\partial y}{\partial q_n}
     \end{bmatrix}
@@ -110,12 +112,12 @@ As described in section \ref{sec:robot_kinematics}, the position of the end-effe
 
 \begin{equation}
     \label{eq:jacobian_pos_mapping}
-    \mathbf{\delta x} = \mathbf{J}\mathbf{\delta q}
+    \bm{\delta x} = \bm{J}\bm{\delta q}
 \end{equation}
 
 \begin{equation}
     \label{eq:jacobian_speed_mapping}
-    \mathbf{\dot x} = \mathbf{J}\mathbf{\dot q}
+    \bm{\dot x} = \bm{J}\bm{\dot q}
 \end{equation}
 
     \subsubsection{Force/Torque Mapping}
@@ -123,20 +125,20 @@ As described in section \ref{sec:robot_kinematics}, the position of the end-effe
 
     Consider a general robotic manipulator, such as the one illustrated in figure \ref{fig:robotic_link_arm}, but with an arbitrary amount, $n$, of joints and links. Assume the joint angles are given by $q_i$ and the joint torques by $\tau_i$. Then, for this manipulator to bear an arbitrary end effector force $F$, the torques at the joints must be given by equation \ref{eq:force_torque_mapping} \cite{ASADA_LECTURE_NOTES}.
 
-    This result can be derived via the principle of virtual work. Consider virtual displacements of the individual joint angles $\delta q_i$ and the end-effector position $\mathbf{\delta x}$. Virtual displacements are infinitesimal displacements of a mechanical system that need only be consistent with the geometric constraints of the system, ie. not the full laws of motion \cite{ASADA_LECTURE_NOTES}. 
+    This result can be derived via the principle of virtual work. Consider virtual displacements of the individual joint angles $\delta q_i$ and the end-effector position $\bm{\delta x}$. Virtual displacements are infinitesimal displacements of a mechanical system that need only be consistent with the geometric constraints of the system, ie. not the full laws of motion \cite{ASADA_LECTURE_NOTES}. 
     
-    If the torques $\mathbf{\tau} = [\tau_1, \tau_2, ..., \tau_n]$ act on the joints, and the endpoint force $\mathbf{-F}$ acts on the end effector, then the virtual work done by the forces and moments is given by equation \ref{eq:virtual_work} \cite{ASADA_LECTURE_NOTES}.
+    If the torques $\bm{\tau} = [\tau_1, \tau_2, ..., \tau_n]$ act on the joints, and the endpoint force $\bm{-F}$ acts on the end effector, then the virtual work done by the forces and moments is given by equation \ref{eq:virtual_work} \cite{ASADA_LECTURE_NOTES}.
 
     \begin{equation}
         \label{eq:virtual_work}
-        \mathbf{\delta W} = \mathbf{\tau^T\delta q -F^T\delta x} 
+        \bm{\delta W} = \bm{\tau^T\delta q -F^T\delta x} 
     \end{equation}
 
-    According to the principal of virtual work, if the system is in equilibrium, then, for virtual displacements satisfying geometric constraints. the virtual work must vanish. If, in equation \ref{eq:virtual_work}, $\mathbf{\delta W}$ is set to zero and $\mathbf{\delta x}$ is replaced with $\mathbf{J}\mathbf{\delta q}$ in accordance with equation \ref{eq:jacobian_pos_mapping}, the resulting equation is equation \ref{eq:force_torque_mapping} \cite{ASADA_LECTURE_NOTES}.
+    According to the principal of virtual work, if the system is in equilibrium, then, for virtual displacements satisfying geometric constraints. the virtual work must vanish. If, in equation \ref{eq:virtual_work}, $\bm{\delta W}$ is set to zero and $\bm{\delta x}$ is replaced with $\bm{J}\bm{\delta q}$ in accordance with equation \ref{eq:jacobian_pos_mapping}, the resulting equation is equation \ref{eq:force_torque_mapping} \cite{ASADA_LECTURE_NOTES}.
 
     \begin{equation}
         \label{eq:force_torque_mapping}
-        \mathbf{\tau} = \mathbf{J^T F}
+        \bm{\tau} = \bm{J^T F}
     \end{equation}
 
     \subsubsection{Inverse Kinematics}
