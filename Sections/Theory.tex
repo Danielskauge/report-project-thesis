@@ -1,14 +1,10 @@
 \section{Theory}
 
-\subsection{Actuator Modeling}
-    \subsubsection{DC Motor Model}
-
-
-
-    \subsubsection{BLDC Motor Model}
+\subsection{BLDC Motor Model}
     \label{sec:bldc_theory}
 
-
+    The brushless DC motor (BLDC) is a type of synchronous electric motor that is driven by direct current (DC) electricity \cite{PMSM_BOOK}. Like many other motors, a BLDC motor's ability to generate torque generally decreases as the motor's speed increases \cite{Microchip_BLDC}. This relationship is often referred to as a motor's torque-speed curve. Figure \ref{fig:bldc_torque_speed} shows an example of a typical torque-speed curve for a BLDC motor \cite{Microchip_BLDC}. As can be seen, the curve is characterized by four parameters: the peak torque, the maximum speed, the rated speed, and the rated torque. As can be seen from the figure, the rated torque is the highest torque that the motor can deliver for an extended period of time, while the rated speed is the highest speed at which the motor can deliver the rated torque. The motor can typically be run at a higher speed than the rated speed, but at these speeds the delivered torque will start dropping. For brief periods of time, for example from standstill followed by acceleration, the motor can deliver a higher torque than the rated torque, so long as it adheres to the torque speed curve. 
+    
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{Images/stolen_BLDC_torque_speed.png}
@@ -16,7 +12,7 @@
         \label{fig:bldc_torque_speed}
     \end{figure}
 
-    \subsubsection{Gear Transmission Friction Model}
+\subsection{Gear Transmission Friction Model}
 
     Although electric motors for robotics are available for a wide power range, they are often too high speed and low power to do any useful work. For this reason, it is often necessary to use a gear transmission to increase the torque and reduce the speed of the motor. 
 
@@ -97,7 +93,7 @@ Axes and joint angles corresponding to the expression in equation \ref{eq:robot_
 
     \subsubsection{Jacobian Matrix}
 
-As described in section \ref{sec:robot_kinematics}, the position of the end-effector can be expressed as a function of the joint angles and link lengths. In robotics, it is often useful to express the relationship between infinitesimal changes in the joint angles and the resulting change in the end-effector position. As can be seen in equation \ref{eq:infinitesimal_change}, infinitesimal changes in variables $\delta y$ and $\delta x$ can be described by means of the partial derivative \cite{modsim}. If this is compared to the definition of the jacobian in equation \ref{eq:jacobian}, it is clear that the jacobian matrix $\mathbf{J}$ can be used to map infinitesimal changes in joint angles to changes in the end-effector position, as illustrated in equation \ref{eq:jacobian_pos_mapping}. The limit of an infinitesimal change over an infinitesimal time interval is a derivative, and thus by dividing each side in equation \ref{eq:jacobian_pos_mapping} by $\delta t$, one arrives at the expression in equation \ref{eq:jacobian_speed_mapping}, by which the jacobian can be used to map joint velocities to end-effector velocities.
+As described in section \ref{sec:robot_kinematics}, the position of the end-effector can be expressed as a function of the joint angles and link lengths. In robotics, it is often useful to express the relationship between infinitesimal changes in the joint angles and the resulting change in the end-effector position. As can be seen in equation \ref{eq:infinitesimal_change}, infinitesimal changes in variables $\delta y$ and $\delta x$ can be described by means of the partial derivative \cite{modsim}. If this is compared to the definition of the jacobian in equation \ref{eq:jacobian}, it is clear that the jacobian matrix $\mathbf{J}$ can be used to map infinitesimal changes in joint angles to changes in the end-effector position, as illustrated in equation \ref{eq:jacobian_pos_mapping} \cite{ASADA_LECTURE_NOTES}. Using the chain rule on \ref{eq:robot_kinematics} one can also arrive at equation \ref{eq:jacobian_speed_mapping}, which maps joint velocities to end-effector velocities by means of the jacobian \cite{ASADA_LECTURE_NOTES}.
 
 \begin{equation}
     \label{eq:infinitesimal_change}
