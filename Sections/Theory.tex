@@ -171,7 +171,6 @@ As described in section \ref{sec:robot_kinematics}, the position of the end-effe
     The ± in the equation for \(\theta_2\) indicates that two solutions exist for most end-effector positions—one with the second joint angle positive and one negative. When \(L_1 = L_2\), a singularity occurs at \((0,0)\) where infinite solutions exist. At the workspace boundary where \(x^2 + y^2 = (L_1 + L_2)^2\), only one solution exists.
 
 
-
 \subsection{Contact Friction}
 \label{sec:contact_friction}
 TODO
@@ -184,35 +183,8 @@ Although a detailed review of numerical solvers and the associated theory is bey
 
 
 \subsection{Linear Least Squares Regression}
-Linear least squares regression is a method for finding the best-fitting line through a set of points by minimizing the sum of squared residuals. Given a set of observations \((x_i, y_i)\) and a linear model \(y = X\beta\), where \(X\) is the matrix of input variables and \(\beta\) contains the model parameters, the residual \(r_i\) for each observation is:
 
-\[
-r_i = y_i - X_i\beta
-\]
 
-The sum of squared residuals \(S\) is then:
 
-\[
-S = \sum_{i=1}^n r_i^2 = (y - X\beta)^T(y - X\beta)
-\]
 
-To minimize \(S\), we take its derivative with respect to \(\beta\) and set it to zero:
-
-\[
-\frac{\partial S}{\partial \beta} = -2X^T(y - X\beta) = 0
-\]
-
-Solving for \(\beta\) yields the normal equations:
-
-\[
-X^TX\beta = X^Ty
-\]
-
-The solution is therefore:
-
-\[
-\beta = (X^TX)^{-1}X^Ty
-\]
-
-This solution minimizes the sum of squared residuals and provides the optimal parameters \(\beta\) in the least squares sense.
 

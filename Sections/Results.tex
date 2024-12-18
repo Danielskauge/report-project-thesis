@@ -1,7 +1,9 @@
 \section{Results}
+\label{sec:results}
 
 \subsection{Motor Friction Estimation}
-Pendulum angle \(\theta\) was sampled with a sampling rate of 60Hz. \(\dot{\theta}\) and \(\ddot{\theta}\) were derived from \(\theta\) using numerical differentiation. The viscous damping coefficient \( b \) was found to be \( 0.001 \) Nm/rad/s for the hip motors (A20 etc) and \( 0.0001 \) Nm/rad/s for the knee motors (A14 etc). Figures \ref{fig:results:motor_friction_estimation:linear_regression_knee_motor} and \ref{fig:results:motor_friction_estimation:linear_regression_hip_motor} show the the predicted \(\dot{\theta}\) from the physical models of the pendulum using the estimated viscous damping coefficients, versus the derived \(\dot{\theta}\).
+\label{sec:results:motor_friction_estimation}
+  The viscous damping coefficient \( b \) was found to be \( 0.003603 \) Nm/rad/s for the hip motors and \( 0.012342 \) Nm/rad/s for the knee motors. Figures \ref{fig:results:motor_friction_estimation:linear_regression_knee_motor} and \ref{fig:results:motor_friction_estimation:linear_regression_hip_motor} show the predicted \(\dot{\theta}\) predicted from the physical models of the pendulum using the estimated viscous damping coefficients, versus the derived \(\dot{\theta}\).
 
 \begin{figure}[h]
     \centering
