@@ -4,6 +4,8 @@
 % Importing document settings from our file "packages.sty"
 \usepackage{packages}
 \addbibresource{references.bib}
+\usepackage{tikz}
+
 
 % Beginning of document
 \begin{document}
@@ -27,7 +29,10 @@
 
 % Defining main matter settings (Norsk: innstillinger for hoveddelen av teksten)
 \mainmatter
-
+% Minimum TikZ example
+\begin{tikzpicture}
+    \draw (0,0) -- (1,1);
+\end{tikzpicture}
 % Introduction explaining this LaTeX-template
 \import{./Sections}{Abbreviations}
 
