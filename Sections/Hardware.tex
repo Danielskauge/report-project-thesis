@@ -6,7 +6,7 @@
 
 Figure \ref{fig:assembly_CAD} shows the CAD model for the torsional spring leg design, including both knee and hip extension/flexion motor, as well as the hip adduction/abduction motor. The CAD model was created using the CAD software Solidworks. An annotated exploded view of the leg can be seen in figure \ref{fig:CAD_leg_exploded_annotate}, while an annotated exploded view for the hip motor housing can be seen in figure \ref{fig:exploded_motor_housing_hip}. 
 
-Figure \ref{fig:manufacture_only} shows the components that are currently planned to manufacture in inhouse. The axle that will be threaded and screwed directly into the motor shaft, and lead directly into a ball bearing, is emphasized in red. The leg has been designed to make it easily manufacturable in aluminum. Aluminum was chosen as a potential material due to its high strength-to-weight ratio, and the fact that it is easy to machine. Although many easily 3D-printable plastics are generally lighter, they are not as strong as aluminum, in fact aluminum has a much higher weight to yield ratio than 3D printable plastics, and thus, barring complications resulting from manufacture, a leg made in aluminum should be lighter than one made of plastic. 
+Figure \ref{fig:manufacture_only} shows the components that are currently planned to manufacture in inhouse. The axle that will be threaded and screwed directly into the motor shaft, and lead directly into a ball bearing, is emphasized in red. The leg has been designed to make it easily manufacturable in aluminum. Aluminum was chosen as a potential material due to its high strength-to-weight ratio, and the fact that it is easy to machine. Although many easily 3D-printable plastics are generally lighter, they are not as strong as aluminum, in fact aluminum has a much higher weight to yield ratio than 3D printable plastics, and thus, barring complications resulting from manufacture, a leg made in aluminum should be lighter than one made of plastic \cite{Aluminum} \cite{PLA}. 
 
 \begin{figure}[h!]
     \centering
@@ -46,7 +46,7 @@ Figure \ref{fig:manufacture_only} shows the components that are currently planne
     \label{fig:manufacture_only}
 \end{figure}
 
-A 3D printed version of the leg thigh together with the purchased spring can be seen in figure \ref{fig:printed_leg_and_spring}. While the full leg has not been assembled, initial physical load tests seem to indicate that the thigh is able to withstand the load of the spring. This could indicate that the leg will be 3D printed rather than made in aluminum. The axle that will be screwed into the motor shaft, however, will still be made in aluminum. 
+A 3D printed version of the thigh together with the purchased spring can be seen in figure \ref{fig:printed_leg_and_spring}. While the full leg has not been assembled, initial physical load tests seem to indicate that the thigh is able to withstand the load of the spring. This could indicate that the leg will be 3D printed rather than made in aluminum. The axle that will be screwed into the motor shaft, however, will still be made in aluminum. 
 
 \begin{figure}[h!]
     \centering
@@ -114,6 +114,22 @@ It is worth mentioning that the mass of the thigh shown in figure \ref{fig:manuf
     \label{tab:thigh_mass_comparison}
 \end{table}
 
-\subsection{Other Components, Spring, etc: TODO}
+\subsection{Other Purchased Components}
 
-Bearing, spring, paw must also be mentioned. Servo horns also. 
+While the motors are the most important and expensive component constituting the leg, other components must also be purchased for its construction. A list of these components and their suppliers can be found in table \ref{tab:other_purchased_components}. Screws and nuts are not included. 
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Component & Name/Part Number & Supplier \\ \hline
+        Bearing & RS: 612-5802 &  RS \\
+        Left leg spring &  T075-180-484L & Sodemann\\
+        Right leg spring &  T075-180-484R & Sodemann\\
+        Knee servo horn & HPS06 & AGF-RC\\
+        Hip servo horns & HPS065 & AGF-RC\\
+        \hline
+    \end{tabular}
+    \caption{Other purchased components.}
+    \label{tab:other_purchased_components}  
+\end{table}
