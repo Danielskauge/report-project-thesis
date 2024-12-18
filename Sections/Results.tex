@@ -3,9 +3,9 @@
 
 \subsection{Motor Friction Estimation}
 \label{sec:results:motor_friction_estimation}
-Figures \ref{fig:results:motor_friction_estimation:pendulum_large} and \ref{fig:results:motor_friction_estimation:pendulum_small} compare the measured pendulum angles against simulations using two friction models: one with only viscous friction and one with both viscous and Coulomb friction. Table \ref{tab:results:motor_friction_parameters} presents the estimated friction parameters and mean squared errors (MSE) between simulated and measured angles for both motors.
+Figures \ref{fig:results:motor_friction_estimation:pendulum_large} and \ref{fig:results:motor_friction_estimation:pendulum_small} compare the measured pendulum angles against simulations using two friction models: one with only viscous friction and one with both viscous and Coulomb friction. Table \ref{tab:results:motor_friction_parameters} presents the estimated friction parameters and Mean Squared Error (MSE) between simulated and measured angles for both motors.
 
-The combined viscous-Coulomb model achieves better accuracy, particularly in the later phases of motion where angular velocities are lower. This aligns with expectations, as Coulomb friction becomes more dominant relative to viscous friction at lower speeds. The MSE values confirm this improved performance, as the MSE with coulomb is about 1/3 of the MSE without coulomb for both motors% for both motors.
+The combined viscous-Coulomb model achieves better accuracy, particularly in the later phases of motion where angular velocities are lower. This aligns with expectations, as Coulomb friction becomes more dominant relative to viscous friction at lower speeds. The MSE values confirm this improved performance, as the MSE with Coulomb is about 1/3 of the MSE without Coulomb for both motors% for both motors.
 
 \begin{table}[h]
     \centering
@@ -20,7 +20,7 @@ The combined viscous-Coulomb model achieves better accuracy, particularly in the
         MSE with Coulomb & 0.000953 & 0.001967 \\
         \hline
     \end{tabular}
-    \caption{Friction model parameters and mean squared errors (MSE) for both motors, comparing models with and without Coulomb friction.}
+    \caption{Friction model parameters and Mean Squared Error (MSE) for both motors, comparing models with and without Coulomb friction.}
     \label{tab:results:motor_friction_parameters}
 \end{table}
 
