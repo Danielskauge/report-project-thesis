@@ -9,7 +9,7 @@
    id="svg1"
    inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
    sodipodi:docname="DOF2_vertical_oneleg_jumo.svg"
-   inkscape:export-filename="DOF2_w_extension_spring.png"
+   inkscape:export-filename="one_axis_jump.png"
    inkscape:export-xdpi="1221.7812"
    inkscape:export-ydpi="1221.7812"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -26,10 +26,10 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     showgrid="true"
-     inkscape:zoom="4"
-     inkscape:cx="77.125"
-     inkscape:cy="122.625"
+     showgrid="false"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="65.584154"
+     inkscape:cy="135.58772"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="1672"
@@ -51,7 +51,7 @@
        dotted="false"
        gridanglex="30"
        gridanglez="30"
-       visible="true" />
+       visible="false" />
   </sodipodi:namedview>
   <defs
      id="defs1">
