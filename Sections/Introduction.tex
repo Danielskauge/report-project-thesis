@@ -4,34 +4,35 @@
 \subsection{Motivation}
 \label{sec:motivation}
 
-%TODO: Shorten the below drastically, but mention the loss of traction in low g for wheeled robots, mentioned in the SpaceHopper paper. 
+Traditional wheeled rovers have successfully explored Mars, with six missions to date \cite{mars_rovers_x6}. However, specialized robots like Axel \cite{Axel} and Reachbot \cite{ReachBot} are needed for more challenging terrain. One key target for exploration is Martian and Lunar lava tubes \cite{lavatubes} - hollow caverns formed by ancient lava flows. These tubes interest scientists because they could shelter future missions from radiation and micrometeorites, maintain stable temperatures, and contain subsurface water ice \cite{lavatubes}.
 
-The exploration of extraterrestrial environments represents one of the most demanding frontiers of robotic systems, requiring exceptional autonomy, resilience, and adaptability to navigate complex and unpredictable terrain. On Mars, wheeled rovers have proven their utility, with six successful deployments to date \cite{mars_rovers_x6}, robots like Axel \cite{Axel} and Reachbot \cite{ReachBot} have also been designed, tailored towards specific tasks. One such task that has received much attention in recent years, is the exploration of potential Martian and Lunar lava tubes \cite{lavatubes}. These tubes are hollow caverns hypothesized to exist beneath the surface of Mars and the Moon, formed by ancient lava flows. They are of particular interest to astrobiologists and planetary scientists, as they could provide shelter from cosmic radiation and micrometeorites, as well as stable temperatures and access to subsurface water ice \cite{lavatubes}.
+Exploring lava tubes requires navigating rough terrain, sharp rocks, and steep slopes - challenges for wheeled rovers. Wheeled robots are also limited to ground movement and cannot take advantage of the lower gravity on Mars, the Moon, and asteroids. In contrast, jumping quadrupeds can utilize low gravity to potentially jump several meters high \cite{OLYMPUS2}, allowing them to cross obstacles that would stop wheeled rovers.
 
-The exploration of such lava tubes present a unique challenge to robotic systems, as they are believed to be characterized by rough, uneven terrain, sharp rocks, and steep slopes. This could present a challenge to traditional wheeled rovers. Further, the motion of wheeled robots is limited to the ground plane, and thus, inherently, they do not utilize the lower gravity of extraterrestrial objects such as asteroids, the Moon and Mars. Jumping quadrupeds, on the other hand, inherently utilize the lower gravity of such objects, and in low earth gravity could potentially jump to heights of several meters \cite{OLYMPUS2}. This could allow them to traverse obstacles that would be insurmountable to wheeled rovers, such as steep slopes, large rocks, and gaps in the terrain.
-
-While recent years have seen great progress in the development of quadruped robots, most quadrupeds still struggle with jumping any significant distance in earth gravity. Since, additionally, low gravity environments are very hard to replicate on earth, it is difficult to test hardware and control algorithms intended for quadrupeds jumping in low gravity. Jumping also includes high velocity impacts, making damage to the often expensive hardware likely. This motivates the main goal of this project, which is to develop a design for a small, lightweight, and low-cost jumping quadruped robot. The robot's low weight is intended to reduce the risk of damage during testing, and the low cost to make it more accessible to researchers, as well as reduce the cost of potential damage. Special emphasis is placed on being able to jump long distances, without losing the general utility of the quadruped form factor, such as the ability to walk on rough terrains, flexibly adjust body pose, and potentially carry scientific payloads.
+While quadruped robots have advanced significantly, they still struggle to jump effectively in Earth gravity. Testing hardware and control systems for low-gravity jumping is difficult since we cannot easily simulate low gravity on Earth. The high-speed impacts during jumping and landing also risk damaging expensive hardware. These challenges motivate our main goal: designing a small, lightweight, low-cost jumping quadruped robot. The low weight and cost reduce damage risk during testing and make the platform more accessible to researchers. We focus on achieving long jumps while maintaining the versatility of quadruped robots, such as walking on rough terrain, adjusting body pose, and carrying scientific equipment.
 
 \subsection{Scope}
 \label{sec:scope}
 
-As described in the motivation section, section \ref{sec:motivation}, the main goal of this project is to develop a design for a small, lightweight, and low-cost jumping quadruped robot. The work presented in this report is part of a specialization project, TTK4550 - Engineering Cybernetics, Specialization Project, pursued at the Norwegian University of Science and Technology (NTNU), as a preparation for a master's thesis. So while the scope of the specialization project is limited to the development of a design, the overall goal is for the design to be used as the basis for a master's thesis, where the robot will be built and tested. The master's thesis will also include the development of control algorithms for the robot, which is not included in this report.
+This report covers the design phase of a jumping quadruped robot as part of the TTK4550 Engineering Cybernetics Specialization Project at NTNU. While this project focuses on design, the work will continue in a master's thesis that includes building, testing, and developing control algorithms for the robot.
 
-More precisely, the scope of this project is limited to the following:
+The project scope includes:
 \begin{itemize}
-    \item Developing a simplified simulation for the robot in MATLAB/Simulink, to be used for verification and evaluation of various design choices. 
-    \item Choosing a specific method of actuation, such as motors, parallel torsional springs, parallel extension springs, or a combination of these.
-    \item Identifying key hardware components, such as motors and springs. 
-    \item Designing a Computer-Aided Design (CAD) model for a single leg of the robot. The leg must adhere to geometric and mechanical constraints such as:
+    \item Creating a MATLAB/Simulink simulation to evaluate design choices
+    \item Selecting an actuation method, either motors only, or a combination of motors and springs
+    \item Choosing specific hardware components
+    \item Developing a CAD model for one leg that:
     \begin{itemize}
-    \item Accommodating chosen springs and motors. 
-    \item Being easily manufacturable using 3D printing and the Computer Numerical Control (CNC) facilities readily available at NTNU.
-    \item Sturdiness, ie. being able to withstand the forces and impacts of jumping. 
+        \item Fits the chosen motors and springs
+        \item Can be manufactured using NTNU's 3D printing and CNC facilities
+        \item Withstands jumping forces and impacts
     \end{itemize}
 \end{itemize}
 
 \subsection{Related Work}
 \label{sec:related_work}
 
-The problem of robotic jumping in earth and low gravity environments has been studied by several researchers, with various approaches taken. One unique example is the Olympus robot \cite{OLYMPUS1} \cite{OLYMPUS2} developed by NTNU's ARL (Autonomous Robots lab), which uses a 5-bar linkage spring assisted leg to jump. The robot weighs TODO kg, is capable of jumping to heights of up to TODO meters in earth gravity, and has been tested in simulated low gravity environments. Another example is the 600g robot RAVEN (Robotic Avian-inspired Vehicle for multiple ENvironments) \cite{RAVEN} developed at EPFL, which uses its bird-inspired 2 DOF multifunctional legs to jump rapidly into flight, walk on the ground, and hop over obstacles and gaps similar to the multimodal locomotion of birds. Notable for RAVEN is its geared BLDC motors, which wind up embedded torsional springs, which then assist in jumping. Apart from the different topology of the legs and springs, the concept is quite similar to that of Olympus. The RAVEN robot can jump TODO (26 cm) cm in earth gravity. A third example is the Grillo robot \cite{GRILLO}, which weighs 15g and takes of at velocities of about 30 body lengths per second, ie. 1.5m/s. 
+Several researchers have studied robotic jumping for Earth and low-gravity environments. NTNU's Autonomous Robots Lab developed the Olympus robot \cite{OLYMPUS1} \cite{OLYMPUS2}, which uses a spring-assisted 5-bar linkage leg for jumping. The robot weighs TODO kg and can jump TODO meters in Earth gravity, with testing done in simulated low gravity.
 
+EPFL's 600g RAVEN robot (Robotic Avian-inspired Vehicle for multiple ENvironments) \cite{RAVEN} uses bird-inspired legs with two degrees of freedom. Similarly to our approach, it uses geared BLDC motors to wind up embedded torsional springs for jumping. RAVEN can jump TODO cm in Earth gravity while also walking and hopping like a bird.
+
+The 15g Grillo robot \cite{GRILLO} demonstrates high-speed jumping, reaching takeoff velocities of 1.5 m/s (30 body lengths per second).
