@@ -1,54 +1,48 @@
 \section{Discussion}
 
-\subsection{Link Length Optimization Trade-offs}
-The optimal link lengths found for both Earth and Mars gravity present practical challenges for the mechanical design. The longer lengths would require either elongating the robot body to prevent leg collisions, or translating the hip joints outward. Body elongation would increase overall weight, while outward hip translation raises collision risks during aerial stabilization. Additionally, longer legs increase the inertia that motors must overcome during aerial maneuvers, potentially slowing stabilization response.
+\subsection{Model Limitations and Uncertainties}
 
-Given these constraints, we opted for shorter link lengths that balance jumping performance with mechanical practicality. Future work could incorporate body dimensions into the optimization process. Additionally, activating hip motors during jumps may yield different optima that better align with design constraints.
+\subsubsection{Symmetric Jump Model Limitations}
+The symmetric jumping configuration approximates asymmetric jumping performance. For asymmetric legs, achieving vertical jumps requires careful paw placement relative to hip joints, varying with link lengths. While symmetric models place paws directly under hips for L1=L2 and L1>L2, this produces angled rather than vertical jumps in asymmetric cases.
 
-\subsection{Limitations of the Symmetric Jump Model}
-The symmetric jumping configuration has key limitations in approximating asymmetric jumping performance. For asymmetric legs, achieving a specific jump angle requires careful paw placement relative to the hip joints - a relationship that varies with link lengths. While the symmetric model places paws directly under hips, this same placement in the asymmetric case produces angled rather than vertical jumps.
+Experiments show vertical jumps are possible with asymmetric legs by adjusting hip-to-paw vector angle. However, the symmetric model only partially captures this through a constant angle offset when $L2 > L1$, failing to produce vertical jumps across all link lengths.
 
-Experiments show vertical jumps are possible with asymmetric legs by adjusting the hip-to-paw vector angle. However, the symmetric model only partially captures this through a constant angle offset when $L2 > L1$, which fails to produce vertical jumps across all link lengths.
-
-This approach introduces systematic biases:
+This introduces systematic biases:
 \begin{itemize}
-    \item When \(L_1 \neq L_2\): Underestimates jump height since asymmetric vertical jumps require paw positions that angle L2 and L1 more horizontally, better converting angular to vertical velocity with less slipping
-    \item When \(L_1 = L_2\): Overestimates jump height since achieving vertical jumps requires L2 to be less horizontal, reducing velocity conversion efficiency
+    \item When \(L_1 \neq L_2\): Underestimates jump height since asymmetric vertical jumps require initial poses that angle L2 and L1 more horizontally, better converting angular to vertical velocity with less slipping.
+    \item When \(L_1 = L_2\): Overestimates jump height since achieving vertical jumps requires L2 to be less horizontal, where they are fully horizontal in the symmetric case \ref{fig:link_length_optimization:equal_len_pose}.
 \end{itemize}
 
-These biases help explain the sharp performance peak at L2 = L1 in the grid search results (figure \ref{fig:link_length_optimization:grid_search_results}) for both Earth and Mars gravity.
+These biases explain the sharp performance peak at L2 = L1 in the grid search results (figure \ref{fig:link_length_optimization:grid_search_results}) for both Earth and Mars gravity.
 
-\subsection{Control and Dynamic Challenges}
-Because the current plan is to turn the knee motors off during jumps, because the torsional springs' power is so much higher than the motors peak power, and it is unknown how the motors will handle that, the current design lacks knee feedback capability during jumps. This could limit the future RL controller's ability to compensate for parameter variations like spring stiffness. This could potentially widen the sim-to-real gap. As well as limit the robots ability to jump accurately. 
+\subsubsection{Unmodeled Dynamics}
+While simulation results are promising, the lack of hardware testing introduces uncertainties about actual jumping performance. The 
+simulated optimal link lengths may differ from real-world optima due to several unmodelled dynamics and approximations. There are 
+unmodelled frictions like those between the springs and the legs. There are mass distribution differences from approximating legs and 
+torso as uniform density rectangular prisms, and there are likely differences in the real and simulated masses of the robot.
 
-When knees bend in the same direction, the shifted center of mass causes uneven leg loading. The back legs bear more weight while the front legs accelerate faster, resulting in backward rotation that complicates aerial stabilization. These challenges could be addressed by using stronger rear springs/motors or by having the hip motors on during the jump with more power provided to the back legs.
+\subsubsection{Motor Loading Uncertainty}
+A critical uncertainty is the knee motors' ability to maintain stall torque while loading springs. As discussed in section \ref{fig:bldc_torque_speed}, prolonged stall torque risks motor overheating. The time required to fully load springs at stall torque remains unknown, making it unclear whether motors can safely achieve maximum spring compression. Our 12\% safety margin for stall torque falls below the recommended 20\% \ref{sec:theory:bldc_theory} #TODO, increasing risk that motors cannot load springs maximally.
 
-\subsection{Design Considerations for Landing}
-The knee springs' equilibrium position at $\theta_2=0$ (straight leg) may complicate landing. To achieve a crouched landing pose, knee motors must work against spring force, increasing response time. Further testing is needed to quantify motor response times for various knee angles.
+\subsection{Design Limitations}
 
-\subsection{Lack of Hardware Tests}
-While simulation results are promising, the absence of hardware testing introduces several uncertainties. The simulated optimal link lengths may differ from real-world optima due to unmodeled dynamics and approximations. These include but are not limited to: 
-\begin{itemize}
-    \item Unmodeled frictions, for example friction between springs and motor housing
-    \item The transversal motors' ability to withstand torque around their rotation axis during jumps
-    \item The actual mass distribution likely differs from current models, which approximate legs and torso as uniform density rectangular prisms
-    \item The torso mass and inertia properties are approximated as described in section \ref{sec:mass_inertia_properties}, which may not be accurate
-    \item Discrepancies in masses such as the leg mass. As described in section \ref{sec:robot_hardware}, the simulated and actual leg masses differ, but the difference in mass is considered negligible compared to motor and body masses
-    \item Simplified viscous friction models for motors
-\end{itemize}
+The optimal link lengths found for both Earth and Mars are too long for the current robot design. To avoid leg collision with bent knees, the longer lengths would require either elongating the robot body, or translating the hip joints outward. Body elongation would increase overall weight, while outward hip translation raises collision risks during aerial stabilization. Additionally, longer legs increase the inertia that motors must overcome during aerial maneuvers, potentially slowing airial stabilization response.
 
-These approximations, combined with simplified torso mass and inertia properties detailed in section \ref{sec:mass_inertia_properties}, may lead to meaningful discrepancies between simulation and reality.
+Given these constraints, we opted for shorter link lengths without sacrificing significant performance. A potential fix would be to incorporate body length into the optimization process. Additionally, activating hip motors during jumps may yield shorter optimal link lengths.
+\subsubsection{Landing Challenges}
+The knee springs' equilibrium position at $\theta_2=0$ (straight leg) complicates landing. Achieving crouched landing poses requires knee motors to work against spring force, increasing response time. Further testing is needed to quantify motor response times across knee angles.
 
-\subsection{Motor Loading Uncertainty}
-A critical uncertainty is the knee motors' ability to maintain stall torque while loading the springs. As discussed in section \ref{fig:bldc_torque_speed}, prolonged stall torque risks motor overheating. The time required to fully load springs at stall torque remains unknown, making it unclear whether motors can safely achieve maximum spring compression. This uncertainty could significantly impact the robot's jumping performance and motor longevity.
+\subsubsection{Hip Abduction/Adduction Design}
+As seen in figure \ref{fig:assembly_CAD}, significant z-axis distance between shank end and hip abduction/adduction motor axis creates a significant and undesired motor loading. As the specialization project has primarily ignored abduction/adduction dynamics, 
+adjusting the shank design to avoid this issue is considered an avenue of future work.
 
-As detailed in section \ref{sec:motor_modeling}, the recommended safety margin for stall torque is about 20\%. Our margin is smaller at 12\%, which increases the risk that the motors will not be able to load the springs maximally.
+\subsection{Post-takeoff rotational velocity}
+The common knee bending direction shifts the center of mass backward, causing the rear legs to support more weight while the front legs 
+experience less resistance to acceleration. This imbalance generates backward rotation at takeoff, making aerial stabilization more 
+challenging. Two potential solutions exist: increasing the spring stiffness or motor power of the rear legs to compensate for the higher 
+loading, or activating hip motors during jumps with greater torque applied to the back legs.
 
-\subsection{Lack of feedback control during jumps}
-The current design lacks motor actuation and thus feedback control during jumps, which stops the future RL controller's ability to compensate for parameter variations like spring stiffness. This could potentially widen the sim-to-real gap. Introducing hip motor actuation during jumps would allow feedback control, which is why it will be investigated in the upcoming masters thesis.
+Potential solutions include increasing rear leg spring stiffness/motor power or applying greater back leg hip motor torque during jumps.
 
-\subsection{Hip Abduction/Adduction Vector Arm}
-\label{sec:hip_abduction_adduction_vector_arm}
-
-As can be seen in figure \ref{fig:assembly_CAD}, there is a considerable distance in the $z$ direction from the end of the shank, ie. where the paw will touch the ground, to the axis of rotation of the hip abduction/adduction motor. This distance will cause a significant and undesired load on the hip abduction/adduction motor. As the specialization project has primarily ignored abduction/adduction dynamics, adjusting the shank design to avoid this issue is considered an avenue of future work.
-
+\subsubsection{Limited Jump Control}
+Current design lacks motor actuation during jumps, preventing feedback control from compensating for parameter variations like spring stiffness. This could widen the sim-to-real gap. Adding hip motor actuation during jumps would enable feedback control - a focus for future masters thesis work.

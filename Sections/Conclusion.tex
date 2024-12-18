@@ -1,12 +1,12 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-This project developed a concept design for a small and lightweight jumping quadruped robot to be used as a platform for training DRL controllers for jumping, arial stabilization, and landing. 
+This project developed a small, lightweight and low-cost jumping quadruped that combines parallel torsional springs with BLDC motors. It is intended to be used as a platform for training DRL policies for jumping, arial stabilization, and landing.
 
-Through motor selection and Simulink Simscape simulations, motor-only actuation proved inadequate for achieving the desired jump performance. Consequently, integrating torsional springs was essential to store and release energy effectively during jumps.
+Simscape simulations showed motor-only actuation produced insufficient jump heights, leading to the addition of torsional springs. Grid search optimization revealed that equal-length links maximize jump height, though the optimal lengths were too long for a compact robot design.
 
-Grid search optimization identified optimal link lengths that to maximize effective jump height. Optimal link lengths were found to be too long for practical robot construction, so link lengths were chosen according to a trade-off between jump height and robot size. System identification refined motor friction models, enhancing simulation accuracy.
+Motor friction estimation through pendulum tests improved simulation accuracy, but hardware testing remains incomplete. We have not tested if motors can maintain stall torque during spring loading without overheating. Unmodeled dynamics like spring-leg interface friction and mass distribution differences will affect real performance. The symmetric jumping model differs from realistic asymmetric leg configurations, and simplified paw placement affects jump trajectory predictions.
 
-Limitations include the symmetric jumping model's simplifications yielding potentially different optimal link lengths than a more realistic asymmetric jumping model. We have not yet performed hardware tests for jumping, thus we do not know how realistic the simulation results are, given mass, inertia, and friction approximations and unmodeled dynamics. We have not tested if the knee motors are able to give stall torque for long enough to load the springs, without overheating or damaging the motor, which is it assumed they can do in simulation.
+The current design has several limitations. Without motor actuation during jumps, potential energy remains untapped. Lack of feedback control during jumps prevents adjustment for unmodeled dynamics differences between simulation and real hardware. Spring equilibrium at straight leg slows landing response. Hip abduction/adduction motor placement creates undesired loading, and the common knee bending direction generates backward rotation at takeoff.
 
-Despite these limitations, the project demonstrates that the robot design is capable of sufficient jumping performance for demonstrating DRL controllers for jumping, aerial stabilization, and landing for traversing martian lava tubes.
+Despite these limitations, simulations indicate the design can achieve sufficient jump heights for demonstrating DRL controllers in both Earth and Mars gravity, setting the foundation for future hardware validation and control development in the upcoming master's thesis.
