@@ -181,9 +181,117 @@ TODO
 Although a detailed review of numerical solvers and the associated theory is beyond the scope of this theory section, it is worth mentioning that numerical simulation of contact dynamics is particularly challenging. This is due to the discontinuities and high-frequency events that occur during contact. These dynamics often require the use of stiff solvers to accurately capture the rapid changes in forces and velocities \cite{stiff_contact_ODE_1}\cite{stiff_contact_ODE_2}. Stiff solvers are designed to handle problems with widely varying timescales, ensuring stability and accuracy in the simulation of contact events. Without the use of stiff solvers, simulations can become unstable or fail to converge, leading to inaccurate results. Examples of stiff solvers include the well known ode15s and ode23s solvers in MATLAB, which are specifically designed to handle stiff ordinary differential equations \cite{MATLAB_ODE}. 
 
 
-
 \subsection{Linear Least Squares Regression}
+Linear least squares regression is a method for finding the best-fitting line through a set of points by minimizing the sum of squared residuals. Given a set of observations \((x_i, y_i)\) and a linear model \(y = X\beta\), where \(X\) is the matrix of input variables and \(\beta\) contains the model parameters, the residual \(r_i\) for each observation is:
 
+\begin{equation}
+\label{eq:residual}
+r_i = y_i - X_i\beta
+\end{equation}
+
+The sum of squared residuals \(S\) is then:
+
+\begin{equation}
+\label{eq:sum_squared_residuals} 
+S = \sum_{i=1}^n r_i^2 = (y - X\beta)^T(y - X\beta)
+\end{equation}
+
+To minimize \(S\), we take its derivative with respect to \(\beta\) and set it to zero:
+
+\begin{equation}
+\label{eq:derivative_residuals}
+\frac{\partial S}{\partial \beta} = -2X^T(y - X\beta) = 0
+\end{equation}
+
+Solving for \(\beta\) yields the normal equations:
+
+\begin{equation}
+\label{eq:normal_equations}
+X^TX\beta = X^Ty
+\end{equation}
+
+The solution is therefore:
+
+\begin{equation}
+\label{eq:least_squares_solution}
+\beta = (X^TX)^{-1}X^Ty
+\end{equation}
+
+This solution minimizes the sum of squared residuals and provides the optimal parameters \(\beta\) in the least squares sense.
+
+\subsection{Moving Average Filter}
+A moving average filter smooths data by replacing each point with the average of a window of neighboring points. For a window size \(w\), the filtered value \(y_i\) at index \(i\) is:
+
+\begin{equation}
+\label{eq:moving_average}
+y_i = \frac{1}{w}\sum_{j=i-\lfloor w/2 \rfloor}^{i+\lfloor w/2 \rfloor} x_j
+\end{equation}
+
+where \(x_j\) are the input values. The filter reduces high-frequency noise while preserving lower-frequency trends in the data. Larger window sizes provide more smoothing but can attenuate rapid changes in the signal.
+
+\subsection{Centered Finite Differences}
+Centered finite differences approximate derivatives using symmetric sampling around each point. For time series data with constant time step \(\Delta t\), the first and second derivatives at index \(i\) are approximated as:
+
+\begin{equation}
+\label{eq:first_derivative}
+\dot{x}_i = \frac{x_{i+1} - x_{i-1}}{2\Delta t}
+\end{equation}
+
+\begin{equation}
+\label{eq:second_derivative}
+\ddot{x}_i = \frac{x_{i+1} - 2x_i + x_{i-1}}{(\Delta t)^2}
+\end{equation}
+
+\subsection{Inertia Calculations and Parallel Axis Theorem}
+\label{sec:inertia_calculations}
+
+Calculating the moment of inertia for various components is essential in understanding the dynamics of rotating systems. The moment of inertia, \(I\), quantifies the rotational inertia of an object, indicating how much torque is required for a desired angular acceleration.
+
+\subsubsection{Parallel Axis Theorem}
+The Parallel Axis Theorem allows the calculation of the moment of inertia of a body about any axis, given its moment of inertia about a parallel axis through its center of mass. It is mathematically expressed as:
+
+\begin{equation}
+\label{eq:parallel_axis_theorem}
+I = I_{\text{cm}} + md^2
+\end{equation}
+
+where:
+\begin{itemize}
+    \item \(I\) is the moment of inertia about the chosen axis,
+    \item \(I_{\text{cm}}\) is the moment of inertia about the center of mass axis,
+    \item \(m\) is the mass of the object,
+    \item \(d\) is the distance between the two parallel axes.
+\end{itemize}
+
+\subsubsection{Thin Rod}
+For a thin rod of length \(l\) and mass \(m\), rotating about an axis perpendicular to the rod and passing through its end, the moment of inertia is derived using the Parallel Axis Theorem. The moment of inertia about the center of mass is:
+
+\begin{equation}
+\label{eq:rod_cm_inertia}
+I_{\text{cm, rod}} = \frac{1}{12}ml^2
+\end{equation}
+
+Applying the Parallel Axis Theorem with \(d = \frac{l}{2}\):
+
+\begin{equation}
+\label{eq:rod_total_inertia}
+I_{\text{rod}} = I_{\text{cm, rod}} + m\left(\frac{l}{2}\right)^2 = \frac{1}{12}ml^2 + \frac{1}{4}ml^2 = \frac{1}{3}ml^2
+\end{equation}
+
+\subsubsection{Disk}
+For a solid disk of radius \(r\) and mass \(m\), the moment of inertia about its center is:
+
+\begin{equation}
+\label{eq:disk_cm_inertia}
+I_{\text{cm, disk}} = \frac{1}{2}mr^2
+\end{equation}
+
+Using the Parallel Axis Theorem to find the moment of inertia about an axis parallel and a distance \(d\) away:
+
+\begin{equation}
+\label{eq:disk_total_inertia}
+I_{\text{disk}} = I_{\text{cm, disk}} + md^2 = \frac{1}{2}mr^2 + md^2
+\end{equation}
 
 
 
