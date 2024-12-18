@@ -3,7 +3,9 @@
 
 \subsection{Motor Friction Estimation}
 \label{sec:results:motor_friction_estimation}
-  
+Figures \ref{fig:results:motor_friction_estimation:pendulum_large} and \ref{fig:results:motor_friction_estimation:pendulum_small} compare the measured pendulum angles against simulations using two friction models: one with only viscous friction and one with both viscous and Coulomb friction. Table \ref{tab:results:motor_friction_parameters} presents the estimated friction parameters and mean squared errors (MSE) between simulated and measured angles for both motors.
+
+The combined viscous-Coulomb model achieves better accuracy, particularly in the later phases of motion where angular velocities are lower. This aligns with expectations, as Coulomb friction becomes more dominant relative to viscous friction at lower speeds. The MSE values confirm this improved performance, as the MSE with coulomb is about 1/3 of the MSE without coulomb for both motors% for both motors.
 
 \begin{table}[h]
     \centering
@@ -22,7 +24,6 @@
     \label{tab:results:motor_friction_parameters}
 \end{table}
 
-Mean squared errors (MSE) are calculated between the simulated theta values with estimated friction parameters and the measured theta values, as shown in figure \ref{fig:results:motor_friction_estimation:linear_regression_knee_motor} and \ref{fig:results:motor_friction_estimation:linear_regression_hip_motor}.
 
 
 
@@ -45,10 +46,15 @@ Mean squared errors (MSE) are calculated between the simulated theta values with
 
 \subsection{Link Length Optimization}
 \label{sec:results:link_length_optimization}
-The grid search results for both Earth and Mars gravity are shown in figures \ref{fig:results:grid_search_earth} and \ref{fig:results:grid_search_mars}. The search explored link length ratios from 0.8 to 1.6 and total lengths from 8cm to 36cm, in increments of 0.1 and 0.5 cm respectively.
+Grid search results for Earth and Mars gravity are shown in figures \ref{fig:results:grid_search_earth} and \ref{fig:results:grid_search_mars}. The search explored link length ratios \(\frac{L_1}{L_2}\) from 0.8 to 1.6 and total lengths \(L_1 + L_2\) from 10 cm to 36 cm, in increments of 0.1 and 1 cm respectively.
 
-Best performing jumps are described in table \ref{tab:results:grid_search:best_jumps}.
+For both gravitational environments, a link length ratio of 1.0 yields optimal performance across all total lengths. The optimal total length in Mars gravity (28 cm) exceeds Earth gravity (20 cm) by 8 cm, achieving a 102.4 cm greater maximum jump height.
+
+Jump performance degrades rapidly for ratios below 1.0, but declines more gradually above 1.0. The effective jump height is less steep in the total length dimension around the optimal point, allowing flexibility in length selection with minimal performance impact. The performance landscape is non-convex, containing a secondary peak centered at \(\frac{L_1}{L_2} \approx 1.3\)-1.4 and total length ≈ 24 cm for Earth gravity, and at \(\frac{L_1}{L_2} \approx 1.5\) and total length ≈ 35 cm for Mars gravity.
+
+Table \ref{tab:results:grid_search:best_jumps} summarizes the optimal parameters and their performance.
 \begin{table}[h]
+
     \centering
     \begin{tabular}{lrrrrr}
         \hline
@@ -79,8 +85,6 @@ Best performing jumps are described in table \ref{tab:results:grid_search:best_j
     \label{fig:results:grid_search_mars}
 \end{figure}
 
-TODO: Correct optima
-The optimum total length is 8cm longer under Mars gravity. In both Mars and Earth gravity, the optimal link length ratio is 1.0 across all total lengths, with steep drops in jump height for ratios under 1.0 and less steep drops for ratios over 1.0. 
 
 \subsection{Hip Motor Dimensioning Test}
 \label{sec:hip_motor_dimensioning_test}
