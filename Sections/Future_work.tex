@@ -1,0 +1,11 @@
+\section{Future work}
+\label{sec:future_work}
+The upcoming masters thesis will investigate adding hip motor actuation during jumps to enhance performance and enable feedback control. Then we will use our optimized design to construct the physical robot and create an accurate model in Nvidia Isaac Sim. This model will be used to train reinforcement learning controllers for jumping, aerial stabilization, and landing. Domain randomization techniques will help minimize the sim-to-real gap, and curriculum learning will be explored to make the learning process more tractable. Finally, we will evaluate the trained policies on the physical robot in practical jumping scenarios.
+
+We will perform tests to evaluate the real-life jumping performance of the simulation-derived design and see if knee motors are able to provide stall torque for long enough to load springs maximally.
+
+Due to the oversights addressed in section \ref{sec:design_motor_only_jumps}, the promising A80BHP-H motor was overlooked when selecting motors. This motor not only has almost twice the stall torque of the current knee motor, it also has more than twice the operating velocity. Future work will include investigating the jumping capabilities of a robot combining this motor with torsional springs.
+
+As mentioned in section \ref{sec:hip_abduction_adduction_vector_arm}, adjusting the shank design to avoid a significant load on the hip abduction/adduction motor during jumping is something that will be addressed in future work. 
+
+Although the current robot incorporates springs in the actuation method, it does not incorporate series-elastic springs the way they are often used in legged robots, ie. to reduce the impact forces on the motors \cite{proprioceptive}. As the robot is intended to jump, future work will include adding elastic elements to the legs to reduce the impact forces on the motors.

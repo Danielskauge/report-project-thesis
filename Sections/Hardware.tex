@@ -4,9 +4,9 @@
 \subsection{Torsional Spring Leg}
 \label{sec:torsional_spring_leg}
 
-Figure \ref{fig:assembly_CAD} shows the CAD model for the torsional spring leg design, including both knee and hip extension/flexion motor, as well as the hip adduction/abduction motor. 
+Figure \ref{fig:assembly_CAD} shows the CAD model for the torsional spring leg design, including both knee and hip extension/flexion motor, as well as the hip adduction/abduction motor. The CAD model was created using the CAD software Solidworks. An annotated exploded view of the leg can be seen in figure \ref{fig:CAD_leg_exploded_annotate}, while an annotated exploded view for the hip motor housing can be seen in figure \ref{fig:exploded_motor_housing_hip}. 
 
-Figure \ref{fig:manufacture_only} shows the components that are currently planned to manufacture in inhouse. The axel that will be threaded and screwed directly into the motor shaft, and lead directly into a ball bearing, is emphasized in red. The leg has been designed to make it easily manufacturable in aluminum. Aluminum was chosen as a potential material due to its high strength-to-weight ratio, and the fact that it is easy to machine. Although many easily 3D-printable plastics are generally lighter, they are not as strong as aluminum, in fact aluminum has a much higher weight to yield ratio than 3D printable plastics, and thus, barring complications resulting from manufacture, a leg made in aluminum should be lighter than one made of plastic. 
+Figure \ref{fig:manufacture_only} shows the components that are currently planned to manufacture in inhouse. The axle that will be threaded and screwed directly into the motor shaft, and lead directly into a ball bearing, is emphasized in red. The leg has been designed to make it easily manufacturable in aluminum. Aluminum was chosen as a potential material due to its high strength-to-weight ratio, and the fact that it is easy to machine. Although many easily 3D-printable plastics are generally lighter, they are not as strong as aluminum, in fact aluminum has a much higher weight to yield ratio than 3D printable plastics, and thus, barring complications resulting from manufacture, a leg made in aluminum should be lighter than one made of plastic. 
 
 \begin{figure}[h!]
     \centering
@@ -27,12 +27,26 @@ Figure \ref{fig:manufacture_only} shows the components that are currently planne
 
 \begin{figure}[h!]
     \centering
+    \includegraphics[width=0.6\textwidth]{Images/CAD_leg_exploded_annotate.png}
+    \caption{Annotated exploded view of the CAD leg design.}
+    \label{fig:CAD_leg_exploded_annotate}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/exploded_motor_holder_hip.png}
+    \caption{Exploded view of the motor housings for the hip joint.}
+    \label{fig:exploded_motor_housing_hip}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
     \includegraphics[width=0.6\textwidth]{Images/manufacture_only2.png}
-    \caption{An overview of the CAD model of the leg design, but showing only the components that will be manufactured inhouse. Axel that will be threaded and screwed directly into the motor shaft, and lead directly into a ball bearing, is emphasized in red. }
+    \caption{An overview of the CAD model of the leg design, but showing only the components that will be manufactured inhouse. Axle that will be threaded and screwed directly into the motor shaft, and lead directly into a ball bearing, is emphasized in red. }
     \label{fig:manufacture_only}
 \end{figure}
 
-A 3D printed version of the leg thigh together with the purchased spring can be seen in figure \ref{fig:printed_leg_and_spring}. While the full leg has not been assembled, initial physical load test reveal that the thigh is able to withstand the load of the spring. This could indicate that the leg will be 3D printed rather than made in aluminum.
+A 3D printed version of the leg thigh together with the purchased spring can be seen in figure \ref{fig:printed_leg_and_spring}. While the full leg has not been assembled, initial physical load tests seem to indicate that the thigh is able to withstand the load of the spring. This could indicate that the leg will be 3D printed rather than made in aluminum. The axle that will be screwed into the motor shaft, however, will still be made in aluminum. 
 
 \begin{figure}[h!]
     \centering
@@ -44,7 +58,7 @@ A 3D printed version of the leg thigh together with the purchased spring can be 
 \subsection{Extension Spring Leg design}
 \label{sec:extension_spring_design}
 
-The extension spring leg design is shown in figure \ref{fig:extension_spring_CAD}. As can be seen in the figure, the current design is such that the extension spring will collide with the robot shank as the knee angle approaches $\pm$ 180 degrees. Despite efforts, no solutions were found for this problem, and this design direction was therefore abandoned. Among the suggested solutions was moving the shank-end attachment point of the spring in the inwards direction, thus allowing the extension spring to lie in parallel next to the shank when the leg is fully coiled. This would however introduce a significant moment arm acting directly on the motor shaft, and this design was therefore abandoned in favor of the torsional spring design.
+The extension spring leg design is shown in figure \ref{fig:extension_spring_CAD}. As can be seen in the figure, the current design is such that the extension spring will collide with the robot shank as the knee angle approaches fully coiled (ie. -180 degrees). Despite efforts, no solutions were found for this problem, and this design direction was therefore abandoned. Among the suggested solutions was moving the shank-end attachment point of the spring inwards towards the body, so the extension spring could lie in parallel next to the shank when the leg is fully coiled. This would however introduce a significant moment arm acting directly on the motor shaft, and this design was therefore abandoned in favor of the torsional spring design.
 
 \begin{figure}[h!]
     \centering
@@ -83,4 +97,23 @@ Our specific choice of motors can be found in table \ref{tab:motor_selection}. I
     \label{tab:motor_selection}
 \end{table}
 
-The reason these motors in particular were chosen is the fact that no motors were found in a similar weight class that could provide the same torque and speed. For example, if considering AGF-RC motors, the next motor, strength-wise, after the A20BHM motor, is the A35CHM motor, info about which can be found in appendix \ref{appendix:A35CHM_motor_info}. Despite being significantly heavier, the A35CHM motor is only marginally stronger than the A20BHM motor. The reasoning behind the choice of the A06CLS V2 is detailed in \ref{sec:hip_motor_dimensioning_test_design}. 
+The reason these motors in particular were chosen is the fact that no motors were found in a similar weight class that could provide the same torque and speed. For example, if considering AGF-RC motors, the next motor, strength-wise, after the A20BHM motor, is the A35CHM motor, info about which can be found in appendix \ref{appendix:A35CHM_motor_info}. Despite being significantly heavier, the A35CHM motor is only marginally stronger than the A20BHM motor. The reasoning behind the choice of the A06CLS V2 is detailed in section \ref{sec:hip_motor_dimensioning_test_design}.
+
+It is worth mentioning that the mass of the thigh shown in figure \ref{fig:manufacture_only} is considerably higher than a similarly long thigh in the simulation, as described in section \ref{sec:modeling_and_simulation}. The main difference is that the thigh in the simulations is a long and thin rectangular prism, whereas the actual leg design is currently quite wide and bulky, so as to accommodate the motor and spring while maintaining structural integrity. This is a discrepancy between the simulations and the actual design, however, since the leg masses are so small compared to the mass of the motors and the main body, the discrepancy is not considered significant. For reference, the mass of the thigh for various material densities compared to the leg design used in simulation is shown in table \ref{tab:thigh_mass_comparison}.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Material Density & Mass of thigh in simulation & Mass of actual thigh design \\ \hline
+        1200 kg/m\textsuperscript{3} (Tough PLA, see appendix \ref{appendix:tough_PLA}) & N/A & 6.45 \\
+        2700 kg/m\textsuperscript{3} (Aluminum 6061) & 2.26 g & 14.27 g \\
+        \hline
+    \end{tabular}
+    \caption{Mass of thigh for various material densities compared to the leg design used in simulation. For the real thigh, mass properties were calculated using Solidworks "Mass Properties" tool. }
+    \label{tab:thigh_mass_comparison}
+\end{table}
+
+\subsection{Other Components, Spring, etc: TODO}
+
+Bearing, spring, paw must also be mentioned. Servo horns also. 

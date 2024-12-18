@@ -26,7 +26,7 @@ An example of a typical SimScape block diagram can be found in figure \ref{fig:s
 
 Since the purpose of the Simscape model is not to facilitate the development of a complicated full degree of freedom feedback controller, nor to optimize every small detail of the design, a simplified model was selected. This model consists of a main body with four legs, each of which with two degrees of freedom. A visualization of the model, as well as an overview of the body's naming conventions can be found in figure \ref{fig:name_conventions}. An overview of the body's angle conventions can be found in figure \ref{fig:angle_conventions}. Note the absence of a hip abduction/adduction joint. This is because the model's main purpose is to verify the design for jumping in the sagittal (forward-backward and upwards-downwards) plane, and the hip abduction/adduction joint is not necessary for this purpose.
 
-Regarding the naming conventions presented in figure \ref{fig:name_conventions}, note especially the naming of the different legs corresponding to location on the body, namely RH (Right Hind), RF (Right Front), LH (Left Hind), and LF (Left Front). Note also the naming of the joints hip (HIP) and knee (KNEE). If you see the angle conventions in figure \ref{fig:angle_conventions}, you can see that the angles of these joints correspond to the angles $\theta_1$ and $\theta_2$ respectively. Note that an orientation of zero degrees for the hip joint corresponds to the leg pointing straight downwards, and an orientation of zero degrees for the knee joint corresponds to the shank pointing in the same direction as the thigh. 
+Regarding the naming conventions presented in figure \ref{fig:name_conventions}, note especially the naming of the different legs corresponding to location on the body, namely RH (Right Hind), RF (Right Front), LH (Left Hind), and LF (Left Front). Note also the naming of the joints hip (HIP) and knee (KNEE). If you see the angle conventions in figure \ref{fig:angle_conventions}, you can see that the angles of these joints correspond to the angles $\theta_1$ and $\theta_2$ respectively. Note that an orientation of zero degrees for the hip joint corresponds to the leg pointing straight downwards, and an orientation of zero degrees for the knee joint corresponds to the shank pointing in the same direction as the thigh. Note how each joint has its own coordinate system, with rotation being defined positive around the joints z axis. This is required for all Simscape Revolute joints. Note how the joints' z axes correspond to body y axis. This is the case for all the robots legs, both the right and the left side legs. 
 
 %TODO: Add body coordsys in both figures? So I can explain that positive rotation for both sides corresponds to positive rotation about the body y axis in nominal position. 
 
@@ -174,8 +174,8 @@ To be able to more accurately judge the jumping capability of different motors, 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{Images/torque_speed_func.eps}
-    \caption{Torque-speed characteristics of the motor.}
+    \includegraphics[width=\textwidth]{Images/torque_speed_func.eps}
+    \caption{Torque-speed characteristics for a given motor using our implemented motor model.}
     \label{fig:torque_speed_func}
 \end{figure}
 
