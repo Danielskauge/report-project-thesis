@@ -3,20 +3,41 @@
 
 \subsection{Motor Friction Estimation}
 \label{sec:results:motor_friction_estimation}
-  The viscous damping coefficient \( b \) was found to be \( 0.003603 \) Nm/rad/s for the hip motors and \( 0.012342 \) Nm/rad/s for the knee motors. Figures \ref{fig:results:motor_friction_estimation:linear_regression_knee_motor} and \ref{fig:results:motor_friction_estimation:linear_regression_hip_motor} show the predicted \(\dot{\theta}\) predicted from the physical models of the pendulum using the estimated viscous damping coefficients, versus the derived \(\dot{\theta}\).
+  
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lrr}
+        \hline
+        Parameter & Hip Motor & Knee Motor \\
+        \hline
+        Viscous friction coefficient (without Coulomb) [Nm⋅s/rad] & 0.003552 & 0.011612 \\
+        Viscous friction coefficient (with Coulomb) [Nm⋅s/rad] & 0.001703 & 0.006124 \\
+        Coulomb friction [Nm] & 0.010963 & 0.024127 \\
+        MSE without Coulomb & 0.003203 & 0.005989 \\
+        MSE with Coulomb & 0.000953 & 0.001967 \\
+        \hline
+    \end{tabular}
+    \caption{Friction model parameters and mean squared errors (MSE) for both motors, comparing models with and without Coulomb friction.}
+    \label{tab:results:motor_friction_parameters}
+\end{table}
+
+Mean squared errors (MSE) are calculated between the simulated theta values with estimated friction parameters and the measured theta values, as shown in figure \ref{fig:results:motor_friction_estimation:linear_regression_knee_motor} and \ref{fig:results:motor_friction_estimation:linear_regression_hip_motor}.
+
+
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{Images/results/friction_est_knee_motor.png}
+    \includegraphics[width=0.8\textwidth]{Images/results/pendulum_large.png}
     \caption{Linear regression fit of the pendulum data for the knee motor. Derived theta dot dot is the double derivative of the pendulum angle.}
-    \label{fig:results:motor_friction_estimation:linear_regression_knee_motor}
+    \label{fig:results:motor_friction_estimation:pendulum_large}
 \end{figure}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{Images/results/friction_est_hip_motor.png}
+    \includegraphics[width=0.8\textwidth]{Images/results/pendulum_small.png}
     \caption{Linear regression fit of the pendulum data for the hip motor.}
-    \label{fig:results:motor_friction_estimation:linear_regression_hip_motor}
+    \label{fig:results:motor_friction_estimation:pendulum_small}
 \end{figure}
 
 
@@ -26,25 +47,25 @@
 \label{sec:results:link_length_optimization}
 The grid search results for both Earth and Mars gravity are shown in figures \ref{fig:results:grid_search_earth} and \ref{fig:results:grid_search_mars}. The search explored link length ratios from 0.8 to 1.6 and total lengths from 8cm to 36cm, in increments of 0.1 and 0.5 cm respectively.
 
-Best performing jumps are described in table \ref{tab:results:grid_search_earth:best_jumps}.
+Best performing jumps are described in table \ref{tab:results:grid_search:best_jumps}.
 \begin{table}[h]
     \centering
     \begin{tabular}{lrrrrr}
         \hline
         Gravity & Jump Height (cm) & Ratio & Total Length (cm) & L1 (cm) & L2 (cm) \\
         \hline
-        Earth & 118.03 & 1.0 & 35 & 12.5 & 12.5 \\
-        Mars & 31.39 & 1.0 & 27 & 13.5 & 13.5 \\
+        Earth & 45.39 & 1.0 & 20 & 10 & 10 \\
+        Mars & 149.79 & 1.0 & 28 & 14 & 14 \\
         \hline
     \end{tabular}
     \caption{Best performing link length configurations and their corresponding jump heights for Earth and Mars gravity.}
-    \label{tab:results:grid_search_earth:best_jumps}
+    \label{tab:results:grid_search:best_jumps}
 \end{table}
 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{Images/results/grid_search_results_earth_flat.png}
+    \includegraphics[width=0.8\textwidth]{Images/results/grid_search_earth.png}
     \caption{Grid search results showing jump height performance across different link length configurations under Earth gravity.}
     \label{fig:results:grid_search_earth}
 \end{figure}
@@ -53,7 +74,7 @@ Best performing jumps are described in table \ref{tab:results:grid_search_earth:
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{Images/results/grid_search_results_mars_flat.png}
+    \includegraphics[width=0.8\textwidth]{Images/results/grid_search_mars.png}
     \caption{Grid search results showing jump height performance across different link length configurations under Mars gravity.}
     \label{fig:results:grid_search_mars}
 \end{figure}
