@@ -12,7 +12,7 @@ First, we define the jump angle \(\theta_J\) as the angle of the velocity vector
 
 To simplify the optimization, only the vertical jumping performance was considered, so that different link lengths can be compared directly. Vertical jumps are achieved across link lengths by flipping the front legs such that the legs are symmetric about the vertical axis, as shown in figure \ref{fig:link_length_optimization:flipped_legs}. This flipping transforms the asymmetric leg configuration in figure \ref{fig:link_length_optimization:asymmetric_legs} where the front legs point forward into a symmetric configuration where both legs point backward. In this configuration, the movement of the legs during the jump is symmetric and the robot center of mass remains in the horizontal center of the robot, such that any horizontal component of the jump is canceled out. In practice, the robot will use the asymmetric configuration. The symmetric configuration simply provides an approximation for the jumping performance of a given link length configuration.
 
-The metric used to evaluate the jumping performance is the maximum height reached by the center of the robot torso, minus the maximum standing height reached by the robot torso when the legs are fully extended vertically downwards and the paws are in contact with the ground.
+The metric used to evaluate the jumping performance is the maximum height reached by the center of the robot torso, minus the maximum standing height reached by the robot torso when the legs are fully extended vertically downwards and the paws are in contact with the ground. This metric will hereby be referred to as the "effective jump height".
 
 The asymmetric leg configuration can also achieve vertical jumps by adjusting the angle between the hip-to-paw vector and vertical, as shown in figure \ref{fig:link_length_optimization:asymmetric_legs_vertical_jump}. However, finding or calculating the optimal offset for arbitrary link lengths is complex. We therefore simplify by placing paws directly beneath hips, except when $L2>L1$. While this produces less realistic jump heights, it greatly simplifies the optimization.
 
@@ -77,12 +77,14 @@ For $L2>L1$ configurations, placing paws directly under hips results in near-ver
         \centering
         \includegraphics[width=\textwidth]{Images/link_length_optimization/asymmetric_legs.png}
         \caption{Normal asymmetric leg configuration}
+        \label{fig:link_length_optimization:asymmetric_legs}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Images/link_length_optimization/symmetric_legs.png}
         \caption{Symmetric leg configuration for vertical jumping}
+        \label{fig:link_length_optimization:symmetric_legs}
     \end{subfigure}
     \caption{Comparison of normal and symmetric leg configurations}
     \label{fig:link_length_optimization:flipped_legs}
