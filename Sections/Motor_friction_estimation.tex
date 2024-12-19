@@ -4,7 +4,7 @@
 This section details the estimation of parameters for the motor friction models of the hip and knee motors. The motors serve as pivot points for pendulums consisting of aluminum rods attached to the motor shafts with ballast masses. The pendulums are released from a horizontal position, and their angular velocity and acceleration are measured. These measurements facilitate the estimation of motor friction coefficients using linear regression. The experimental setup for both motors is depicted in Figure \ref{fig:results:motor_friction_estimation:pendulum_setup}.
 
 \subsection{Friction model}
-We adopt a linear friction model as described in Section \ref{sec:motor_friction_models}, incorporating both viscous and Coulomb friction, to accurately fit the observed data. To avoid numerical solver issues from the discontinuity at zero velocity introduced by the Coulomb friction, we used a tanh function to smooth the transition between positive and negative Coulomb friction, expressed as:
+We adopt a linear friction model as described in section \ref{sec:gear_transmission_friction_model}, incorporating both viscous and Coulomb friction, to accurately fit the observed data. To avoid numerical solver issues from the discontinuity at zero velocity introduced by the Coulomb friction, we used a tanh function to smooth the transition between positive and negative Coulomb friction, expressed as:
 
 \begin{equation}
 \label{eq:friction_model}
