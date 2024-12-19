@@ -24,13 +24,13 @@ Figure \ref{fig:vertical_jacobian_velocity} shows that joint velocity translates
     \end{aligned}
 \end{equation}
 
-\begin{equation*}
+\begin{equation}
     \label{eq:jacobian_vertical_jump_leg}
     J = \begin{bmatrix} 
     -L_1 \sin(\theta_1) - L_2 \sin(\theta_1 + \theta_2) & -L_2 \sin(\theta_1 + \theta_2) \\
     L_1 \cos(\theta_1) + L_2 \cos(\theta_1 + \theta_2) & L_2 \cos(\theta_1 + \theta_2)
     \end{bmatrix}
-\end{equation*}
+\end{equation}
 
 \begin{figure}[h]
     \centering
@@ -47,7 +47,7 @@ velocity, with a linear decrease in max torque between these two, was chosen."
 
 The A80BHP-H motor from AGF-RC had the highest stall torque and operating speed in its weight class. No comparable alternatives were found, making tests with this motor an optimistic baseline. Details are in appendix \ref{appendix:A80_motor_info}.
 
-Tests applied maximum torque to knee motors in adherence with their torque-speed curve, while hip joints followed a control law (equation \ref{eq:friction_cone_limit}) to prevent slipping. This control uses the force-torque mapping from section \ref{sec:force_torque_mapping} and friction theory from section \ref{sec:contact_friction}. Though equation \ref{eq:force_torque_mapping} assumes equilibrium, minimal slipping occurred in practice.
+Tests applied maximum torque to knee motors in adherence with their torque-speed curve, while hip joints followed a control law (equation \ref{eq:friction_cone_limit}) to prevent slipping. This control uses the force-torque mapping from section \ref{sec:force_torque_mapping} and friction theory from section \ref{sec:contact_friction}. Though equation \ref{eq:force_torque_mapping} assumes the system is in equilibrium, which is not valid for this dynamic jumping scenario, minimal slipping occurred in practice.
 
 TODO: WHAT DOES THIS MEAN? Equation \ref
 {eq:force_torque_mapping} is derived with an assumption of zero velocity/equilibria (TODO), an assumption that is obviously not valid for this dynamic jumping scenario. Despite this, very little slipping is observed in practice. 
@@ -76,7 +76,7 @@ The extension spring design (figure \ref{fig:extension_spring_CAD}) was abandone
 
 \subsection{Actuation Method Selection: Motors and Torsional Spring}
 
-The final design combines motors with torsional springs in the knees (figure \ref{fig:assembly_CAD}). Motors compress the knee springs until reaching a target angle. When released, the springs accelerate the joints for takeoff. Despite springs working against the friction of the motors, this achieved better jumping performance than motors alone, as shown in section \ref{sec:results:link_length_optimization}. 
+The final design combines motors with torsional springs in the knees (figure \ref{fig:assembly_CAD}). Motors compress the knee springs until reaching a target angle. When released, the springs accelerate the joints for takeoff. Despite springs working against the friction of the motors as modelled in \ref{sec:motor_friction_estimation}, this achieved better jumping performance than motors alone, as shown in section \ref{sec:results:link_length_optimization}. 
 
 In contrast to extension springs, since the spring force from a torsional spring depends only on its angular depelacement, it provides maximum torque at full knee flexion, most efficiently converting angular velocity into linear velocity at the paws.
 
