@@ -30,7 +30,7 @@ The optimal link lengths found for both Earth and Mars are too long for the curr
 
 Given these constraints, we opted for shorter link lengths without sacrificing significant performance. A potential fix would be to incorporate body length into the optimization process. Additionally, activating hip motors during jumps may yield shorter optimal link lengths.
 \subsubsection{Landing Challenges}
-The knee springs' equilibrium position at $\theta_2=0$ (straight leg) complicates landing. Achieving crouched landing poses requires knee motors to work against spring force, increasing response time. Further testing is needed to quantify motor response times across knee angles.
+The knee springs' equilibrium position at $\theta_2=0$ (straight leg) complicates landing. Achieving crouched landing poses requires knee motors to wor k against spring force, increasing response time. Further testing is needed to quantify motor response times across knee angles.
 
 \subsubsection{Hip Abduction/Adduction Design}
 As seen in figure \ref{fig:assembly_CAD}, significant z-axis distance between shank end and hip abduction/adduction motor axis creates a significant and undesired motor loading. As the specialization project has primarily ignored abduction/adduction dynamics, 
@@ -39,10 +39,10 @@ adjusting the shank design to avoid this issue is considered an avenue of future
 \subsection{Post-takeoff rotational velocity}
 The common knee bending direction shifts the center of mass backward, causing the rear legs to support more weight while the front legs 
 experience less resistance to acceleration. This imbalance generates backward rotation at takeoff, making aerial stabilization more 
-challenging. Two potential solutions exist: increasing the spring stiffness or motor power of the rear legs to compensate for the higher 
-loading, or activating hip motors during jumps with greater torque applied to the back legs.
+challenging. Two potential solutions are to increase the spring stiffness of the rear knee springs or activate hip motors during jumps with greater torque applied to the back legs.
 
-Potential solutions include increasing rear leg spring stiffness/motor power or applying greater back leg hip motor torque during jumps.
 
 \subsubsection{Limited Jump Control}
 Current design lacks motor actuation during jumps, preventing feedback control from compensating for parameter variations like spring stiffness. This could widen the sim-to-real gap. Adding hip motor actuation during jumps would enable feedback control - a focus for future masters thesis work.
+
+
