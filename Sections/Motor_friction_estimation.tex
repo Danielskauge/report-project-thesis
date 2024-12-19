@@ -74,13 +74,6 @@ where \(\Delta t\) is the time step between measurements.
 
 The angular position \(\theta\) was smoothed using a moving average filter with a window size of 5 before computing \(\dot{\theta}\). Both \(\dot{\theta}\) and \(\ddot{\theta}\) were smoothed using a moving average filter with a window size of 3.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.6\textwidth]{Images/friction_estimation/big_motor.jpg}
-    \caption{Experimental setup for motor friction estimation. An aluminum rod with ballast mass attached acts as a pendulum, with the motor shaft as the pivot point.}
-    \label{fig:results:motor_friction_estimation:pendulum_setup}
-\end{figure}
-
 \subsection{Linear Regression Derivation}
 Rearranging the equations of motion for linear regression:
 
