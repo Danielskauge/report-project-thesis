@@ -3,7 +3,7 @@
 \subsection{BLDC Motor Model}
     \label{sec:bldc_theory}
 
-    The brushless DC motor (BLDC) is a type of synchronous electric motor that is driven by direct current (DC) electricity \cite{PMSM_BOOK}. Like many other motors, a BLDC motor's ability to generate torque generally decreases as the motor's speed increases \cite{Microchip_BLDC}. This relationship is often referred to as a motor's torque-speed curve. Figure \ref{fig:bldc_torque_speed} shows an example of a typical torque-speed curve for a BLDC motor \cite{Microchip_BLDC}. As can be seen, the curve is characterized by four parameters: the peak torque, the maximum speed, the rated speed, and the rated torque. As can be seen from the figure, the rated torque is the highest torque that the motor can deliver for an extended period of time, while the rated speed is the highest speed at which the motor can deliver the rated torque. The motor can typically be run at a higher speed than the rated speed, but at these speeds the delivered torque will start dropping. For brief periods of time, for example from standstill followed by acceleration, the motor can deliver a higher torque than the rated torque, so long as it adheres to the torque speed curve. 
+    A brushless DC motor (BLDC) is a synchronous electric motor powered by direct current \cite{PMSM_BOOK}. The torque output of a BLDC motor decreases as its speed increases \cite{Microchip_BLDC}. This relationship is described by the motor's torque-speed curve, shown in Figure \ref{fig:bldc_torque_speed}. The curve is defined by four key parameters: peak torque, maximum speed, rated speed, and rated torque. The rated torque is the maximum continuous torque output, while rated speed is the highest speed at which rated torque can be maintained. Above rated speed, torque output decreases. The motor can briefly exceed rated torque, for example during acceleration, within the limits of the torque-speed curve.
 
     \begin{figure}[H]
         \centering
@@ -12,32 +12,33 @@
         \label{fig:bldc_torque_speed}
     \end{figure}
 
-    For a given application requiring a given peak torque, it is common to add a safety margin of at least 20\%, after you have adjusted for other known factors such as friction \cite{Microchip_BLDC}.
+    When selecting a motor for an application, a 20\% safety margin should be added to the required peak torque, after accounting for friction and other known factors \cite{Microchip_BLDC}.
 
 \subsection{Gear Transmission Friction Model}
+\label{sec:gear_transmission_friction_model}
 
-    Although electric motors for robotics are available for a wide power range, they are often too high speed and low power to do any useful work. For this reason, it is often necessary to use a gear transmission to increase the torque and reduce the speed of the motor. 
+    Electric motors used in robotics often operate at speeds too high and torques too low for direct use. Gear transmissions are used to reduce speed and increase torque.
 
-    In the presence of a geared transmission, assuming no power loss, the output torque and velocity of a geared motor are given by equation \ref{eq:gear_torque} and equation \ref{eq:gear_velocity}, respectively, where $N$ is the gear ratio, $\tau_{in}$ is the input torque, $\tau_{out}$ is the output torque, $w_{in}$ is the input velocity, and $w_{out}$ is the output velocity \cite{modern_robotics_book}.
+    In an ideal geared transmission with no power loss, the output torque and velocity are given by equations \ref{eq:gear_torque} and \ref{eq:gear_velocity}, where $N$ is the gear ratio, $\tau_{in}$ and $\tau_{out}$ are input and output torques, and $w_{in}$ and $w_{out}$ are input and output velocities \cite{modern_robotics_book}.
 
     \begin{equation}
         \label{eq:gear_torque}
-        w_ {out} = \frac{w_{in}}{N}
+        \tau_{out} = N \tau_{in}
     \end{equation}
 
     \begin{equation}
         \label{eq:gear_velocity}
-        \tau_{out} = N\tau_{in}
+        w_{out} = \frac{w_{in}}{N}
     \end{equation}
 
-    In reality, however, there is always some power loss in the transmission. A common way to model this is to use friction model consisting of a viscous friction term and a Coulomb friction term \cite{modern_robotics_book}. The viscous friction term is proportional to the velocity of the transmission, and the Coulomb friction term is a constant friction torque that must be overcome before the transmission starts moving. The total friction torque is the sum of these two terms, as seen in equation \ref{eq:friction_torque}. It is also possible to drop one or the other of these terms, depending on the application \cite{modern_robotics_book}.
+    Real transmissions experience power loss through friction. A common friction model combines viscous friction (proportional to velocity) and Coulomb friction (constant opposing force) \cite{modern_robotics_book}. The total friction torque is the sum of these components, as shown in equation \ref{eq:friction_torque}. Either term may be omitted depending on the application.
 
     \begin{equation}
         \label{eq:friction_torque}
         \tau_{friction} = b_{viscous}\dot{\theta} + b_{coulomb}\text{sign}(\dot{\theta})  
     \end{equation}
 
-    In addition to friction, heavily gearing motors can lead to a very high apparent rotor inertia. If one looks at equation \ref{eq:rotor_kinetic_energy}, it is clear that the apparent rotor inertia is proportional to the square of the gear ratio \cite{modern_robotics_book}. This can lead to a very high apparent rotor inertia, which can often be problematic to robotic applications. This is especially the case for cases with contact forces, as the high apparent rotor inertia can lead to very stiff and damaging collisions \cite{proprioceptive}.
+    High gear ratios also increase the apparent rotor inertia. As shown in equation \ref{eq:rotor_kinetic_energy}, apparent inertia increases with the square of the gear ratio \cite{modern_robotics_book}. This can be problematic in robotic applications, particularly during contact, where high apparent inertia leads to stiff impacts \cite{proprioceptive}.
 
     \begin{equation}
         \label{eq:rotor_kinetic_energy}
@@ -46,33 +47,32 @@
 
 \subsection{Spring Modeling}
 \label{sec:spring_theory}
-Springs are mechanical devices that store and release energy when subjected to displacement. There are two main types of springs: extension springs and torsion springs.
+Springs store potential energy through elastic deformation. The two main types relevant to this work are linear (extension/compression) springs and torsional springs.
 
-Extension springs are designed to operate with a tension load, meaning they extend as the load is applied. The force exerted by an extension spring is proportional to the displacement from its equilibrium position, following Hooke's Law, which is given by:
+Linear springs develop force proportional to displacement from their free length. For an ideal linear spring, this relationship follows Hooke's Law:
 \begin{equation}
     F = -kx
 \end{equation}
-where \( F \) is the force exerted by the spring, \( k \) is the spring constant, and \( x \) is the displacement from the equilibrium position. The potential energy stored in an extension spring is given by:
+where $F$ is the spring force, $k$ is the spring constant, and $x$ is displacement from equilibrium. The stored potential energy is:
 \begin{equation}
     U = \frac{1}{2}kx^2
 \end{equation}
 
-Torsion springs, on the other hand, are designed to operate with a rotational or twisting load. They exert a torque that is proportional to the angular displacement from their equilibrium position. The torque generated by a torsion spring is given by:
+Torsional springs develop torque proportional to angular displacement from their free position:
 \begin{equation}
     \tau = -k\theta
 \end{equation}
-where \( \tau \) is the torque, \( k \) is the torsion spring constant, and \( \theta \) is the angular displacement. The potential energy stored in a torsion spring is given by:
+where $\tau$ is the restoring torque, $k$ is the torsional stiffness in Nm/rad, and $\theta$ is the angular displacement. The stored elastic potential energy is:
 \begin{equation}
     U = \frac{1}{2}k\theta^2
 \end{equation}
 
-Both types of springs are widely used in various mechanical systems to provide force or torque, absorb shock, and store energy.
+Both spring types are used in mechanical systems for force/torque generation, shock absorption, and energy storage.
 
 \subsection{Kinematics}
     \subsubsection{Robot Kinematics}
     \label{sec:robot_kinematics}
-Consider a robotic link arm existing in $\mathbb{R}^2$ consisting of $n$ links, each with a length $l_i$ and a joint angle $\theta_i$. The position of the end-effector is given by the vector $\bm{x} = [x, y]^T$, where $x$ and $y$ are the coordinates of the end-effector in the global coordinate system. Using simple trigonometry, the position of the end-effector can be expressed as a function of the joint angles and link lengths as seen in equation \ref{eq:robot_kinematics}. 
-Axes and joint angles corresponding to the expression in equation \ref{eq:robot_kinematics} can be seen in figure \ref{fig:robotic_link_arm}. 
+Consider a planar robotic arm with $n$ links, each with length $l_i$ and joint angle $\theta_i$. The end-effector position $\bm{x} = [x, y]^T$ in global coordinates is given by equation \ref{eq:robot_kinematics}, derived from basic trigonometry. Figure \ref{fig:robotic_link_arm} shows the coordinate system and joint angles.
 
 \begin{equation}
     \label{eq:robot_kinematics}
@@ -88,14 +88,13 @@ Axes and joint angles corresponding to the expression in equation \ref{eq:robot_
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/manipulator_inkscape.png}
-    \caption{Illustration of a 3 link robotic link arm in $\mathbb{R}^2$ with $n$ links.}
+    \caption{A 3-link planar robotic arm in $\mathbb{R}^2$.}
     \label{fig:robotic_link_arm}
 \end{figure}
 
+\subsubsection{Jacobian Matrix}
 
-    \subsubsection{Jacobian Matrix}
-
-As described in section \ref{sec:robot_kinematics}, the position of the end-effector can be expressed as a function of the joint angles and link lengths. In robotics, it is often useful to express the relationship between infinitesimal changes in the joint angles and the resulting change in the end-effector position. As can be seen in equation \ref{eq:infinitesimal_change}, infinitesimal changes in variables $\delta y$ and $\delta x$ can be described by means of the partial derivative \cite{modsim}. If this is compared to the definition of the jacobian in equation \ref{eq:jacobian}, it is clear that the jacobian matrix $\bm{J}$ can be used to map infinitesimal changes in joint angles to changes in the end-effector position, as illustrated in equation \ref{eq:jacobian_pos_mapping}. Using the chain rule on \ref{eq:robot_kinematics} one can also arrive at equation \ref{eq:jacobian_speed_mapping}, which maps joint velocities to end-effector velocities by means of the jacobian.
+The Jacobian matrix relates small changes in joint angles to end-effector motion. As shown in equation \ref{eq:infinitesimal_change}, infinitesimal changes are described by partial derivatives \cite{modsim}. The Jacobian matrix $\bm{J}$ (equation \ref{eq:jacobian}) maps joint angle changes to end-effector position changes (equation \ref{eq:jacobian_pos_mapping}). Using the chain rule on equation \ref{eq:robot_kinematics} yields equation \ref{eq:jacobian_speed_mapping}, relating joint and end-effector velocities.
 
 \begin{equation}
     \label{eq:infinitesimal_change}
@@ -123,18 +122,17 @@ As described in section \ref{sec:robot_kinematics}, the position of the end-effe
     \subsubsection{Force/Torque Mapping}
     \label{sec:force_torque_mapping}
 
-    Consider a general robotic manipulator, such as the one illustrated in figure \ref{fig:robotic_link_arm}, but with an arbitrary amount, $n$, of joints and links. Assume the joint angles are given by $q_i$ and the joint torques by $\tau_i$. Then, for this manipulator to bear an arbitrary end effector force $F$, the torques at the joints must be given by equation \ref{eq:force_torque_mapping} \cite{ASADA_LECTURE_NOTES}.
+    For a robotic manipulator with $n$ joints (like figure \ref{fig:robotic_link_arm}), joint angles $q_i$ and torques $\tau_i$, the joint torques needed to support an end-effector force $F$ are given by equation \ref{eq:force_torque_mapping} \cite{ASADA_LECTURE_NOTES}.
 
-    This result can be derived via the principle of virtual work. Consider virtual displacements of the individual joint angles $\delta q_i$ and the end-effector position $\bm{\delta x}$. Virtual displacements are infinitesimal displacements of a mechanical system that need only be consistent with the geometric constraints of the system, ie. not the full laws of motion \cite{ASADA_LECTURE_NOTES}. 
-    
-    If the torques $\bm{\tau} = [\tau_1, \tau_2, ..., \tau_n]$ act on the joints, and the endpoint force $\bm{-F}$ acts on the end effector, then the virtual work done by the forces and moments is given by equation \ref{eq:virtual_work} \cite{ASADA_LECTURE_NOTES}.
+    This relationship follows from the principle of virtual work. Consider virtual displacements $\delta q_i$ of joint angles and $\bm{\delta x}$ of end-effector position. Virtual displacements need only satisfy geometric constraints, not dynamic laws \cite{ASADA_LECTURE_NOTES}.
+
+    For joint torques $\bm{\tau} = [\tau_1, \tau_2, ..., \tau_n]$ and end-effector force $\bm{-F}$, the virtual work is:
 
     \begin{equation}
         \label{eq:virtual_work}
         \bm{\delta W} = \bm{\tau^T\delta q -F^T\delta x} 
     \end{equation}
-
-    According to the principal of virtual work, if the system is in equilibrium, then, for virtual displacements satisfying geometric constraints. the virtual work must vanish. If, in equation \ref{eq:virtual_work}, $\bm{\delta W}$ is set to zero and $\bm{\delta x}$ is replaced with $\bm{J}\bm{\delta q}$ in accordance with equation \ref{eq:jacobian_pos_mapping}, the resulting equation is equation \ref{eq:force_torque_mapping} \cite{ASADA_LECTURE_NOTES}.
+    At equilibrium, virtual work is zero for all valid displacements. Setting $\bm{\delta W} = 0$ and substituting $\bm{\delta x} = \bm{J}\bm{\delta q}$ from equation \ref{eq:jacobian_pos_mapping} gives:
 
     \begin{equation}
         \label{eq:force_torque_mapping}
@@ -142,9 +140,9 @@ As described in section \ref{sec:robot_kinematics}, the position of the end-effe
     \end{equation}
 
     \subsubsection{Inverse Kinematics}
-    Inverse kinematics solve for joint angles that achieve a desired end-effector pose. For a planar two-link manipulator with link lengths \(L_1\) and \(L_2\), given a desired end-effector position \((x,y)\), the joint angles \(\theta_1\) and \(\theta_2\) can be found analytically.
+    Inverse kinematics calculates joint angles needed for a desired end-effector position. For a planar two-link manipulator with link lengths \(L_1\) and \(L_2\), we can solve analytically for joint angles \(\theta_1\) and \(\theta_2\) given target position \((x,y)\).
 
-    The forward kinematics equations are decribed by the 2-link case of equation \ref{eq:robot_kinematics}.
+    The forward kinematics are described by the 2-link case of equation \ref{eq:robot_kinematics}.
     
     \begin{equation}
     x = L_1 \cos(\theta_1) + L_2 \cos(\theta_1 + \theta_2)
@@ -154,29 +152,49 @@ As described in section \ref{sec:robot_kinematics}, the position of the end-effe
     y = L_1 \sin(\theta_1) + L_2 \sin(\theta_1 + \theta_2)
     \end{equation}
     
-    From the law of cosines, \(\theta_2\) is:
+    Using the law of cosines:
     
     \begin{equation}
     \theta_2 = \pm \arccos\left(\frac{x^2 + y^2 - L_1^2 - L_2^2}{2L_1L_2}\right)
     \end{equation}
     
-    The angle \(\theta_1\) is then:
+    Then:
     
     \begin{equation}
     \theta_1 = \arctan2(y,x) - \arctan2(L_2\sin(\theta_2), L_1 + L_2\cos(\theta_2))
     \end{equation}
     
-    The ± in the equation for \(\theta_2\) indicates that two solutions exist for most end-effector positions—one with the second joint angle positive and one negative. When \(L_1 = L_2\), a singularity occurs at \((0,0)\) where infinite solutions exist. At the workspace boundary where \(x^2 + y^2 = (L_1 + L_2)^2\), only one solution exists.
-
+    The ± in \(\theta_2\) indicates two possible solutions exist for most positions - one with elbow up and one with elbow down. When \(L_1 = L_2\), the position \((0,0)\) is a singularity with infinite solutions. At the workspace boundary where \(x^2 + y^2 = (L_1 + L_2)^2\), only one solution exists.
 
 \subsection{Contact Friction}
 \label{sec:contact_friction}
-TODO
+Contact friction is a force that resists relative motion between surfaces. The classical Coulomb friction model states that the friction force \(F_f\) is proportional to the normal force \(F_N\):
+
+\begin{equation}
+\label{eq:coulomb_friction}
+F_f = \mu F_N
+\end{equation}
+
+where \(\mu\) is the coefficient of friction. This model distinguishes between static friction (surfaces at rest) and kinetic friction (surfaces in motion), with \(\mu_s > \mu_k\). The friction force opposes motion and is limited by:
+
+\begin{equation}
+\label{eq:friction_inequality}
+|F_f| \leq \mu_s F_N \text{ (static)}
+\end{equation}
+
+When motion occurs, the friction force becomes:
+
+\begin{equation}
+\label{eq:kinetic_friction}
+F_f = -\mu_k F_N \text{sign}(v)
+\end{equation}
+
+where \(v\) is the relative velocity. This discontinuity at \(v=0\) creates numerical challenges in simulation, often addressed by smoothing the transition between static and kinetic friction.
 
 \subsection{Numerical Solvers}
 \label{sec:numerical_solvers}
 
-Although a detailed review of numerical solvers and the associated theory is beyond the scope of this theory section, it is worth mentioning that numerical simulation of contact dynamics is particularly challenging. This is due to the discontinuities and high-frequency events that occur during contact. These dynamics often require the use of stiff solvers to accurately capture the rapid changes in forces and velocities \cite{stiff_contact_ODE_1}\cite{stiff_contact_ODE_2}. Stiff solvers are designed to handle problems with widely varying timescales, ensuring stability and accuracy in the simulation of contact events. Without the use of stiff solvers, simulations can become unstable or fail to converge, leading to inaccurate results. Examples of stiff solvers include the well known ode15s and ode23s solvers in MATLAB, which are specifically designed to handle stiff ordinary differential equations \cite{MATLAB_ODE}. 
+Contact dynamics simulation requires specialized numerical solvers due to discontinuities and rapid force changes during impacts. These dynamics need stiff solvers to accurately model the fast transitions in forces and velocities \cite{stiff_contact_ODE_1}\cite{stiff_contact_ODE_2}. Stiff solvers handle problems with widely varying timescales, maintaining stability during contact events. Standard solvers can become unstable or fail to converge. MATLAB's ode15s and ode23s are examples of stiff solvers designed for these challenging differential equations \cite{MATLAB_ODE}.
 
 
 \subsection{Linear Least Squares Regression}
@@ -205,7 +223,7 @@ Solving for \(\beta\) yields the normal equations:
 
 \begin{equation}
 \label{eq:normal_equations}
-X^TX\beta = X^Ty
+X^TX\beta = X^Tyx
 \end{equation}
 
 The solution is therefore:
