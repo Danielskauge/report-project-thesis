@@ -22,7 +22,7 @@ unmodelled frictions like those between the springs and the legs. There are mass
 torso as uniform density rectangular prisms, and there are likely differences in the real and simulated masses of the robot.
 
 \subsubsection{Motor Loading Uncertainty}
-A critical uncertainty is the knee motors' ability to maintain stall torque while loading springs. As discussed in section \ref{fig:bldc_torque_speed}, prolonged stall torque risks motor overheating. The time required to fully load springs at stall torque remains unknown, making it unclear whether motors can safely achieve maximum spring compression. Our 12\% safety margin for stall torque falls below the recommended 20\% \ref{sec:theory:bldc_theory} #TODO, increasing risk that motors cannot load springs maximally.
+A critical uncertainty is the knee motors' ability to maintain stall torque while loading springs. As discussed in section \ref{sec:bldc_theory}, prolonged stall torque risks motor overheating. The time required to fully load springs at stall torque remains unknown, making it unclear whether motors can safely achieve maximum spring compression. Our 12\% safety margin for stall torque falls below the recommended 20\% \ref{sec:bldc_theory}, increasing risk that motors cannot load springs maximally.
 
 \subsection{Design Limitations}
 
