@@ -65,7 +65,7 @@ Torsional springs develop torque proportional to angular displacement from their
 where $\tau$ is the restoring torque, $k$ is the torsional stiffness in Nm/rad, and $\theta$ is the angular displacement. The stored elastic potential energy is:
 \begin{equation}
     U = \frac{1}{2}k\theta^2
-\end{equation}
+\end{equation} 
 
 Both spring types are used in mechanical systems for force/torque generation, shock absorption, and energy storage.
 
@@ -168,7 +168,7 @@ The Jacobian matrix relates small changes in joint angles to end-effector motion
 
 \subsection{Contact Friction}
 \label{sec:contact_friction}
-Contact friction is a force that resists relative motion between surfaces. The classical Coulomb friction model states that the friction force \(F_f\) is proportional to the normal force \(F_N\):
+Contact friction is a force that resists relative motion between surfaces. The classical Coulomb friction model \cite{modern_robotics_book} states that the friction force \(F_f\) is proportional to the normal force \(F_N\):
 
 \begin{equation}
 \label{eq:coulomb_friction}
@@ -198,7 +198,7 @@ Contact dynamics simulation requires specialized numerical solvers due to discon
 
 
 \subsection{Linear Least Squares Regression}
-Linear least squares regression is a method for finding the best-fitting line through a set of points by minimizing the sum of squared residuals. Given a set of observations \((x_i, y_i)\) and a linear model \(y = X\beta\), where \(X\) is the matrix of input variables and \(\beta\) contains the model parameters, the residual \(r_i\) for each observation is:
+Linear least squares regression is a method for finding the best-fitting line through a set of points by minimizing the sum of squared residuals \cite{numerical_methods}. Given a set of observations \((x_i, y_i)\) and a linear model \(y = X\beta\), where \(X\) is the matrix of input variables and \(\beta\) contains the model parameters, the residual \(r_i\) for each observation is:
 
 \begin{equation}
 \label{eq:residual}
@@ -236,7 +236,7 @@ The solution is therefore:
 This solution minimizes the sum of squared residuals and provides the optimal parameters \(\beta\) in the least squares sense.
 
 \subsection{Mean Squared Error}
-Mean Squared Error (MSE) measures the average squared difference between predicted values and actual values. For a set of \(n\) predictions \(\hat{y}_i\) and corresponding true values \(y_i\), MSE is defined as:
+Mean Squared Error (MSE) measures the average squared difference between predicted values and actual values \cite{numerical_methods}. For a set of \(n\) predictions \(\hat{y}_i\) and corresponding true values \(y_i\), MSE is defined as:
 
 \begin{equation}
 \label{eq:mse}
@@ -247,7 +247,7 @@ MSE penalizes larger errors more heavily due to the squared term, making it usef
 
 
 \subsection{Moving Average Filter}
-A moving average filter smooths data by replacing each point with the average of a window of neighboring points. For a window size \(w\), the filtered value \(y_i\) at index \(i\) is:
+A moving average filter smooths data by replacing each point with the average of a window of neighboring points \cite{signal_processing}. For a window size \(w\), the filtered value \(y_i\) at index \(i\) is:
 
 \begin{equation}
 \label{eq:moving_average}
@@ -257,7 +257,7 @@ y_i = \frac{1}{w}\sum_{j=i-\lfloor w/2 \rfloor}^{i+\lfloor w/2 \rfloor} x_j
 where \(x_j\) are the input values. The filter reduces high-frequency noise while preserving lower-frequency trends in the data. Larger window sizes provide more smoothing but can attenuate rapid changes in the signal.
 
 \subsection{Centered Finite Differences}
-Centered finite differences approximate derivatives using symmetric sampling around each point. For time series data with constant time step \(\Delta t\), the first and second derivatives at index \(i\) are approximated as:
+Centered finite differences approximate derivatives using symmetric sampling around each point \cite{numerical_methods}. For time series data with constant time step \(\Delta t\), the first and second derivatives at index \(i\) are approximated as:
 
 \begin{equation}
 \label{eq:first_derivative}
@@ -271,10 +271,10 @@ Centered finite differences approximate derivatives using symmetric sampling aro
 
 \subsection{Inertia}
 \label{sec:inertia}
-The moment of inertia, \(I\), quantifies the rotational inertia of an object, indicating how much torque is required for a desired angular acceleration.
+The moment of inertia, \(I\), quantifies the rotational inertia of an object \cite{taylor_mechanics}, indicating how much torque is required for a desired angular acceleration.
 
 \subsubsection{Parallel Axis Theorem}
-The Parallel Axis Theorem allows the calculation of the moment of inertia of a body about any axis, given its moment of inertia about a parallel axis through its center of mass. It is mathematically expressed as:
+The Parallel Axis Theorem \cite{taylor_mechanics} allows the calculation of the moment of inertia of a body about any axis, given its moment of inertia about a parallel axis through its center of mass. It is mathematically expressed as:
 
 \begin{equation}
 \label{eq:parallel_axis_theorem}
@@ -290,7 +290,7 @@ where:
 \end{itemize}
 
 \subsubsection{Thin Rod}
-For a thin rod of length \(l\) and mass \(m\), rotating about an axis perpendicular to the rod and passing through its end, the moment of inertia is derived using the Parallel Axis Theorem. The moment of inertia about the center of mass is:
+For a thin rod of length \(l\) and mass \(m\), rotating about an axis perpendicular to the rod and passing through its end, the moment of inertia is derived using the Parallel Axis Theorem. The moment of inertia about the center of mass is \cite{taylor_mechanics}:
 
 \begin{equation}
 \label{eq:rod_cm_inertia}
@@ -305,7 +305,7 @@ I_{\text{rod}} = I_{\text{cm, rod}} + m\left(\frac{l}{2}\right)^2 = \frac{1}{12}
 \end{equation}
 
 \subsubsection{Disk}
-For a solid disk of radius \(r\) and mass \(m\), the moment of inertia about its center is:
+For a solid disk of radius \(r\) and mass \(m\), the moment of inertia about its center is \cite{taylor_mechanics}:
 
 \begin{equation}
 \label{eq:disk_cm_inertia}
