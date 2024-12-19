@@ -42,15 +42,11 @@ Figure \ref{fig:vertical_jacobian_velocity} shows that joint velocity translates
 \subsection{Actuation Method Selection: Motors Only}
 \label{sec:design_motor_only_jumps}
 
-Initial experiments used motors alone. AGF-RC motors were selected for their high torque-to-weight ratio. The motor model used stall torque and maximum velocity parameters with linear torque decrease between them, as described in section \ref{sec:motor_modeling}. AGF-RC could not provide detailed performance data beyond these basic specifications. Motor-only actuation jumping performnace was not satisfactory, thus the approach was abandoned.WHAT DOES THIS MEAN: "a motor model consisting of a stall torque and a max 
-velocity, with a linear decrease in max torque between these two, was chosen."
+Initial experiments used motors alone. Motors from the supplier AGF-RC were selected for their high torque-to-weight ratio. The motor model used stall torque and maximum velocity parameters with linear torque decrease between them, as described in section \ref{sec:motor_modeling}. AGF-RC could not provide detailed performance data beyond these basic specifications. Motor-only actuation jumping performance was not satisfactory, thus the approach was abandoned. 
 
 The A80BHP-H motor from AGF-RC had the highest stall torque and operating speed in its weight class. No comparable alternatives were found, making tests with this motor an optimistic baseline. Details are in appendix \ref{appendix:A80_motor_info}.
 
-Tests applied maximum torque to knee motors in adherence with their torque-speed curve, while hip joints followed a control law (equation \ref{eq:friction_cone_limit}) to prevent slipping. This control uses the force-torque mapping from section \ref{sec:force_torque_mapping} and friction theory from section \ref{sec:contact_friction}. Though equation \ref{eq:force_torque_mapping} assumes the system is in equilibrium, which is not valid for this dynamic jumping scenario, minimal slipping occurred in practice.
-
-TODO: WHAT DOES THIS MEAN? Equation \ref
-{eq:force_torque_mapping} is derived with an assumption of zero velocity/equilibria (TODO), an assumption that is obviously not valid for this dynamic jumping scenario. Despite this, very little slipping is observed in practice. 
+Tests applied maximum torque to knee motors in adherence with their torque-speed curve, while hip joints followed a control law (equation \ref{eq:friction_cone_limit}) to prevent slipping. This control law uses the force-torque mapping from section \ref{sec:force_torque_mapping} and friction theory from section \ref{sec:contact_friction}. Though equation \ref{eq:force_torque_mapping} assumes the system is in equilibrium, which is not valid for this dynamic jumping scenario, minimal slipping occurred in practice.
 
 \begin{align}
     N &= \text{Normal force} \\
@@ -86,4 +82,4 @@ In contrast to extension springs, since the spring force from a torsional spring
 
 Successful jumping inherently requires aerial attitude stabilization for proper landing. The use of torsional knee springs for jumping reduces the hip motors' role in takeoff, allowing them to be optimized for aerial control. To validate that the hip motors can provide sufficient control authority for landing orientation, we adopted the heuristic from \cite{finn_tarek_master} of executing three 90-degree lateral swings per second. This benchmark provides a conservative bound on the torque and speed requirements needed to reorient the robot during flight.
 
-We simulated this benchmark in Simulink Simscape TODO: citation???, with the robot body fixed in space and 1cm diameter iron spheres (32g) as paws. While lighter than the 80g paws in \cite{finn_tarek_master}, this scales appropriately with our 300g body mass compared to their 800g. The simulation results are presented in section \ref{sec:hip_motor_dimensioning_test}.
+We simulated this benchmark in Simulink Simscape, with the robot body fixed in space and 1cm diameter iron spheres (32g) as paws. While lighter than the 80g paws in \cite{finn_tarek_master}, this scales appropriately with our 300g body mass compared to their 800g. The simulation results are presented in section \ref{sec:hip_motor_dimensioning_test}.
