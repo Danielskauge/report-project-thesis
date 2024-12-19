@@ -3,8 +3,15 @@
 
 This section details the estimation of parameters for the motor friction models of the hip and knee motors. The motors serve as pivot points for pendulums consisting of aluminum rods attached to the motor shafts with ballast masses. The pendulums are released from a horizontal position, and their angular velocity and acceleration are measured. These measurements facilitate the estimation of motor friction coefficients using linear regression. The experimental setup for both motors is depicted in Figure \ref{fig:results:motor_friction_estimation:pendulum_setup}.
 
-We adopt a linear friction model as described in Section \ref{sec:motor_friction_models}, incorporating both viscous and Coulomb friction, to accurately fit the observed data.
+\subsection{Friction model}
+We adopt a linear friction model as described in Section \ref{sec:motor_friction_models}, incorporating both viscous and Coulomb friction, to accurately fit the observed data. To avoid numerical solver issues from the nonlinearity at zero velocity introduced by the Coulomb friction, we used a tanh function to smooth the transition between positive and negative Coulomb friction, expressed as:
 
+\begin{equation}
+\label{eq:friction_model}
+\tau_{\text{friction}} = b_v \dot{\theta} + b_c \tanh( \dot{\theta} / k)
+\end{equation}
+
+where \(k = 0.001\) controls the smoothness of the transitions, maintaining realism while avoiding numerical solver issues.
 
 \subsection{Pendulum Modeling}
 The pendulum used in the motor friction tests consists of an aluminum rod of length \( l_{\text{arm}} = 0.21 \) meters and a ballast mass \( m_{\text{ballast}} = 0.301 \) kg with radius \( r_{\text{ballast}} = 0.03 \) meters attached at a distance \( d_{\text{ballast}} = 0.20 \) meters from the pivot. The total mass of the arm is \( m_{\text{arm}} = 0.034 \) kg. The pendulum is modeled as a rigid body rotating about the motor shaft with a total moment of inertia \( I \) composed of the arm inertia \( I_{\text{arm}} \) and ballast inertia \( I_{\text{ballast}} \). The arm is approximated as a thin rod, and the ballast as a disk, both with uniform density. Their inertias are calculated using the parallel axis theorem:
