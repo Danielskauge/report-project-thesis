@@ -26,9 +26,12 @@ A critical uncertainty is the knee motors' ability to maintain stall torque whil
 
 \subsection{Design Limitations}
 
-The optimal link lengths found for both Earth and Mars are too long for the current robot design. To avoid leg collision with bent knees, the longer lengths would require either elongating the robot body, or translating the hip joints outward. Body elongation would increase overall weight, while outward hip translation raises collision risks during aerial stabilization. Additionally, longer legs increase the inertia that motors must overcome during aerial maneuvers, potentially slowing airial stabilization response.
+The optimal link lengths found for both Earth and Mars are too long for the current robot design. To avoid leg collision with bent knees, the longer lengths would require either elongating the robot body, or translating the hip joints outward. Body elongation would increase overall weight, while outward hip translation raises collision risks during aerial stabilization. Additionally, longer legs increase the inertia that motors must overcome during aerial maneuvers, potentially slowing aeirial stabilization response.
 
-Given these constraints, we opted for shorter link lengths without sacrificing significant performance. A potential fix would be to incorporate body length into the optimization process. Additionally, activating hip motors during jumps may yield shorter optimal link lengths.
+Given these constraints, we must opt for shorter link lengths without sacrificing significant performance. 
+
+A potential fix would be to incorporate body length into the optimization process. Additionally, activating hip motors during jumps may yield shorter optimal link lengths.
+
 \subsubsection{Landing Challenges}
 The knee springs' equilibrium position at $\theta_2=0$ (straight leg) complicates landing. Achieving crouched landing poses requires knee motors to wor k against spring force, increasing response time. Further testing is needed to quantify motor response times across knee angles.
 

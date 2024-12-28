@@ -86,6 +86,23 @@ Table \ref{tab:results:grid_search:best_jumps} summarizes the optimal parameters
 \end{figure}
 
 
+Figures~\ref{fig:results:grid_search_forward_earth} and~\ref{fig:results:grid_search_forward_mars} present the grid search results for angled jumps under Earth and Mars gravity, respectively, where the hip-to-paw angle is set to 45^\circ. Experimental results indicate that the offset from an actual 45^\circ jump can vary significantly depending on the link lengths. Notably, in cases where L_1 = L_2, the jump angle \theta_J was generally close to 45^\circ, which may explain the superior performance observed for a link length ratio of 1.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/results/grid_search_forward_earth.png}
+    \caption{Grid search results showing jump distance for forward jumps across different link length configurations under Earth gravity.}
+    \label{fig:results:grid_search_forward_earth}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/results/grid_search_forward_mars.png}
+    \caption{Grid search results showing jump distance for forward jumps across different link length configurations under Mars gravity.}
+    \label{fig:results:grid_search_forward_mars}
+\end{figure}
+
+
 \subsection{Hip Motor Dimensioning Test}
 \label{sec:hip_motor_dimensioning_test}
 
