@@ -86,7 +86,23 @@ Table \ref{tab:results:grid_search:best_jumps} summarizes the optimal parameters
 \end{figure}
 
 
-Figures~\ref{fig:results:grid_search_forward_earth} and~\ref{fig:results:grid_search_forward_mars} present the grid search results for angled jumps under Earth and Mars gravity, respectively, where the hip-to-paw angle is set to 45^\circ. Experimental results indicate that the offset from an actual 45^\circ jump can vary significantly depending on the link lengths. Notably, in cases where L_1 = L_2, the jump angle \theta_J was generally close to 45^\circ, which may explain the superior performance observed for a link length ratio of 1.
+Figures~\ref{fig:results:grid_search_forward_earth} and~\ref{fig:results:grid_search_forward_mars}, and table \ref{tab:results:grid_search:best_jumps_forward} present the grid search results for forward jumps under Earth and Mars gravity, respectively, where the hip-to-paw angle is set to \(45^{\circ}\). The search space is the same as for the jump height grid search. Experimental results indicate that the offset from an actual \(45^{\circ}\) jump can vary significantly depending on the link lengths. Notably, in cases where \(L_1 = L_2\), the jump angle \(\theta_J\) was generally closer to \(45^{\circ}\), which may explain the superior performance observed for a link length ratio of 1.
+
+Table \ref{tab:results:grid_search:best_jumps_forward} shows the best performing link length configurations and their corresponding jump distances for Earth and Mars gravity.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lrrrrr}
+        \hline
+        Gravity & Jump Distance (cm) & Ratio & Total Length (cm) & L1 (cm) & L2 (cm) \\
+        \hline
+        Earth & 88.49 & 1.0 & 26 & 13 & 13 \\
+        Mars & 267.41 & 1.0 & 36 & 18 & 18 \\
+        \hline
+\end{tabular}
+\caption{Best performing link length configurations and their corresponding jump distances for Earth and Mars gravity.}
+\label{tab:results:grid_search:best_jumps_forward}
+\end{table}
 
 \begin{figure}[H]
     \centering
