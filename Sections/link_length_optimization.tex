@@ -5,12 +5,12 @@ This section details the optimization of the robot's link lengths L1 and L2 to m
 
 
 \subsection{Impact of link lengths}
-Due to the lack of feedback control during the jumping maneuver, the jumping performance is determined fully by the link lengths and initial pose. By initial pose we mean the angles theta1 and theta2 of the knee and hip joints as the knee motor turns off and lets the loaded knee spring actuate the leg. Link lengths constrain the possible initial poses for any given jumping angle, while the initial pose determines spring compression through the knee angle theta2 and thus available potential spring energy. Additionally, link lengths affect the center of mass trajectory during jumps, influencing how gravitational and ground contact forces impact the robot's movement.
+Due to the lack of feedback control during the jumping manoeuvre, the jumping performance is determined fully by the link lengths and initial pose. By initial pose we mean the angles $\theta_1$ and $\theta_2$ of the knee and hip joints as the knee motor turns off and lets the loaded knee spring actuate the leg. Link lengths constrain the possible initial poses for any given jumping angle, while the initial pose determines spring compression through the knee angle $\theta_2$ and thus available potential spring energy. Additionally, link lengths affect the center of mass trajectory during jumps, influencing how gravitational and ground contact forces impact the robot's movement.
 
 \subsection{Problem simplification}
 First, we define the jump angle \(\theta_J\) as the angle of the velocity vector of the center of mass of the robot body at the moment the robot leaves the ground. While the robot should be able to jump both vertically and at angles sufficient to overcome obstacles, optimizing for angled jumps presents challenges. We want to directly compare the jumping performance of different link lengths, but it is not obvious how to place the initial pose of the robot to achieve a \(\theta_J\) across different link lengths. 
 
-To simplify the optimization, only the vertical jumping performance was considered, so that different link lengths can be compared directly. Vertical jumps are achieved across link lengths by flipping the front legs such that the legs are symmetric about the vertical axis, as shown in figure \ref{fig:link_length_optimization:flipped_legs}. This flipping transforms the asymmetric leg configuration in figure \ref{fig:link_length_optimization:asymmetric_legs} where the front legs point forward into a symmetric configuration where both legs point backward. In this configuration, the movement of the legs during the jump is symmetric and the robot center of mass remains in the horizontal center of the robot, such that any horizontal component of the jump is canceled out. In practice, the robot will use the asymmetric configuration. The symmetric configuration simply provides an approximation for the jumping performance of a given link length configuration.
+To simplify the optimization, only the vertical jumping performance was considered, so that different link lengths can be compared directly. Vertical jumps are achieved across link lengths by flipping the front legs such that the legs are symmetric about the vertical axis, as shown in figure \ref{fig:link_length_optimization:flipped_legs}. In this configuration, the movement of the legs during the jump is symmetric and the robot center of mass remains in the horizontal center of the robot, such that any horizontal component of the jump is cancelled out. In practice, the robot will use the asymmetric configuration. The symmetric configuration simply provides an approximation for the jumping performance of a given link length configuration.
 
 The metric used to evaluate the jumping performance is the maximum height reached by the center of the robot torso, minus the maximum standing height reached by the robot torso when the legs are fully extended vertically downwards and the paws are in contact with the ground. This metric will hereby be referred to as the "effective jump height".
 
@@ -95,7 +95,7 @@ For $L2>L1$ configurations, placing paws directly under hips results in near-ver
 For each set of link lengths, an initial pose must be calculated that satisfies several constraints:
 \begin{itemize}
     \item The paws must maintain ground contact
-    \item Knee angle theta2 must be maximized to store maximum spring potential energy
+    \item Knee angle $\theta_2$ must be maximized to store maximum spring potential energy
     \item Knees cannot penetrate the ground
     \item Both knees bend outward rather than inward
 \end{itemize}
@@ -110,7 +110,7 @@ The pose calculation considers three cases based on link length ratios:
 
 For all cases, we calculate the distance \(d\) from hip joint to paw. For cases $L1=L2$ and $L1>L2$, where paw is placed directly under hip, \(d\) is vertical from the hip. For case $L2>L1$, where paw is adjusted inwards towards the body, \(d\) is along the adjusted hip-to-paw vector. 
 
- \(d\) is minimized to maximize \(theta2\) and thus spring potential energy while satisfying the pose constraints. Inverse kinematics then determines \(theta1\) and \(theta2\), selecting the solution where knees bend outward. \(d\) is calculated as follows:
+ \(d\) is minimized to maximize $\theta_2$ and thus spring potential energy while satisfying the pose constraints. Inverse kinematics then determines $\theta_1$ and $\theta_2$, selecting the solution where knees bend outward. \(d\) is calculated as follows:
 
 \begin{itemize}
     \item For \(L_1 = L_2\): \(d = \epsilon\), where \(\epsilon\) = 1mm ensures unique inverse kinematics solutions
