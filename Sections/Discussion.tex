@@ -22,7 +22,7 @@ unmodelled frictions like those between the springs and the legs. There are mass
 torso as uniform density rectangular prisms, and there are likely differences in the real and simulated masses of the robot.
 
 \subsubsection{Motor Loading Uncertainty}
-A critical uncertainty is the knee motors' ability to maintain stall torque while loading springs. As discussed in section \ref{sec:bldc_theory}, prolonged stall torque risks motor overheating. The time required to fully load springs at stall torque remains unknown, making it unclear whether motors can safely achieve maximum spring compression. Our 12\% safety margin for stall torque falls below the recommended 20\% \ref{sec:bldc_theory}, increasing risk that motors cannot load springs maximally.
+A critical uncertainty is the knee motors' ability to maintain stall torque while loading springs. As discussed in section \ref{sec:bldc_theory}, prolonged stall torque risks motor overheating. The time required to fully load springs at stall torque remains unknown, making it unclear whether motors can safely achieve maximum spring compression. Our 12\% safety margin for stall torque falls below the recommended 20\% discussed in section \ref{sec:bldc_theory}, increasing risk that motors cannot load springs maximally.
 
 \subsection{Design Limitations}
 
@@ -33,11 +33,10 @@ Given these constraints, we must opt for shorter link lengths without sacrificin
 A potential fix would be to incorporate body length into the optimization process. Additionally, activating hip motors during jumps may yield shorter optimal link lengths.
 
 \subsubsection{Landing Challenges}
-The knee springs' equilibrium position at $\theta_2=0$ (straight leg) complicates landing. Achieving crouched landing poses requires knee motors to wor k against spring force, increasing response time. Further testing is needed to quantify motor response times across knee angles.
+The knee springs' equilibrium position at $\theta_2=0$ (straight leg) complicates landing. Achieving crouched landing poses requires knee motors to work against spring force, increasing response time. Further testing is needed to quantify motor response times across knee angles.
 
 \subsubsection{Hip Abduction/Adduction Design}
-As seen in figure \ref{fig:assembly_CAD}, significant z-axis distance between shank end and hip abduction/adduction motor axis creates a significant and undesired motor loading. As the specialization project has primarily ignored abduction/adduction dynamics, 
-adjusting the shank design to avoid this issue is considered an avenue of future work.
+As seen in figure \ref{fig:assembly_CAD}, the current leg design has a paw position that isn't located directly below the axis of rotation of the hip abduction/adduction motor. In other words, the hip motors will have to produce a powerful torque not to be rotated by vertical end-effector forces. As the specialization project has primarily ignored abduction/adduction dynamics, adjusting the shank design to avoid this issue is considered an avenue of future work.
 
 \subsection{Post-takeoff rotational velocity}
 The common knee bending direction shifts the center of mass backward, causing the rear legs to support more weight while the front legs 
